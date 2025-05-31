@@ -117,8 +117,8 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 100vw; /* Full viewport width on mobile */
-            max-width: 100vw; /* Ensure it takes full width on mobile */
+            width: 100vw; 
+            max-width: 100vw; 
             height: 100vh;
             background-color: #FFCB05; 
             padding: 1.5rem; 
@@ -128,10 +128,10 @@
             transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1); 
             overflow-y: auto; 
         }
-        @media (min-width: 640px) { /* sm breakpoint and up */
+        @media (min-width: 640px) { 
             #sideMenu {
-                width: 85%; /* Revert to percentage for tablet */
-                max-width: 300px; /* Restore max-width for tablet and desktop */
+                width: 85%; 
+                max-width: 300px; 
             }
         }
         #sideMenu.open {
@@ -141,7 +141,6 @@
             display: flex;
             flex-direction: column; 
             align-items: stretch; 
-            gap: 0.75rem; 
             margin-top: 2rem; 
         }
         #sideMenu .menu-link {
@@ -162,6 +161,11 @@
             color: #2918a9; 
             font-weight: 700; 
             background-color: rgba(41, 24, 169, 0.1); 
+        }
+        #sideMenu .menu-separator {
+            border-top: 1px solid rgba(41, 24, 169, 0.2); 
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
         }
         #closeSideMenuButton {
             color: #1f2937; 
@@ -400,13 +404,13 @@
             display: flex;
             flex-direction: row; 
             gap: 0.5rem; 
-            width: auto; /* Allow buttons to determine their own width */
+            width: auto; 
             justify-content: center; 
             margin-bottom: 1.5rem; 
         }
         .app-store-badge {
             display: inline-block;
-            height: 32px; /* Further reduced height for mobile */
+            height: 32px; 
             transition: transform 0.2s ease-in-out;
         }
         @media (min-width: 640px) { 
@@ -414,12 +418,12 @@
                 gap: 0.75rem;
             }
             .app-store-badge {
-                height: 40px; /* Slightly reduced for tablet */
+                height: 40px; 
             }
         }
          @media (min-width: 1024px) {
             .app-store-badge {
-                height: 48px; /* Original height for desktop */
+                height: 48px; 
             }
         }
         .app-store-badge:hover {
@@ -632,7 +636,7 @@
             border-bottom: 1px solid #e5e7eb; 
         }
         .latest-releases-list li:last-child {
-            border-bottom: none;
+            border-bottom: none; 
         }
         .latest-releases-list a {
             color: #2563EB; 
@@ -718,11 +722,15 @@
         </div>
         <nav> 
             <a href="#home" class="menu-link">HOME</a>
+            <hr class="menu-separator">
             <a href="#about" class="menu-link">ABOUT</a>
+            <hr class="menu-separator">
             <a href="#team" class="menu-link">TEAM</a>
+            <hr class="menu-separator">
             <a href="#release" class="menu-link">RELEASE</a>
+            <hr class="menu-separator">
             <a href="#database" class="menu-link">DATABASE</a>
-        </nav>
+            </nav>
     </div>
 
     <main id="pageContainer">
@@ -732,7 +740,7 @@
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight hero-animate-title" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.6); color: #FFCB05;">
                         PMII BALI NUSRA
                     </h1>
-                    <div class="text-xs sm:text-base md:text-lg lg:text-xl mb-8 sm:mb-10 font-medium hero-animate-subtitle" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">
+                    <div class="text-xs sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-10 font-medium hero-animate-subtitle" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">
                         <p>PERGERAKAN MAHASISWA ISLAM INDONESIA</p>
                         <p>REGION BALI DAN NUSA TENGGARA</p>
                     </div>
@@ -797,7 +805,7 @@
         <div id="page-team" class="page-content-wrapper">
             <section class="page-content-section">
                 <div class="container mx-auto px-6">
-                    <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 pt-8">
+                    <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-8">
                         </div>
                 </div>
             </section>
@@ -810,7 +818,7 @@
                         <div id="releaseGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 pt-8">
                             </div>
                         <div class="text-center mt-8">
-                            <button id="loadMoreReleasesButton" class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 text-sm sm:text-base font-semibold py-2 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105 active:scale-95">
+                            <button id="loadMoreReleasesButton" class="text-white text-sm sm:text-base font-semibold py-2 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105 active:scale-95" style="background-color: #0973D6; hover:background-color: #0861b3;">
                                 Baca Lainnya
                             </button>
                         </div>
@@ -825,7 +833,7 @@
                         <p id="detail-release-date" class="text-sm sm:text-base text-gray-500 mb-6"></p>
                         <div id="detail-release-content" class="text-sm sm:text-base text-gray-700 leading-relaxed text-justify"></div>
                         <hr class="my-10 border-gray-300">
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-800">Informasi Lainnya:</h3>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-800">Informasi Lainnya</h3>
                         <ul id="latest-releases-list" class="list-none space-y-3"></ul>
                     </div>
                 </div>
@@ -839,6 +847,10 @@
                         <div>
                             <label for="nama_lengkap" class="form-label text-xs sm:text-sm font-medium">NAMA LENGKAP</label>
                             <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-input form-input-uppercase text-sm sm:text-base" required>
+                        </div>
+                        <div>
+                            <label for="email_anggota" class="form-label text-xs sm:text-sm font-medium">EMAIL</label>
+                            <input type="email" name="email_anggota" id="email_anggota" class="form-input text-sm sm:text-base" required>
                         </div>
                         <div>
                             <label for="asal_rayon" class="form-label text-xs sm:text-sm font-medium">RAYON ATAU FAKULTAS</label>
@@ -867,8 +879,8 @@
                                 <span class="button-text">BUAT KTA PMII</span>
                                 <span class="button-spinner"></span>
                             </button>
-                            <button type="button" id="unduhProdukHukumButton" class="form-button download-button-card text-sm sm:text-base font-semibold">
-                                PRODUK HUKUM PMII
+                            <button type="button" id="unduhProdukPmiiButton" class="form-button download-button-card text-sm sm:text-base font-semibold">
+                                PRODUK PMII
                             </button>
                         </div>
                     </form>
@@ -898,7 +910,7 @@
                         </a>
                     </div>
                     <footer class="main-footer-text-container mt-8"> 
-                        <p class="mb-2 text-[0.6rem] leading-tight sm:text-xs">&copy;2025 PMII Bali dan Nusa Tenggara. Hak Cipta Dilindungi Undang-Undang.</p>
+                        <p class="mb-2 text-[0.6rem] leading-tight sm:text-xs">&copy;2025 PMII Bali dan Nusa Tenggara. Hak Cipta Dilindungi.</p>
                     </footer>
                 </div>
             </div>
@@ -1261,7 +1273,7 @@
                         <h3 class="text-base sm:text-lg font-semibold mt-2 mb-1">${item.title}</h3>
                         <p class="release-date text-xs sm:text-sm mb-2">${item.date}</p>
                         <p class="text-sm mb-2">${item.shortDesc.substring(0,60)}${item.shortDesc.length > 60 ? '...' : ''}</p>
-                        <a href="#" class="release-read-more text-sm font-medium self-start" data-id="${item.id}">Baca Selengkapnya &rarr;</a>
+                        <a href="#" class="release-read-more text-sm font-medium self-start text-[#0973d6]" data-id="${item.id}">Baca Selengkapnya &rarr;</a>
                     </div>
                 </div>
             `;
@@ -1273,10 +1285,10 @@
                     <img src="${item.imageUrl}" alt="Gambar Berita ${item.title}" onerror="this.onerror=null;this.src='https://placehold.co/600x338/E2E8F0/4A5568?text=Gagal+Muat';">
                     <div class="news-content">
                         <div> 
-                            <h3 class="text-sm sm:text-base font-semibold mt-2 mb-1">${item.title.substring(0,30)}${item.title.length > 30 ? '...' : ''}</h3>
+                            <h3 class="text-sm sm:text-base font-semibold mt-2 mb-1">${item.title}</h3>
                             <p class="text-xs sm:text-sm mb-2">${item.shortDesc.substring(0,50)}${item.shortDesc.length > 50 ? '...' : ''}</p>
                         </div>
-                        <a href="#" class="release-read-more-home text-xs sm:text-sm font-medium self-start" data-id="${item.id}">Baca Selengkapnya &rarr;</a>
+                        <a href="#" class="release-read-more-home text-xs sm:text-sm font-medium self-start text-[#FFCB05]" data-id="${item.id}">Baca Selengkapnya &rarr;</a>
                     </div>
                 </div>
             `;
@@ -1312,14 +1324,19 @@
                                                         Baca Sumber Asli &rarr;
                                                      </a>`;
                 } else {
-                    detailReleaseContent.innerHTML = `<p class="mb-4">${item.fullDesc}</p>
-                                                     <p class="mt-4 text-gray-500 italic">Sumber artikel eksternal tidak tersedia untuk berita ini.</p>`;
+                    detailReleaseContent.innerHTML = `<p class="mb-4">${item.fullDesc}</p>`; 
                 }
 
 
                 latestReleasesList.innerHTML = ''; 
-                sampleReleaseData.filter(r => r.id !== item.id).slice(0, 5).forEach(otherItem => { 
+                sampleReleaseData.filter(r => r.id !== item.id).slice(0, 5).forEach((otherItem, index, arr) => { 
                     const li = document.createElement('li');
+                    if (index < arr.length -1 ) { 
+                        li.classList.add('border-b', 'border-gray-200', 'pb-2', 'mb-2');
+                    } else {
+                        li.classList.add('pb-2', 'mb-2'); 
+                    }
+
                     const a = document.createElement('a');
                     a.href = "#";
                     a.textContent = otherItem.title; 
@@ -1433,12 +1450,13 @@
                     e.preventDefault();
                     
                     const nama = formKartuAnggota.nama_lengkap.value.trim();
+                    const email = formKartuAnggota.email_anggota.value.trim(); 
                     const rayon = formKartuAnggota.asal_rayon.value;
                     const komisariat = formKartuAnggota.asal_komisariat.value;
                     const cabang = formKartuAnggota.asal_cabang.value;
                     const sertifikat = formKartuAnggota.sertifikat_mapaba.files.length;
 
-                    if (!nama || !rayon || !komisariat || !cabang || !sertifikat) {
+                    if (!nama || !email || !rayon || !komisariat || !cabang || !sertifikat) { 
                         showNotification('Harap lengkapi semua kolom formulir!', 'error');
                         return;
                     }
@@ -1461,10 +1479,10 @@
                 });
             }
 
-            const unduhProdukHukumButton = document.getElementById('unduhProdukHukumButton');
-            if (unduhProdukHukumButton) {
-                unduhProdukHukumButton.addEventListener('click', () => {
-                    showNotification('Fitur unduh produk hukum akan segera tersedia.', 'info');
+            const unduhProdukPmiiButton = document.getElementById('unduhProdukPmiiButton'); 
+            if (unduhProdukPmiiButton) {
+                unduhProdukPmiiButton.addEventListener('click', () => {
+                    showNotification('Fitur unduh produk PMII akan segera tersedia.', 'info');
                 });
             }
 
