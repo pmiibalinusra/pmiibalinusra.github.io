@@ -117,8 +117,8 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 85%; 
-            max-width: 300px; 
+            width: 100%; /* Full width on mobile */
+            max-width: 100%; /* Override max-width for mobile */
             height: 100vh;
             background-color: #FFCB05; 
             padding: 1.5rem; 
@@ -127,6 +127,12 @@
             transform: translateX(100%); 
             transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1); 
             overflow-y: auto; 
+        }
+        @media (min-width: 640px) { /* sm breakpoint and up */
+            #sideMenu {
+                width: 85%;
+                max-width: 300px; /* Restore max-width for tablet and desktop */
+            }
         }
         #sideMenu.open {
             transform: translateX(0); 
@@ -228,15 +234,16 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            min-height: 110px; 
+            min-height: 100px; /* Slightly reduced for mobile */
         }
         .counter-card-container { 
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr)); 
-            gap: 0.5rem; 
+            grid-template-columns: repeat(1, minmax(0, 1fr)); /* 1 column on mobile */
+            gap: 0.75rem; /* Adjusted gap for mobile */
         }
-        @media (min-width: 640px) { 
+        @media (min-width: 640px) { /* sm breakpoint */
             .counter-card-container {
+                grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns on tablet and up */
                 gap: 1rem; 
             }
              .counter-card {
@@ -244,12 +251,10 @@
                 min-height: 130px;
             }
         }
-         @media (min-width: 768px) { 
+         @media (min-width: 1024px) { /* lg breakpoint */
             .counter-card-container {
                 gap: 1.5rem; 
             }
-        }
-         @media (min-width: 1024px) { 
             .counter-card {
                 padding: 1.5rem; 
                 min-height: 160px;
@@ -257,7 +262,7 @@
         }
 
         .counter-card .counter-number {
-            font-size: 1.375rem; 
+            font-size: 1.25rem; /* Adjusted for mobile */
             font-weight: 800; 
             line-height: 1.1; 
             margin-bottom: 0.25rem; 
@@ -271,14 +276,14 @@
 
         .counter-card .counter-title { 
             font-weight: 600; 
-            font-size: 0.8rem; 
+            font-size: 0.75rem; /* Adjusted for mobile */
             line-height: 1.3; 
             color: #1f2937; 
             margin-bottom: 0.125rem; 
         }
         .counter-card .counter-subtitle { 
             font-weight: 500; 
-            font-size: 0.7rem; 
+            font-size: 0.65rem; /* Adjusted for mobile */
             line-height: 1.25; 
             color: #374151; 
         }
@@ -327,12 +332,15 @@
             display: flex; 
             flex-direction: column; 
             justify-content: space-between; 
+            text-align: center; /* Added for text alignment */
         }
         .testimonial-card-custom-bg img {
             border-color: #FFCB05; 
             width: 3.5rem; 
             height: 3.5rem; 
             object-fit: cover; 
+            margin-left: auto; /* Center image */
+            margin-right: auto; /* Center image */
         }
          @media (min-width: 640px) {
             .testimonial-card-custom-bg img {
@@ -353,6 +361,7 @@
             -webkit-line-clamp: 3; 
             -webkit-box-orient: vertical;
             margin-bottom: 0.5rem; 
+            /* text-align: center; Inherited from parent */
         }
          @media (min-width: 640px) {
             .testimonial-card-custom-bg .testimonial-text { 
@@ -363,7 +372,7 @@
         .app-promo-footer-section {
             background-color: #2918a9; 
             color: white;
-            padding: 3rem 1.5rem; 
+            padding: 2rem 1.5rem; /* Adjusted padding */
             position: relative;
             z-index: 5; 
         }
@@ -386,31 +395,28 @@
         
         .app-promo-text-content { 
             width: 100%; 
-            /* margin-bottom: 1.5rem; Dihapus, diganti mb-6 di HTML */
         }
 
         .app-promo-buttons {
             display: flex;
-            flex-direction: column; 
-            gap: 0.75rem; 
+            flex-direction: row; /* Default to row for mobile */
+            gap: 0.5rem; /* Reduced gap for mobile */
             width: 100%; 
-            max-width: 220px; 
-            margin-left: auto; 
-            margin-right: auto;
-            margin-bottom: 2rem; 
-        }
-        @media (min-width: 640px) { 
-             .app-promo-buttons {
-                flex-direction: row; 
-                width: auto;
-                max-width: none;
-                justify-content: center; 
-             }
+            justify-content: center; /* Center buttons */
+            margin-bottom: 1.5rem; /* Adjusted margin */
         }
         .app-store-badge {
             display: inline-block;
-            height: 48px; 
+            height: 36px; /* Reduced height for mobile */
             transition: transform 0.2s ease-in-out;
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .app-promo-buttons {
+                gap: 0.75rem;
+            }
+            .app-store-badge {
+                height: 48px; /* Restore height for tablet and up */
+            }
         }
         .app-store-badge:hover {
             transform: scale(1.05);
@@ -722,13 +728,12 @@
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight hero-animate-title" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.6); color: #FFCB05;">
                         PMII BALI NUSRA
                     </h1>
-                    <div class="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 font-medium hero-animate-subtitle" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">
+                    <div class="text-sm sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-10 font-medium hero-animate-subtitle" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">
                         <p>PERGERAKAN MAHASISWA ISLAM INDONESIA</p>
                         <p>REGION BALI DAN NUSA TENGGARA</p>
                     </div>
                     <a href="#pelajari-lebih-lanjut-content" id="selengkapnyaButton"
-                       class="text-sm sm:text-base md:text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95
-                              py-3 px-6 sm:py-3.5 sm:px-8 md:py-4 md:px-10 hero-animate-button"
+                       class="text-xs py-2.5 px-5 sm:text-base sm:py-3.5 sm:px-8 md:text-lg md:py-4 md:px-10 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 hero-animate-button"
                        style="background-color: #FFCB05; color: #1f2937;">
                         Selengkapnya
                     </a>
@@ -736,7 +741,7 @@
             </div>
             <section id="pelajari-lebih-lanjut-content" class="page-content-section">
                 <div class="container mx-auto px-6">
-                    <div class="counter-card-container mb-16 sm:mb-20 pt-8 sm:pt-12">
+                    <div class="counter-card-container grid-cols-1 sm:grid-cols-3 mb-16 sm:mb-20 pt-8 sm:pt-12">
                         <div class="counter-card card reveal-on-scroll">
                             <div id="counter1" class="counter-number">0</div>
                             <h3 class="counter-title">CABANG</h3>
@@ -788,7 +793,7 @@
         <div id="page-team" class="page-content-wrapper">
             <section class="page-content-section">
                 <div class="container mx-auto px-6">
-                    <div id="teamGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 pt-8">
+                    <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 pt-8">
                         </div>
                 </div>
             </section>
@@ -798,7 +803,7 @@
             <section class="page-content-section">
                 <div class="container mx-auto px-6">
                     <div id="release-list-view">
-                        <div id="releaseGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 pt-8">
+                        <div id="releaseGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 pt-8">
                             </div>
                         <div class="text-center mt-8">
                             <button id="loadMoreReleasesButton" class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 text-sm sm:text-base font-semibold py-2 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105 active:scale-95">
@@ -873,10 +878,10 @@
             <div class="app-promo-footer-container">
                 <div class="app-footer-content-wrapper w-full">
                     <div class="app-promo-text-content mb-6">
-                        <h2 class="app-promo-headline text-xl sm:text-2xl md:text-3xl font-bold">
+                        <h2 class="app-promo-headline text-lg sm:text-2xl md:text-3xl font-bold">
                             Download Aplikasi <span style="color: #FFCB05;">PERMAISINDO</span>
                         </h2>
-                        <h3 class="app-promo-subheadline text-sm sm:text-base md:text-lg font-bold">
+                        <h3 class="app-promo-subheadline text-xs sm:text-base md:text-lg font-bold">
                             Platform Aktivis Pergerakan, Sekarang!
                         </h3>
                     </div>
@@ -889,7 +894,7 @@
                         </a>
                     </div>
                     <footer class="main-footer-text-container mt-8"> 
-                        <p class="mb-2 text-xs sm:text-sm">&copy;2025 PMII Bali dan Nusa Tenggara. Hak Cipta Dilindungi Undang-Undang.</p>
+                        <p class="mb-2 text-[0.65rem] leading-tight sm:text-sm">&copy;2025 PMII Bali dan Nusa Tenggara. Hak Cipta Dilindungi Undang-Undang.</p>
                     </footer>
                 </div>
             </div>
@@ -939,7 +944,7 @@
         const sampleReleaseData = [
             {
                 id: 1,
-                title: "Muzakkir Berkomitmen Merevolusi Pendidikan di Bali Nusra",
+                title: "Muzakkir Berkomitmen Merevolusi Pendidikan di Bali Nusra Melalui Program Beasiswa dan Pelatihan Vokasi", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir akan meluncurkan program beasiswa serta pelatihan vokasi guna membekali generasi muda.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra yang baru terpilih, menyatakan komitmennya untuk meningkatkan akses dan kualitas pendidikan di wilayah Bali Nusra. Dalam rencananya, ia akan meluncurkan program beasiswa serta pelatihan vokasi guna membekali generasi muda dengan keterampilan yang relevan di era modern. Muzakkir menjelaskan bahwa ia akan bekerja sama dengan institusi pendidikan lokal untuk mengembangkan kurikulum yang selaras dengan kebutuhan industri. Program beasiswa akan diprioritaskan bagi pelajar berprestasi dari keluarga kurang mampu, sementara pelatihan vokasi akan fokus pada bidang teknologi informasi, pertanian, dan pariwisata. “Pendidikan adalah kunci masa depan, dan kami ingin memastikan setiap anak muda memiliki kesempatan untuk berkembang,” ujarnya.",
@@ -948,7 +953,7 @@
             },
             {
                 id: 2,
-                title: "Muzakkir Dorong Nilai Islam dalam Pembinaan Generasi Muda",
+                title: "Muzakkir Dorong Penguatan Nilai Islam dalam Pembinaan Karakter Generasi Muda Bali Nusra", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir bertekad membentuk generasi muda berakhlak mulia melalui penguatan nilai-nilai Islam.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, bertekad membentuk generasi muda yang berakhlak mulia melalui penguatan nilai-nilai Islam. Ia akan mengadakan kajian Islam rutin dan program dakwah komunitas untuk menanamkan etika dalam kehidupan sehari-hari. Kajian Islam akan digelar di masjid dan sekolah dengan melibatkan ulama serta tokoh agama sebagai pembicara. Sementara itu, program dakwah komunitas akan mengajak pemuda berpartisipasi dalam kegiatan sosial berbasis nilai Islam, seperti bakti sosial dan pengajian kelompok. “Kami ingin generasi muda tidak hanya cerdas, tetapi juga memiliki moral yang kuat,” kata Muzakkir.",
@@ -957,7 +962,7 @@
             },
             {
                 id: 3,
-                title: "Muzakkir Prioritaskan Kesejahteraan Masyarakat Bali Nusra",
+                title: "Muzakkir Prioritaskan Kesejahteraan dan Keadilan Sosial bagi Masyarakat Bali Nusra", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir menegaskan komitmennya untuk mewujudkan keadilan sosial melalui inisiatif bantuan.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, menegaskan komitmennya untuk mewujudkan keadilan sosial melalui inisiatif bantuan bagi masyarakat kurang mampu. Ia juga akan mengorganisir program sukarela untuk menangani permasalahan sosial yang mendesak di wilayah tersebut. Inisiatif ini mencakup program bantuan pangan dan kesehatan untuk keluarga miskin. Selain itu, program sukarela akan melibatkan anggota PMII dan masyarakat umum dalam aksi seperti pembersihan lingkungan dan bantuan korban bencana. “Kesejahteraan masyarakat adalah tanggung jawab bersama,” tegas Muzakkir.",
@@ -966,7 +971,7 @@
             },
             {
                 id: 4,
-                title: "Inisiatif Hijau: Rencana Muzakkir untuk Masa Depan Berkelanjutan",
+                title: "Inisiatif Hijau PMII Bali Nusra: Rencana Muzakkir untuk Masa Depan Lingkungan yang Berkelanjutan", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir berjanji menjadikan Bali Nusra lebih hijau melalui promosi praktik ramah lingkungan.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, berjanji menjadikan Bali Nusra lebih hijau melalui promosi praktik ramah lingkungan dan kebijakan pelestarian sumber daya alam. Ia ingin menciptakan lingkungan yang lestari untuk generasi mendatang. Muzakkir akan berkolaborasi dengan pemerintah daerah dan organisasi lingkungan untuk mengembangkan kebijakan hijau. Praktik yang dipromosikan meliputi pengelolaan sampah, penggunaan energi terbarukan, dan penanaman pohon. “Kita harus menjaga bumi ini demi anak cucu kita,” ungkapnya.",
@@ -975,7 +980,7 @@
             },
             {
                 id: 5,
-                title: "Membangun Kesatuan: Muzakkir Dukung Dialog Antaragama",
+                title: "Membangun Kesatuan Bangsa: Muzakkir Dukung Dialog Antaragama dan Pertukaran Budaya", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir akan mengadakan forum antaragama dan program pertukaran budaya untuk harmoni sosial.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, akan mengadakan forum antaragama dan program pertukaran budaya untuk menciptakan harmoni sosial. Ia berharap dapat mempererat hubungan antar komunitas beragama demi perdamaian yang berkelanjutan. Forum antaragama akan melibatkan tokoh lintas agama untuk berdialog, sementara program pertukaran budaya akan mengajak pemuda dari berbagai latar belakang berpartisipasi dalam kegiatan yang memupuk toleransi. “Perbedaan adalah kekayaan yang harus kita jaga,” kata Muzakkir.",
@@ -984,7 +989,7 @@
             },
             {
                 id: 6,
-                title: "Memberdayakan Generasi Muda: Fokus Muzakkir pada Kepemimpinan dan Inovasi",
+                title: "Memberdayakan Generasi Muda Bali Nusra: Fokus Muzakkir pada Kepemimpinan dan Inovasi", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir berkomitmen mendukung pemuda menjadi pemimpin dan wirausahawan melalui pelatihan.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, berkomitmen mendukung pemuda menjadi pemimpin dan wirausahawan melalui pelatihan kepemimpinan dan workshop inovasi. Langkah ini bertujuan mendorong kemajuan ekonomi dan sosial di wilayah tersebut. Pelatihan kepemimpinan akan mencakup komunikasi, manajemen konflik, dan pengambilan keputusan, sedangkan workshop inovasi akan fokus pada pengembangan ide bisnis dan teknologi. “Pemuda adalah agen perubahan, dan kami akan berikan mereka alat untuk sukses,” ujar Muzakkir.",
@@ -993,7 +998,7 @@
             },
             {
                 id: 7,
-                title: "Melestarikan Warisan: Visi Budaya Muzakkir",
+                title: "Melestarikan Warisan Budaya Bali Nusra: Visi Budaya dari Ketua PKC PMII Muzakkir", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir berencana menggelar festival budaya dan mendukung pengrajin tradisional.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, berencana menggelar festival budaya dan mendukung pengrajin tradisional untuk menjaga identitas lokal. Ia ingin warisan budaya Bali Nusra tetap hidup di tengah arus modernisasi. Festival budaya tahunan akan menampilkan seni, musik, dan tarian tradisional, sementara dukungan bagi pengrajin mencakup pelatihan keterampilan dan akses pasar. “Budaya adalah jati diri kita yang harus dilestarikan,” tegas Muzakkir.",
@@ -1002,7 +1007,7 @@
             },
             {
                 id: 8,
-                title: "Menjembatani Kesenjangan Digital: Inisiatif Teknologi Muzakkir",
+                title: "Menjembatani Kesenjangan Digital di Bali Nusra: Inisiatif Teknologi PMII oleh Muzakkir", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir akan meningkatkan literasi digital di kalangan pelajar dengan akses teknologi dan lokakarya.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, akan meningkatkan literasi digital di kalangan pelajar dengan menyediakan akses teknologi dan lokakarya terkait. Ia ingin generasi muda siap bersaing di era digital. Akses teknologi akan diwujudkan melalui penyediaan komputer dan internet di sekolah, sedangkan lokakarya akan membahas keamanan online dan pengembangan web. “Digitalisasi adalah keniscayaan, dan kita harus siap,” ungkap Muzakkir.",
@@ -1011,7 +1016,7 @@
             },
             {
                 id: 9,
-                title: "Masyarakat Sehat: Agenda Kesehatan Muzakkir",
+                title: "Masyarakat Sehat dan Kuat: Agenda Kesehatan PMII Bali Nusra di Bawah Kepemimpinan Muzakkir", // Judul diperpanjang
                 date: "31 Mei 2025",
                 shortDesc: "Ahmad Muzakkir menjadikan kesehatan prioritas dengan kampanye kesehatan dan peningkatan akses layanan medis.",
                 fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, menjadikan kesehatan sebagai prioritas dengan mengadakan kampanye kesehatan dan meningkatkan akses layanan medis. Ia ingin meningkatkan kualitas hidup masyarakat secara menyeluruh. Kampanye kesehatan akan meliputi pemeriksaan gratis dan edukasi gaya hidup sehat, sementara akses layanan medis akan diperluas melalui kerjasama dengan rumah sakit lokal. “Masyarakat yang sehat adalah masyarakat yang kuat,” kata Muzakkir.",
@@ -1249,7 +1254,7 @@
                 <div class="release-card-custom card flex flex-col reveal-on-scroll" style="transition-delay: ${delay}s;">
                     <img src="${item.imageUrl}" alt="Gambar ${item.title}" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x350/FFCB05/1F2937?text=Gagal+Muat';">
                     <div class="release-content"> 
-                        <h3 class="text-base sm:text-lg font-semibold mt-2 mb-1">${item.title.substring(0,35)}${item.title.length > 35 ? '...' : ''}</h3>
+                        <h3 class="text-base sm:text-lg font-semibold mt-2 mb-1">${item.title}</h3> {/* Menampilkan judul lengkap */}
                         <p class="release-date text-xs sm:text-sm mb-2">${item.date}</p>
                         <p class="text-sm mb-2">${item.shortDesc.substring(0,60)}${item.shortDesc.length > 60 ? '...' : ''}</p>
                         <a href="#" class="release-read-more text-sm font-medium self-start" data-id="${item.id}">Baca Selengkapnya &rarr;</a>
@@ -1278,7 +1283,7 @@
                 <div class="testimonial-card-custom-bg card reveal-on-scroll" style="transition-delay: ${delay}s;"> 
                     <div> 
                         <img src="${item.photoUrl}" alt="Foto Testimoni ${item.name}" class="w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2 sm:mb-3 border-2 shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/80x80/FFCB05/1F2937?text=Foto';">
-                        <p class="testimonial-text text-xs sm:text-sm italic">"${item.text}"</p>
+                        <p class="testimonial-text text-xs sm:text-sm italic text-center">"${item.text}"</p> {/* Ditambahkan text-center */}
                     </div>
                     <div> 
                         <p class="testimonial-name text-sm font-semibold mt-2">- ${item.name}</p>
@@ -1293,7 +1298,7 @@
             if (item && detailReleaseImage && detailReleaseTitle && detailReleaseDate && detailReleaseContent && latestReleasesList && releaseListView && releaseDetailView) {
                 detailReleaseImage.src = item.imageUrl;
                 detailReleaseImage.alt = `Gambar ${item.title}`;
-                detailReleaseTitle.textContent = item.title;
+                detailReleaseTitle.textContent = item.title; // Menampilkan judul lengkap
                 detailReleaseDate.textContent = item.date;
                 
                 if (item.articleUrl && item.articleUrl !== "#") {
@@ -1313,7 +1318,7 @@
                     const li = document.createElement('li');
                     const a = document.createElement('a');
                     a.href = "#";
-                    a.textContent = otherItem.title;
+                    a.textContent = otherItem.title; // Menampilkan judul lengkap
                     a.dataset.id = otherItem.id;
                     a.classList.add('release-read-more', 'text-sm', 'sm:text-base', 'font-medium'); 
                     li.appendChild(a);
