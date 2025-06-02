@@ -13,7 +13,6 @@
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
-        /* Gaya untuk Hero Section dengan GIF dan Overlay Gradien */
         #hero {
             position: relative; 
             background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2pkanNrOWZmMmI4NXhmdmliZ2FoZTBvNXY0dGg3MjF6ZmV1Ym5meCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eS6c9bqOnxIPBpKFwS/giphy.gif');
@@ -28,14 +27,13 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
-            opacity: 0.9; /* Opasitas 90% untuk gradien */
+            opacity: 0.9; 
             z-index: 1; 
         }
         #hero .container { 
             position: relative;
             z-index: 2;
         }
-        /* Footer dengan gradien */
         .footer-gradient {
             background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
             position: relative;
@@ -51,19 +49,61 @@
         .modal-backdrop {
             background-color: rgba(0,0,0,0.5);
         }
+
+        /* Mobile Menu Styling */
         .mobile-menu {
-            transition: transform 0.3s ease-in-out;
+            position: fixed; /* Memastikan menutupi seluruh layar */
+            top: 0;
+            right: 0;
             width: 100vw; /* Full screen width */
             height: 100vh; /* Full screen height */
             background-color: white; 
+            z-index: 100; /* Di atas konten lain, termasuk header */
             display: flex; 
             flex-direction: column; 
-            padding-top: 1.5rem; 
-            padding-bottom: 1.5rem; 
+            padding: 1.5rem; /* Padding keseluruhan */
+            transition: transform 0.3s ease-in-out;
         }
         .mobile-menu.hidden {
             transform: translateX(100%);
         }
+        .mobile-menu-nav {
+            flex-grow: 1; /* Mengisi ruang yang tersedia */
+            overflow-y: auto; /* Scroll jika item banyak */
+        }
+        .mobile-menu-item {
+            display: block; /* Memastikan setiap item satu baris */
+            text-align: center; /* Teks rata tengah */
+            font-weight: 700; /* bold */
+            padding-top: 1rem; /* py-4 */
+            padding-bottom: 1rem; /* py-4 */
+            position: relative;
+            color: #000000; /* text-black */
+            border-bottom: 1px solid #2918a9; /* Garis pemisah */
+        }
+        .mobile-menu-item:last-of-type { 
+             border-bottom: none;
+        }
+        .mobile-menu-item.active::after, .mobile-menu-item:hover::after {
+            content: '';
+            display: block;
+            width: 2.5em; 
+            height: 3px; 
+            background-color: #FFCB05; 
+            margin: 6px auto 0; 
+        }
+         .mobile-menu-item.active {
+             color: #0973d6; 
+        }
+        .mobile-menu-logo-container {
+            margin-top: auto; /* Mendorong ke bawah */
+            padding-top: 1rem; /* Spasi dari item menu terakhir */
+            padding-bottom: 0.5rem; /* Mengurangi padding bawah untuk menaikkan logo sedikit */
+            display: flex;
+            justify-content: center;
+        }
+
+
         .btn-primary { 
             @apply bg-[#2918A9] hover:bg-[#1F127A] text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
         }
@@ -108,28 +148,6 @@
             text-underline-offset: 4px; 
             color: #FFCB05; 
         }
-        
-        /* Gaya untuk link menu mobile */
-        .mobile-menu-item {
-            @apply text-center font-bold py-4 block relative text-black; /* py-4 untuk spasi vertikal lebih */
-            border-bottom: 1px solid #2918a9; /* Garis pemisah */
-        }
-        .mobile-menu-item:last-of-type { /* Item terakhir di nav tidak ada border bawah */
-             border-bottom: none;
-        }
-        .mobile-menu-item.active::after, .mobile-menu-item:hover::after {
-            content: '';
-            display: block;
-            width: 2.5em; /* Perkiraan lebar 2 huruf, sesuaikan jika perlu */
-            height: 3px; /* Ketebalan garis bawah */
-            background-color: #FFCB05; /* Warna garis bawah */
-            margin: 6px auto 0; /* Posisi garis bawah */
-        }
-         .mobile-menu-item.active {
-             color: #0973d6; /* Warna teks saat aktif */
-        }
-
-
         .about-card {
             background-color: #FFCB05;
             min-height: 180px; 
@@ -148,37 +166,34 @@
                  font-size: 0.875rem; 
             }
         }
-        /* Carousel Styling */
         .carousel-track {
             display: flex;
             transition: transform 0.5s ease-in-out;
         }
         .carousel-item {
-            flex-shrink: 0; /* Mencegah item menyusut */
+            flex-shrink: 0; 
         }
-
-        /* Phone Mockup Styling */
         .phone-mockup-container {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Pusatkan mockup dan tombol di bawahnya */
+            align-items: center; 
         }
         .phone-mockup {
-            width: 280px; /* Lebar mockup HP */
-            height: 560px; /* Tinggi mockup HP */
-            background-color: #1a202c; /* Warna casing HP (abu-abu gelap) */
-            border-radius: 30px; /* Sudut melengkung casing */
-            padding: 15px; /* Padding internal untuk layar */
+            width: 280px; 
+            height: 560px; 
+            background-color: #1a202c; 
+            border-radius: 30px; 
+            padding: 15px; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-            margin-top: 2rem; /* Margin atas untuk mockup */
-            margin-bottom: 1rem; /* Margin bawah sebelum tombol */
+            margin-top: 2rem; 
+            margin-bottom: 1rem; 
         }
         .phone-screen {
-            background-color: #000; /* Warna layar (hitam) */
+            background-color: #000; 
             width: 100%;
             height: 100%;
-            border-radius: 15px; /* Sudut melengkung layar */
-            overflow: hidden; /* Untuk memastikan gambar tidak keluar dari layar */
+            border-radius: 15px; 
+            overflow: hidden; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -186,17 +201,17 @@
         .phone-screen img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Gambar mengisi layar tanpa distorsi */
+            object-fit: cover; 
         }
         .app-download-buttons {
             display: flex;
-            justify-content: center; /* Pusatkan tombol jika ada ruang lebih */
-            gap: 1rem; /* Spasi antar tombol */
-            width: 280px; /* Samakan lebar dengan mockup hp */
+            justify-content: center; 
+            gap: 1rem; 
+            width: 280px; 
             margin-top: 1rem;
         }
         .app-download-buttons a img {
-            height: 50px; /* Tinggi tombol gambar disesuaikan */
+            height: 50px; 
             width: auto;
             border-radius: 8px;
             transition: transform 0.2s ease-in-out;
@@ -204,8 +219,6 @@
         .app-download-buttons a:hover img {
             transform: scale(1.05);
         }
-
-        /* Animasi Scroll */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -215,21 +228,19 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Garis bawah setengah untuk judul footer */
         .footer-title-underline::after {
             content: '';
             display: block;
-            width: 30%; /* Lebar garis bawah, sesuaikan jika perlu */
-            max-width: 50px; /* Batas maksimal lebar garis */
+            width: 30%; 
+            max-width: 50px; 
             height: 2px;
             background-color: #FFCB05;
-            margin-top: 0.35rem; /* Spasi dari teks */
+            margin-top: 0.35rem; 
         }
-        /* Garis pemisah untuk item regulasi di footer */
         .footer-regulation-item:not(:last-child) {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Garis tipis putih transparan */
-            padding-bottom: 0.5rem; /* Spasi bawah untuk item */
-            margin-bottom: 0.5rem; /* Spasi antar item */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+            padding-bottom: 0.5rem; 
+            margin-bottom: 0.5rem; 
         }
     </style>
 </head>
@@ -253,20 +264,20 @@
                 </button>
             </div>
         </div>
-        <div id="mobileMenu" class="mobile-menu hidden fixed top-0 right-0 z-40">
-            <div class="flex justify-end mb-4 px-6 pt-6"> 
-                <button id="closeMobileMenuButton" class="text-black hover:text-[#0973d6] focus:outline-none">
+        <div id="mobileMenu" class="mobile-menu hidden fixed top-0 right-0 z-[100]"> {/* z-index lebih tinggi */}
+            <div class="flex justify-end mb-4 px-6"> {/* Padding hanya untuk tombol close */}
+                <button id="closeMobileMenuButton" class="text-black hover:text-[#0973d6] focus:outline-none pt-4"> {/* pt-4 untuk spasi dari atas */}
                     <i class="fas fa-times text-3xl"></i>
                 </button>
             </div>
-            <nav class="flex-grow overflow-y-auto px-6"> 
+            <nav class="mobile-menu-nav px-6"> 
                 <a href="#hero" class="mobile-menu-item">HOME</a>
                 <a href="#about" class="mobile-menu-item">ABOUT</a>
                 <a href="#team" class="mobile-menu-item">TEAM</a>
                 <a href="#release" class="mobile-menu-item">RELEASE</a>
                 <a href="#database" class="mobile-menu-item">DATABASE</a>
             </nav>
-            <div class="mt-auto pt-4 pb-4 flex justify-center">
+            <div class="mobile-menu-logo-container"> 
                 <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII" class="h-16 w-auto">
             </div>
         </div>
@@ -278,9 +289,9 @@
             <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight"> 
                 PMII BALI NUSRA
             </h1>
-            <div class="text-xs sm:text-sm md:text-lg lg:text-xl mb-10 max-w-3xl mx-auto">
+            <div class="text-sm sm:text-base md:text-lg lg:text-xl mb-10 max-w-3xl mx-auto">
                 <p class="font-semibold text-[#FFCB05] leading-tight">PERGERAKAN MAHASISWA ISLAM INDONESIA</p>
-                <p class="mt-1 md:mt-2 text-[0.65rem] sm:text-xs md:text-base lg:text-lg leading-tight">REGION BALI DAN NUSA TENGGARA</p>
+                <p class="mt-1 md:mt-2 text-xs sm:text-sm md:text-base lg:text-lg leading-tight">REGION BALI DAN NUSA TENGGARA</p>
             </div>
         </div>
     </section>
@@ -526,7 +537,7 @@
                 </div>
             </div>
             <div class="border-t border-white border-opacity-50 pt-8 text-center text-sm"> 
-                <p>&copy; <span id="currentYear"></span> PMII Bali Nusra.</p>
+                <p>&copy; <span id="currentYear"></span> PMII Bali Nusra. Semua Hak Dilindungi.</p>
             </div>
         </div>
     </footer>
