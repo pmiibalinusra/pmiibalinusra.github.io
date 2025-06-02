@@ -58,8 +58,8 @@
             background-color: white; 
             display: flex; 
             flex-direction: column; 
-            padding-top: 1.5rem; /* Menambah padding atas */
-            padding-bottom: 1.5rem; /* Menambah padding bawah */
+            padding-top: 1.5rem; 
+            padding-bottom: 1.5rem; 
         }
         .mobile-menu.hidden {
             transform: translateX(100%);
@@ -231,8 +231,6 @@
             padding-bottom: 0.5rem; /* Spasi bawah untuk item */
             margin-bottom: 0.5rem; /* Spasi antar item */
         }
-
-
     </style>
 </head>
 <body class="bg-white text-black">
@@ -256,19 +254,19 @@
             </div>
         </div>
         <div id="mobileMenu" class="mobile-menu hidden fixed top-0 right-0 z-40">
-            <div class="flex justify-end mb-4 px-6 pt-6">
+            <div class="flex justify-end mb-4 px-6 pt-6"> 
                 <button id="closeMobileMenuButton" class="text-black hover:text-[#0973d6] focus:outline-none">
                     <i class="fas fa-times text-3xl"></i>
                 </button>
             </div>
-            <nav class="flex-grow overflow-y-auto px-6">
+            <nav class="flex-grow overflow-y-auto px-6"> 
                 <a href="#hero" class="mobile-menu-item">HOME</a>
                 <a href="#about" class="mobile-menu-item">ABOUT</a>
                 <a href="#team" class="mobile-menu-item">TEAM</a>
                 <a href="#release" class="mobile-menu-item">RELEASE</a>
                 <a href="#database" class="mobile-menu-item">DATABASE</a>
             </nav>
-            <div class="mt-auto pb-8 pt-4 flex justify-center">
+            <div class="mt-auto pt-4 pb-4 flex justify-center">
                 <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII" class="h-16 w-auto">
             </div>
         </div>
@@ -280,9 +278,9 @@
             <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight"> 
                 PMII BALI NUSRA
             </h1>
-            <div class="text-sm sm:text-base md:text-2xl mb-10 max-w-3xl mx-auto">
+            <div class="text-xs sm:text-sm md:text-lg lg:text-xl mb-10 max-w-3xl mx-auto">
                 <p class="font-semibold text-[#FFCB05] leading-tight">PERGERAKAN MAHASISWA ISLAM INDONESIA</p>
-                <p class="mt-1 md:mt-2 text-xs sm:text-sm md:text-xl leading-tight">REGION BALI DAN NUSA TENGGARA</p>
+                <p class="mt-1 md:mt-2 text-[0.65rem] sm:text-xs md:text-base lg:text-lg leading-tight">REGION BALI DAN NUSA TENGGARA</p>
             </div>
         </div>
     </section>
@@ -528,7 +526,7 @@
                 </div>
             </div>
             <div class="border-t border-white border-opacity-50 pt-8 text-center text-sm"> 
-                <p>&copy; <span id="currentYear"></span> PMII Bali Nusra. Semua Hak Dilindungi.</p>
+                <p>&copy; <span id="currentYear"></span> PMII Bali Nusra.</p>
             </div>
         </div>
     </footer>
@@ -621,7 +619,7 @@
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const closeMobileMenuButton = document.getElementById('closeMobileMenuButton');
         const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuItems = document.querySelectorAll('.mobile-menu-item'); // Diganti dari .mobile-menu-link
+        const mobileMenuItems = document.querySelectorAll('.mobile-menu-item'); 
         const desktopNavLinks = document.querySelectorAll('header nav a.nav-link'); 
 
         function openMobileMenu() {
@@ -657,7 +655,7 @@
             });
             clickedLink.classList.add(activeClass);
             
-            if (clickedLink.classList.contains('mobile-menu-item')) { // Disesuaikan
+            if (clickedLink.classList.contains('mobile-menu-item')) { 
                 closeMobileMenu();
             }
         }
@@ -668,9 +666,9 @@
             });
         });
         
-        mobileMenuItems.forEach(link => { // Disesuaikan
+        mobileMenuItems.forEach(link => { 
             link.addEventListener('click', function(e) {
-                handleNavLinkClick(this, mobileMenuItems, 'active'); // Disesuaikan
+                handleNavLinkClick(this, mobileMenuItems, 'active'); 
             });
         });
 
@@ -687,7 +685,7 @@
         }
 
         const sections = document.querySelectorAll('section[id]');
-        const allNavLinks = document.querySelectorAll('header nav a.nav-link, #mobileMenu nav a.mobile-menu-item'); // Disesuaikan
+        const allNavLinks = document.querySelectorAll('header nav a.nav-link, #mobileMenu nav a.mobile-menu-item'); 
         const footerNavLinks = document.querySelectorAll('footer ul a.nav-link-footer');
 
 
@@ -739,8 +737,8 @@
                     if (targetElement) {
                         if (this.classList.contains('nav-link')) {
                             handleNavLinkClick(this, desktopNavLinks, 'active');
-                        } else if (this.classList.contains('mobile-menu-item')) { // Disesuaikan
-                            handleNavLinkClick(this, mobileMenuItems, 'active'); // Disesuaikan
+                        } else if (this.classList.contains('mobile-menu-item')) { 
+                            handleNavLinkClick(this, mobileMenuItems, 'active'); 
                         }
 
                         targetElement.scrollIntoView({
@@ -752,7 +750,7 @@
                      allNavLinks.forEach(link => link.classList.remove('active'));
                      const homeDesktopLink = document.querySelector('header nav a.nav-link[href="#hero"]');
                      if (homeDesktopLink) homeDesktopLink.classList.add('active');
-                     const homeMobileLink = document.querySelector('#mobileMenu nav a.mobile-menu-item[href="#hero"]'); // Disesuaikan
+                     const homeMobileLink = document.querySelector('#mobileMenu nav a.mobile-menu-item[href="#hero"]'); 
                      if (homeMobileLink) homeMobileLink.classList.add('active');
                 }
             });
