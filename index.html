@@ -53,6 +53,12 @@
         }
         .mobile-menu {
             transition: transform 0.3s ease-in-out;
+            /* Perubahan untuk menu mobile full screen */
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Pastikan background solid */
+            display: flex; /* Untuk menata logo di bawah */
+            flex-direction: column; /* Untuk menata logo di bawah */
         }
         .mobile-menu.hidden {
             transform: translateX(100%);
@@ -101,11 +107,31 @@
             text-underline-offset: 4px; 
             color: #FFCB05; 
         }
-        .mobile-menu-link.active {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            color: #0973d6; 
+        /* Gaya untuk link menu mobile */
+        .mobile-menu-link {
+            @apply text-center font-bold py-3 block relative; /* py-3 untuk spasi, block agar ::after bekerja baik */
+            border-bottom: 1px solid #2918a9; /* Garis pemisah */
         }
+        .mobile-menu-link:last-child {
+            border-bottom: none; /* Hapus border untuk item terakhir */
+        }
+        .mobile-menu-link::after { /* Garis bawah setengah */
+            content: '';
+            display: block;
+            width: 50%;
+            height: 2px;
+            background-color: #FFCB05;
+            margin: 4px auto 0; /* Pusatkan garis bawah */
+            transition: width 0.3s ease; /* Transisi untuk hover/active jika diinginkan */
+        }
+        .mobile-menu-link.active::after, .mobile-menu-link:hover::after {
+            width: 70%; /* Sedikit lebih lebar saat aktif/hover */
+        }
+        .mobile-menu-link.active {
+             color: #0973d6; /* Warna teks saat aktif */
+        }
+
+
         .about-card {
             background-color: #FFCB05;
             min-height: 180px; 
@@ -191,6 +217,22 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Garis bawah setengah untuk judul footer */
+        .footer-title-underline::after {
+            content: '';
+            display: block;
+            width: 30%; /* Lebar garis bawah */
+            height: 2px;
+            background-color: #FFCB05;
+            margin-top: 0.25rem; /* Spasi dari teks */
+        }
+        /* Garis pemisah untuk item regulasi di footer */
+        .footer-regulation-item:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Garis tipis putih transparan */
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
 
     </style>
 </head>
@@ -214,19 +256,22 @@
                 </button>
             </div>
         </div>
-        <div id="mobileMenu" class="mobile-menu hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-xl p-6 z-40">
-            <div class="flex justify-end mb-4">
+        <div id="mobileMenu" class="mobile-menu hidden fixed top-0 right-0 z-40 p-6">
+            <div class="flex justify-end mb-8">
                 <button id="closeMobileMenuButton" class="text-black hover:text-[#0973d6] focus:outline-none">
-                    <i class="fas fa-times text-2xl"></i>
+                    <i class="fas fa-times text-3xl"></i>
                 </button>
             </div>
-            <nav class="flex flex-col space-y-4">
-                <a href="#hero" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">HOME</a>
-                <a href="#about" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">ABOUT</a>
-                <a href="#team" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">TEAM</a>
-                <a href="#release" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">RELEASE</a>
-                <a href="#database" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">DATABASE</a>
+            <nav class="flex-grow"> {/* flex-grow agar logo terdorong ke bawah */}
+                <a href="#hero" class="mobile-menu-link text-black hover:text-[#0973d6]">HOME</a>
+                <a href="#about" class="mobile-menu-link text-black hover:text-[#0973d6]">ABOUT</a>
+                <a href="#team" class="mobile-menu-link text-black hover:text-[#0973d6]">TEAM</a>
+                <a href="#release" class="mobile-menu-link text-black hover:text-[#0973d6]">RELEASE</a>
+                <a href="#database" class="mobile-menu-link text-black hover:text-[#0973d6]">DATABASE</a>
             </nav>
+            <div class="mt-auto pt-6 flex justify-center"> {/* Logo di bawah */}
+                <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII" class="h-16 w-auto">
+            </div>
         </div>
     </header>
 
@@ -236,9 +281,9 @@
             <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight"> 
                 PMII BALI NUSRA
             </h1>
-            <div class="text-lg md:text-2xl mb-10 max-w-3xl mx-auto">
+            <div class="text-base sm:text-lg md:text-2xl mb-10 max-w-3xl mx-auto">
                 <p class="font-semibold text-[#FFCB05]">PERGERAKAN MAHASISWA ISLAM INDONESIA</p>
-                <p class="mt-1 md:mt-2">REGION BALI DAN NUSA TENGGARA</p>
+                <p class="mt-1 md:mt-2 text-sm sm:text-base md:text-xl">REGION BALI DAN NUSA TENGGARA</p>
             </div>
         </div>
     </section>
@@ -445,22 +490,22 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4">Alamat</h4>
+                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Alamat</h4>
                     <p class="text-sm">Jl. Catur Warga, Kecamatan Pejanggik, Kota Mataram, Provinsi Nusa Tenggara Barat.</p>
                     <p class="text-sm">Email	: pkcbalinusra@gmail.com</p>
                     <p class="text-sm">Telepon	: +62 877-5432-2362</p>
                 </div>
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4">Regulasi</h4>
+                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Regulasi</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Survey</a></li>
-                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Disclaimer</a></li>
-                        <li><a href="#" onclick="openModal('privacyModal')" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Privacy Policy</a></li>
+                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Survey</a></li>
+                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Disclaimer</a></li>
+                        <li class="footer-regulation-item"><a href="#" onclick="openModal('privacyModal')" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Privacy Policy</a></li>
                         <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Copyright</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4">Media Sosial</h4>
+                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Media Sosial</h4>
                     <ul class="space-y-3">
                         <li class="flex items-center">
                             <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
@@ -644,7 +689,7 @@
 
         const sections = document.querySelectorAll('section[id]');
         const allNavLinks = document.querySelectorAll('header nav a.nav-link, #mobileMenu nav a.mobile-menu-link');
-        const footerNavLinks = document.querySelectorAll('footer ul a.nav-link-footer'); // Disesuaikan selectornya
+        const footerNavLinks = document.querySelectorAll('footer ul a.nav-link-footer');
 
 
         function activateMenuAtCurrentScroll() {
@@ -824,7 +869,7 @@
                 
                 if (totalOriginalTeamItems > teamItemsToShow) {
                     for (let i = 0; i < teamItemsToShow; i++) {
-                        if (teamItems[i]) { // Pastikan item ada sebelum di-clone
+                        if (teamItems[i]) { 
                             const clone = teamItems[i].cloneNode(true);
                             clone.classList.add('cloned');
                             teamCarouselTrackEl.appendChild(clone);
@@ -859,8 +904,7 @@
                 if (totalOriginalTeamItems > teamItemsToShow) {
                     teamInterval = setInterval(scrollTeamCarousel, 3000);
                 } else {
-                     // Jika item kurang dari atau sama dengan yang ditampilkan, tidak perlu auto-scroll
-                    teamCarouselTrackEl.style.transform = 'translateX(0%)'; // Pastikan di posisi awal
+                    teamCarouselTrackEl.style.transform = 'translateX(0%)'; 
                 }
             };
             
@@ -892,10 +936,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animated');
-                    // scrollObserver.unobserve(entry.target); // Hapus jika ingin animasi berulang
-                } else {
-                    // entry.target.classList.remove('animated'); // Tambahkan jika ingin animasi berulang saat scroll kembali
-                }
+                } 
             });
         }, { threshold: 0.1 });
 
