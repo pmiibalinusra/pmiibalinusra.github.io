@@ -3,1544 +3,907 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMII BALI NUSRA</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Logo_PMII.png/250px-Logo_PMII.png" type="image/png">
+    <title>PMII Bali Nusra</title>
+    <link rel="icon" type="image/png" href="https://pmii.id/assets/frontend/images/apple-touch-icon2.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Mengatur font default ke Inter */
         body {
             font-family: 'Inter', sans-serif;
-            background-size: cover; 
-            background-position: center center; 
-            background-repeat: no-repeat; 
-            background-attachment: fixed; 
-            color: #374151; 
+            scroll-behavior: smooth;
+        }
+        /* Gaya untuk Hero Section dengan GIF dan Overlay Gradien */
+        #hero {
             position: relative; 
-            transition: background-color 0.5s ease-in-out, background-image 0.5s ease-in-out; 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
+            background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2pkanNrOWZmMmI4NXhmdmliZ2FoZTBvNXY0dGg3MjF6ZmV1Ym5meCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eS6c9bqOnxIPBpKFwS/giphy.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
-
-        #pageContainer {
-            flex-grow: 1; 
-        }
-
-        .gif-color-overlay {
-            position: fixed; 
+        .hero-gradient-overlay { 
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(41, 24, 169, 0.65); 
-            z-index: -1; 
-            transition: opacity 0.5s ease-in-out; 
-            opacity: 0; 
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
+            opacity: 0.9; /* Opasitas 90% untuk gradien */
+            z-index: 1; 
         }
-        .gif-color-overlay.active {
-            opacity: 1;
+        #hero .container { 
+            position: relative;
+            z-index: 2;
+        }
+        /* Footer dengan gradien */
+        .footer-gradient {
+            background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
+            position: relative;
         }
 
-        html { 
-            margin: 0;
-            overflow-x: hidden; 
+        .card-hover {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
         }
-        body { 
-            padding-top: 4.5rem; 
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .modal-backdrop {
+            background-color: rgba(0,0,0,0.5);
+        }
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.hidden {
+            transform: translateX(100%);
+        }
+        .btn-primary { 
+            @apply bg-[#2918A9] hover:bg-[#1F127A] text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
+        }
+        
+        .btn-hero-yellow-blue-text {
+            background-color: #FFCB05;
+            color: #2918a9;
+            font-weight: 600; 
+            font-size: 1.125rem; 
+            line-height: 1.75rem; 
+            padding-left: 2rem; 
+            padding-right: 2rem; 
+            padding-top: 1rem; 
+            padding-bottom: 1rem; 
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+            transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); 
+            transition-duration: 300ms; 
+            transform: scale(1); 
+            display: inline-block; 
+        }
+
+        .btn-hero-yellow-blue-text:hover {
+            background-color: #E0B404; 
+            transform: scale(1.05); 
+        }
+
+        .btn-muted {
+            @apply bg-gray-200 hover:bg-gray-300 text-black font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
+        }
+        
+        header {
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .header-scrolled {
+            background-color: #2918A9; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .nav-link.active {
+            text-decoration: underline;
+            text-underline-offset: 4px; 
+            color: #FFCB05; 
+        }
+        .mobile-menu-link.active {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            color: #0973d6; 
+        }
+        .about-card {
+            background-color: #FFCB05;
+            min-height: 180px; 
+        }
+        .about-card .number {
+            font-size: 3rem; 
         }
         @media (min-width: 768px) { 
-            body {
-                padding-top: 5.5rem; 
+            .about-card .number {
+                font-size: 3.75rem; 
+            }
+            .about-card h3 {
+                 font-size: 1.125rem; 
+            }
+             .about-card p {
+                 font-size: 0.875rem; 
             }
         }
+        /* Carousel Styling */
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            flex-shrink: 0; /* Mencegah item menyusut */
+        }
 
-        .full-screen-container { 
+        /* Phone Mockup Styling */
+        .phone-mockup-container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 4.5rem); 
-            text-align: center;
-            padding-left: 1.5rem; 
-            padding-right: 1.5rem; 
-            padding-top: 1.5rem; 
-            padding-bottom: 1.5rem; 
-            position: relative; 
-            color: white; 
+            align-items: center; /* Pusatkan mockup dan tombol di bawahnya */
         }
-         @media (min-width: 768px) { 
-            .full-screen-container {
-                min-height: calc(100vh - 5.5rem); 
-                padding-top: 2rem; 
-                padding-bottom: 2rem; 
-            }
+        .phone-mockup {
+            width: 280px; /* Lebar mockup HP */
+            height: 560px; /* Tinggi mockup HP */
+            background-color: #1a202c; /* Warna casing HP (abu-abu gelap) */
+            border-radius: 30px; /* Sudut melengkung casing */
+            padding: 15px; /* Padding internal untuk layar */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            margin-top: 2rem; /* Margin atas untuk mockup */
+            margin-bottom: 1rem; /* Margin bawah sebelum tombol */
         }
-        .hero-animate-title {
-            animation: fadeInUp 0.8s 0.2s ease-out backwards;
-        }
-        .hero-animate-subtitle {
-            animation: fadeInUp 0.8s 0.4s ease-out backwards;
-        }
-        .hero-animate-button {
-            animation: fadeInUp 0.8s 0.6s ease-out backwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        #pageHeader {
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            height: 4.5rem; 
-        }
-         @media (min-width: 768px) {
-            #pageHeader {
-                height: 5.5rem;
-            }
-        }
-        #pageHeader.scrolled,
-        #pageHeader.header-solid-bg {
-            background-color: #2918a9;
-            box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.15), 0 2px 8px -2px rgba(0, 0, 0, 0.1); 
-        }
-
-        #sideMenu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100vw; 
-            max-width: 100vw; 
-            height: 100vh;
-            background-color: #FFCB05; 
-            padding: 1.5rem; 
-            box-shadow: -6px 0 20px rgba(0,0,0,0.15);
-            z-index: 100; 
-            transform: translateX(100%); 
-            transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1); 
-            overflow-y: auto; 
-        }
-        @media (min-width: 640px) { 
-            #sideMenu {
-                width: 85%; 
-                max-width: 300px; 
-            }
-        }
-        #sideMenu.open {
-            transform: translateX(0); 
-        }
-        #sideMenu nav {
-            display: flex;
-            flex-direction: column; 
-            align-items: stretch; 
-            margin-top: 2rem; 
-        }
-        #sideMenu .menu-link {
-            color: #1f2937; 
-            padding: 0.875rem 1.5rem; 
-            border-radius: 0.5rem; 
-            text-align: left; 
-            font-size: 1.05rem; 
-            font-weight: 600; 
-            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
-            width: 100%; 
-        }
-        #sideMenu .menu-link:hover {
-            background-color: rgba(0, 0, 0, 0.08); 
-            transform: translateX(4px);
-        }
-        #sideMenu .menu-link.active {
-            color: #2918a9; 
-            font-weight: 700; 
-            background-color: rgba(41, 24, 169, 0.1); 
-        }
-        #sideMenu .menu-separator {
-            border-top: 1px solid rgba(41, 24, 169, 0.2); 
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        #closeSideMenuButton {
-            color: #1f2937; 
-        }
-
-        .logo-container img {
+        .phone-screen {
+            background-color: #000; /* Warna layar (hitam) */
             width: 100%;
             height: 100%;
-            object-fit: contain; 
-            border-radius: 0.25rem; 
-        }
-
-        .page-content-wrapper {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            display: none; 
-        }
-        .page-content-wrapper.active-page {
-            opacity: 1;
-            transform: translateY(0);
-            display: block; 
-        }
-        
-        .page-content-section { 
-            background-color: white;
-            color: #1f2937; 
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-            position: relative;
-            z-index: 1;
-        }
-        @media (min-width: 768px) {
-             .page-content-section { 
-                padding-top: 5rem;
-                padding-bottom: 5rem;
-             }
-        }
-
-        .card { 
-            background-color: #ffffff; 
-            border: 1px solid #e5e7eb; 
-            border-radius: 0.75rem; 
-            padding: 1.5rem; 
-            box-shadow: 0 4px 10px -2px rgba(0,0,0,0.08), 0 2px 6px -3px rgba(0,0,0,0.08); 
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-8px) scale(1.02); 
-            box-shadow: 0 12px 24px -6px rgba(0,0,0,0.12), 0 8px 12px -8px rgba(0,0,0,0.12); 
-        }
-        
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .counter-card {
-            background-color: #FFCB05; 
-            color: #1f2937; 
-            border: none; 
-            padding: 0.75rem; 
+            border-radius: 15px; /* Sudut melengkung layar */
+            overflow: hidden; /* Untuk memastikan gambar tidak keluar dari layar */
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            text-align: center;
-            min-height: 100px; 
-        }
-        .counter-card-container { 
-            display: grid;
-            grid-template-columns: repeat(1, minmax(0, 1fr)); 
-            gap: 0.75rem; 
-        }
-        @media (min-width: 640px) { 
-            .counter-card-container {
-                grid-template-columns: repeat(3, minmax(0, 1fr)); 
-                gap: 1rem; 
-            }
-             .counter-card {
-                padding: 1rem; 
-                min-height: 130px;
-            }
-        }
-         @media (min-width: 1024px) { 
-            .counter-card-container {
-                gap: 1.5rem; 
-            }
-            .counter-card {
-                padding: 1.5rem; 
-                min-height: 160px;
-            }
-        }
-
-        .counter-card .counter-number {
-            font-size: 1.25rem; 
-            font-weight: 800; 
-            line-height: 1.1; 
-            margin-bottom: 0.25rem; 
-        }
-        @media (min-width: 640px) { 
-            .counter-card .counter-number { font-size: 2rem; } 
-        }
-        @media (min-width: 1024px) {
-            .counter-card .counter-number { font-size: 2.75rem; } 
-        }
-
-        .counter-card .counter-title { 
-            font-weight: 600; 
-            font-size: 0.75rem; 
-            line-height: 1.3; 
-            color: #1f2937; 
-            margin-bottom: 0.125rem; 
-        }
-        .counter-card .counter-subtitle { 
-            font-weight: 500; 
-            font-size: 0.65rem; 
-            line-height: 1.25; 
-            color: #374151; 
-        }
-        @media (min-width: 640px) { 
-            .counter-card .counter-title { font-size: 0.875rem; } 
-            .counter-card .counter-subtitle { font-size: 0.75rem; } 
-        }
-         @media (min-width: 1024px) { 
-            .counter-card .counter-title { font-size: 1rem; } 
-            .counter-card .counter-subtitle { font-size: 0.875rem; } 
-        }
-
-        .news-card-custom-bg {
-            background-color: #0973D6; 
-            color: white; 
-            border: none;
-            padding: 0; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        .news-card-custom-bg img { 
-            border-radius: 0.5rem 0.5rem 0 0; 
-            margin-bottom: 0; 
-            object-fit: cover;
-            aspect-ratio: 16 / 9; 
-            width: 100%; 
-        }
-        .news-card-custom-bg .news-content { 
-            padding: 0.75rem; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-        }
-         @media (min-width: 640px) {
-            .news-card-custom-bg .news-content { padding: 1rem; }
-        }
-
-        .testimonial-card-custom-bg {
-            background-color: #2918a9; 
-            color: white; 
-            border: none;
-            padding: 1rem; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            text-align: center; 
-        }
-        .testimonial-card-custom-bg img {
-            border-color: #FFCB05; 
-            width: 3.5rem; 
-            height: 3.5rem; 
-            object-fit: cover; 
-            margin-left: auto; 
-            margin-right: auto; 
-        }
-         @media (min-width: 640px) {
-            .testimonial-card-custom-bg img {
-                 width: 4rem; 
-                 height: 4rem; 
-            }
-         }
-         @media (min-width: 1024px) {
-            .testimonial-card-custom-bg img {
-                 width: 5rem; 
-                 height: 5rem; 
-            }
-         }
-        .testimonial-card-custom-bg .testimonial-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3; 
-            -webkit-box-orient: vertical;
-            margin-bottom: 0.5rem; 
-        }
-         @media (min-width: 640px) {
-            .testimonial-card-custom-bg .testimonial-text { 
-                -webkit-line-clamp: 4; 
-            } 
-         }
-
-        .app-promo-footer-section {
-            background-color: #2918a9; 
-            color: white;
-            padding: 2rem 1.5rem; 
-            position: relative;
-            z-index: 5; 
-        }
-        .app-promo-footer-container { 
-            display: flex;
-            flex-direction: column; 
             align-items: center;
-            text-align: center;
         }
-        
-        .app-footer-content-wrapper { 
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Gambar mengisi layar tanpa distorsi */
+        }
+        .app-download-buttons {
             display: flex;
-            flex-direction: column;
-            align-items: center; 
-            text-align: center;
-            width: 100%; 
-            max-width: 600px; 
-            margin: 0 auto; 
+            justify-content: center; /* Pusatkan tombol jika ada ruang lebih */
+            gap: 1rem; /* Spasi antar tombol */
+            width: 280px; /* Samakan lebar dengan mockup hp */
+            margin-top: 1rem;
         }
-        
-        .app-promo-text-content { 
-            width: 100%; 
-        }
-
-        .app-promo-buttons {
-            display: flex;
-            flex-direction: row; 
-            gap: 0.5rem; 
-            width: auto; 
-            justify-content: center; 
-            margin-bottom: 1.5rem; 
-        }
-        .app-store-badge {
-            display: inline-block;
-            height: 32px; 
+        .app-download-buttons a img {
+            height: 50px; /* Tinggi tombol gambar disesuaikan */
+            width: auto;
+            border-radius: 8px;
             transition: transform 0.2s ease-in-out;
         }
-        @media (min-width: 640px) { 
-            .app-promo-buttons {
-                gap: 0.75rem;
-            }
-            .app-store-badge {
-                height: 40px; 
-            }
-        }
-         @media (min-width: 1024px) {
-            .app-store-badge {
-                height: 48px; 
-            }
-        }
-        .app-store-badge:hover {
+        .app-download-buttons a:hover img {
             transform: scale(1.05);
         }
-        .app-store-badge img {
-            height: 100%;
-            width: auto;
-        }
-        
-        .main-footer-text-container { 
-            width: 100%; 
-            padding-top: 1.5rem; 
-            border-top: 1px solid rgba(255,255,255,0.15); 
-        }
-        .main-footer-text-container .social-links {
-            margin-top: 1rem; 
-            display: flex;
-            justify-content: center; 
-            gap: 1rem; 
-        }
-        .main-footer-text-container .social-links svg { 
-            width: 1rem; 
-            height: 1rem; 
-        }
 
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem; 
-            color: #374151; 
-        }
-        .form-input, .form-select { 
-            display: block;
-            width: 100%;
-            padding: 0.875rem 1.25rem; 
-            border: 1px solid #D1D5DB; 
-            border-radius: 0.5rem; 
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            background-color: white; 
-        }
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: #2563EB; 
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); 
-        }
-        .form-input-uppercase {
-            text-transform: uppercase;
-        }
-        .form-file-input {
-            display: block;
-            width: 100%;
-            padding: 0.5rem; 
-            border: 1px solid #D1D5DB;
-            border-radius: 0.5rem; 
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            color: #4B5563; 
-            background-color: white;
-        }
-        .form-file-input::file-selector-button { 
-            padding: 0.6rem 1.2rem;
-            margin-right: 1rem;
-            background-color: #E5E7EB; 
-            border: none;
-            border-radius: 0.375rem; 
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .form-file-input::file-selector-button:hover {
-            background-color: #D1D5DB; 
-        }
-
-        .form-button { 
-            padding: 0.875rem 1.5rem; 
-            border-radius: 0.5rem; 
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            width: 100%;
-            border: none;
-            margin-top: 0.75rem; 
-            position: relative; 
-            overflow: hidden; 
-        }
-        .form-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .form-button:active {
-            transform: translateY(-1px) scale(0.98);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .submit-button-card {
-            background-color: #2918a9; 
-            color: white;
-        }
-        .submit-button-card:hover {
-            background-color: #1e1278; 
-        }
-        .download-button-card {
-            background-color: #FFCB05;
-            color: #1f2937; 
-        }
-        .download-button-card:hover {
-            background-color: #eab308; 
-        }
-        .button-spinner {
-            display: none; 
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
-        }
-        .form-button.loading .button-spinner {
-            display: inline-block;
-        }
-        .form-button.loading .button-text {
-            visibility: hidden;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .team-member-card {
-            background-color: #FFCB05; 
-            color: #1f2937; 
-            border: none;
-            text-align: center; 
-        }
-        .team-member-card img {
-            width: 6rem; 
-            height: 6rem; 
-            border-radius: 9999px; 
-            object-fit: cover;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 0.75rem; 
-            border: 3px solid #2918a9; 
-            transition: transform 0.3s ease;
-        }
-        .team-member-card:hover img {
-            transform: scale(1.1);
-        }
-         @media (min-width: 640px) {
-            .team-member-card img {
-                width: 7rem;
-                height: 7rem;
-            }
-         }
-          @media (min-width: 1024px) {
-            .team-member-card img {
-                width: 8rem;
-                height: 8rem;
-            }
-         }
-
-        .about-page-image, .about-page-gif { 
-            display: block; 
-            width: 100%; 
-            max-width: 100%; 
-            height: auto;
-            border-radius: 0.75rem; 
-            margin: 2.5rem auto; 
-        }
-
-        .release-card-custom {
-            background-color: #FFCB05; 
-            color: #1f2937; 
-            border: none;
-            padding: 0; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        .release-card-custom img {
-            border-radius: 0.5rem 0.5rem 0 0; 
-            margin-bottom: 0; 
-            object-fit: cover;
-            aspect-ratio: 16 / 9; 
-            width: 100%;
-        }
-        .release-card-custom .release-content { 
-            padding: 0.75rem; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-        }
-        @media (min-width: 640px) {
-            .release-card-custom .release-content { padding: 1rem; }
-        }
-        @media (min-width: 1024px) {
-            .release-card-custom .release-content { padding: 1.25rem; }
-        }
-
-        .release-detail-image {
-            width: 100%;
-            max-width: 768px; 
-            height: auto;
-            border-radius: 0.75rem; 
-            margin: 0 auto 2.5rem auto; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-        }
-        .latest-releases-list li {
-            padding: 0.75rem 0; 
-            border-bottom: 1px solid #e5e7eb; 
-        }
-        .latest-releases-list li:last-child {
-            border-bottom: none; 
-        }
-        .latest-releases-list a {
-            color: #2563EB; 
-            text-decoration: none;
-            transition: color 0.2s ease-in-out, padding-left 0.2s ease-out;
-            display: block; 
-        }
-        .latest-releases-list a:hover {
-            color: #1D4ED8; 
-            padding-left: 8px; 
-        }
-
-        .hidden {
-            display: none !important; 
-        }
-        
-        #notification-area {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10000; 
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .notification-toast {
-            background-color: #2918a9; 
-            color: white;
-            padding: 12px 20px;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        /* Animasi Scroll */
+        .animate-on-scroll {
             opacity: 0;
-            transform: translateX(100%);
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            font-size: 0.9rem;
-            min-width: 250px;
-            max-width: 350px;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .notification-toast.show {
+        .animate-on-scroll.animated {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
-        .notification-toast.success {
-            background-color: #FFCB05; 
-            color: #1f2937;
-        }
-        .notification-toast.error {
-            background-color: #ef4444; 
-            color: white;
-        }
-        .notification-toast.info {
-             background-color: #0973D6; 
-            color: white;
-        }
+
     </style>
 </head>
-<body>
+<body class="bg-white text-black">
 
-    <div id="notification-area"></div>
-
-    <div class="gif-color-overlay"></div>
-
-    <header id="pageHeader" class="fixed top-0 left-0 w-full z-30">
-        <div class="container mx-auto flex justify-between items-center px-6 h-16 sm:h-20 md:h-[5.5rem]">
-            <div id="topLeftLogo" class="logo-container w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Logo_PMII.png/250px-Logo_PMII.png" alt="Logo PMII">
-            </div>
-            <div> 
-                <button id="hamburgerButton" class="text-white focus:outline-none p-1.5 sm:p-2 md:p-2.5 rounded-md hover:bg-white/10 active:bg-white/20 transition-colors">
-                    <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
+    <header class="fixed top-0 left-0 w-full z-50 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#hero" class="flex items-center">
+                <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII Bali Nusra" class="h-10 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x40/2918A9/FFFFFF?text=Logo+PMII';">
+            </a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#hero" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">HOME</a>
+                <a href="#about" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">ABOUT</a>
+                <a href="#team" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">TEAM</a>
+                <a href="#release" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">RELEASE</a>
+                <a href="#database" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">DATABASE</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobileMenuButton" class="text-white hover:text-[#FFCB05] focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
+        <div id="mobileMenu" class="mobile-menu hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-xl p-6 z-40">
+            <div class="flex justify-end mb-4">
+                <button id="closeMobileMenuButton" class="text-black hover:text-[#0973d6] focus:outline-none">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-4">
+                <a href="#hero" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">HOME</a>
+                <a href="#about" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">ABOUT</a>
+                <a href="#team" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">TEAM</a>
+                <a href="#release" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">RELEASE</a>
+                <a href="#database" class="mobile-menu-link text-black hover:text-[#0973d6] font-bold py-2">DATABASE</a>
+            </nav>
+        </div>
     </header>
 
-    <div id="sideMenu"> 
-        <div class="flex justify-end mb-4"> 
-            <button id="closeSideMenuButton" class="focus:outline-none p-2 rounded-md hover:bg-black/10 active:bg-black/20 transition-colors">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
+    <section id="hero" class="text-white py-20 md:py-32 min-h-[50vh] flex flex-col justify-center items-center">
+        <div class="hero-gradient-overlay"></div> 
+        <div class="container mx-auto px-6 text-center animate-on-scroll"> 
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight"> 
+                PMII BALI NUSRA
+            </h1>
+            <div class="text-lg md:text-2xl mb-10 max-w-3xl mx-auto">
+                <p class="font-semibold text-[#FFCB05]">PERGERAKAN MAHASISWA ISLAM INDONESIA</p>
+                <p class="mt-1 md:mt-2">REGION BALI DAN NUSA TENGGARA</p>
+            </div>
         </div>
-        <nav> 
-            <a href="#home" class="menu-link">HOME</a>
-            <hr class="menu-separator">
-            <a href="#about" class="menu-link">ABOUT</a>
-            <hr class="menu-separator">
-            <a href="#team" class="menu-link">TEAM</a>
-            <hr class="menu-separator">
-            <a href="#release" class="menu-link">RELEASE</a>
-            <hr class="menu-separator">
-            <a href="#database" class="menu-link">DATABASE</a>
-            </nav>
-    </div>
+    </section>
 
-    <main id="pageContainer">
-        <div id="page-home" class="page-content-wrapper">
-            <div id="home-hero" class="full-screen-container text-white"> 
-                <div class="max-w-3xl mx-auto">
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight hero-animate-title" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.6); color: #FFCB05;">
-                        PMII BALI NUSRA
-                    </h1>
-                    <div class="text-xs sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-10 font-medium hero-animate-subtitle" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">
-                        <p>PERGERAKAN MAHASISWA ISLAM INDONESIA</p>
-                        <p>REGION BALI DAN NUSA TENGGARA</p>
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16">
+                </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll">
+                    <span class="number font-bold text-black mb-2" data-target="25">0</span>
+                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Cabang</h3>
+                    <p class="text-black text-sm">Kabupaten/Kota</p>
+                </div>
+                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.2s;">
+                    <span class="number font-bold text-black mb-2" data-target="75">0</span>
+                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Komisariat</h3>
+                    <p class="text-black text-sm">Universitas/Institusi</p>
+                </div>
+                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.4s;">
+                    <span class="number font-bold text-black mb-2" data-target="150">0</span>
+                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Rayon</h3>
+                    <p class="text-black text-sm">Fakultas/Departemen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-left mb-12 md:mb-16 animate-on-scroll">
+                <p class="text-2xl md:text-3xl font-bold">
+                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Dokumentasi Kegiatan</span>
+                </p>
+            </div>
+            <div class="carousel-wrapper w-full relative animate-on-scroll">
+                <div class="carousel-container overflow-hidden">
+                    <div class="carousel-track flex">
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/FFC107/000000?text=Kegiatan+1" alt="Dokumentasi Kegiatan 1" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Diskusi Publik</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/3F51B5/FFFFFF?text=Kegiatan+2" alt="Dokumentasi Kegiatan 2" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Pelatihan Kader</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Kegiatan+3" alt="Dokumentasi Kegiatan 3" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Bakti Sosial</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/F44336/FFFFFF?text=Kegiatan+4" alt="Dokumentasi Kegiatan 4" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Seminar Nasional</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/9C27B0/FFFFFF?text=Kegiatan+5" alt="Dokumentasi Kegiatan 5" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Kunjungan Studi</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/00BCD4/000000?text=Kegiatan+6" alt="Dokumentasi Kegiatan 6" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Pentas Seni</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/8BC34A/000000?text=Kegiatan+7" alt="Dokumentasi Kegiatan 7" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Olahraga Bersama</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/FF9800/000000?text=Kegiatan+8" alt="Dokumentasi Kegiatan 8" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Workshop Kepenulisan</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/795548/FFFFFF?text=Kegiatan+9" alt="Dokumentasi Kegiatan 9" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <p class="text-center text-sm mt-2 text-black">Rapat Anggota</p>
+                        </div>
                     </div>
-                    <a href="#pelajari-lebih-lanjut-content" id="selengkapnyaButton"
-                       class="text-xs py-2.5 px-5 sm:text-base sm:py-3.5 sm:px-8 md:text-lg md:py-4 md:px-10 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 hero-animate-button"
-                       style="background-color: #FFCB05; color: #1f2937;">
-                        Selengkapnya
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="release" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-left mb-12 md:mb-16 animate-on-scroll">
+                 <p class="text-2xl md:text-3xl font-bold">
+                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Informasi Kegiatan</span>
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll">
+                    <img src="https://placehold.co/600x400/FFCB05/000000?text=Info+1" alt="Gambar Informasi 1" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 02 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Judul Informasi Kegiatan Terbaru 1</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                 <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.1s;">
+                    <img src="https://placehold.co/600x400/0973d6/FFFFFF?text=Info+2" alt="Gambar Informasi 2" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 01 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Opini Kader: Pentingnya Organisasi Mahasiswa</h3>
+                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                 <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.2s;">
+                     <img src="https://placehold.co/600x400/2918A9/FFFFFF?text=Info+3" alt="Gambar Informasi 3" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 30 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Laporan Kegiatan MAPABA Rayon X</h3>
+                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.3s;">
+                    <img src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Info+4" alt="Gambar Informasi 4" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 28 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Jadwal Pelatihan Jurnalistik PMII</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.4s;">
+                    <img src="https://placehold.co/600x400/F44336/FFFFFF?text=Info+5" alt="Gambar Informasi 5" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 27 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Undangan Diskusi Panel Kebangsaan</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.5s;">
+                    <img src="https://placehold.co/600x400/9C27B0/FFFFFF?text=Info+6" alt="Gambar Informasi 6" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 25 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Refleksi Hari Kebangkitan Nasional</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.6s;">
+                    <img src="https://placehold.co/600x400/00BCD4/000000?text=Info+7" alt="Gambar Informasi 7" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 22 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Galang Dana untuk Korban Bencana Alam</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.7s;">
+                    <img src="https://placehold.co/600x400/8BC34A/000000?text=Info+8" alt="Gambar Informasi 8" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 20 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Kajian Mingguan: Islam dan Tantangan Global</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.8s;">
+                    <img src="https://placehold.co/600x400/FF9800/000000?text=Info+9" alt="Gambar Informasi 9" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 18 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Pengumuman Hasil Lomba Esai PMII</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="database" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16 animate-on-scroll">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <div class="flex animate-on-scroll"> 
+                    <img src="https://placehold.co/600x400/2918A9/FFFFFF?text=Database+PMII" alt="Database PMII Bali Nusra" class="rounded-xl shadow-xl w-full h-full object-cover">
+                </div>
+                <div class="space-y-6 flex flex-col justify-between animate-on-scroll" style="transition-delay: 0.2s;"> 
+                    <div>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6"> 
+                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-id-card-alt mr-2"></i> Kartu Tanda Anggota</h3>
+                            <p class="text-black">Pusat data anggota, pengurus, dan alumni PMII.</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-folder-open mr-2"></i> Dokumentasi Pengurus</h3>
+                            <p class="text-black">Pusat dokumentasi dan pelaporan kegiatan PMII di Cabang, Komisariat dan Rayon.</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-lightbulb mr-2"></i> Produk PMII</h3>
+                            <p class="text-black">Pusat studi ilmiah dan regulasi akademis terkait isu dan kebijakan daerah, nasional, dan internasional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak" class="py-16 md:py-24 bg-white text-black">
+        <div class="container mx-auto px-6 text-center">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="text-black">UNDUH APLIKASI</span> <span class="text-[#2918a9]">PERMAISINDO</span>
+                </h2>
+                <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                    Platform Aktivis Pergerakan, Pusat Kajian Keilmuan Organisasi, Akademisi, dan Opini Publik! Jangan Sampai Ketinggalan.
+                </p>
+            </div>
+            <div class="phone-mockup-container animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <img src="https://placehold.co/250x530/0973d6/FFFFFF?text=Tampilan+Aplikasi" alt="Tampilan Aplikasi Permasindo" onerror="this.onerror=null;this.src='https://placehold.co/250x530/cccccc/000000?text=App+Screen';">
+                    </div>
+                </div>
+                <div class="app-download-buttons">
+                    <a href="#" aria-label="Unduh di Google Play">
+                        <img src="https://placehold.co/135x50/000000/FFFFFF?text=Google+Play" alt="Tombol Google Play">
+                    </a>
+                    <a href="#" aria-label="Unduh di App Store">
+                        <img src="https://placehold.co/135x50/000000/FFFFFF?text=App+Store" alt="Tombol App Store">
                     </a>
                 </div>
             </div>
-            <section id="pelajari-lebih-lanjut-content" class="page-content-section">
-                <div class="container mx-auto px-6">
-                    <div class="counter-card-container grid-cols-1 sm:grid-cols-3 mb-16 sm:mb-20 pt-8 sm:pt-12">
-                        <div class="counter-card card reveal-on-scroll">
-                            <div id="counter1" class="counter-number">0</div>
-                            <h3 class="counter-title">CABANG</h3>
-                            <p class="counter-subtitle">KABUPATEN/KOTA</p>
-                        </div>
-                        <div class="counter-card card reveal-on-scroll" style="transition-delay: 0.1s;">
-                            <div id="counter2" class="counter-number">0</div>
-                            <h3 class="counter-title">KOMISARIAT</h3>
-                            <p class="counter-subtitle">UNIVERSITAS/LAINNYA</p>
-                        </div>
-                        <div class="counter-card card reveal-on-scroll" style="transition-delay: 0.2s;">
-                             <div id="counter3" class="counter-number">0</div>
-                            <h3 class="counter-title">RAYON</h3>
-                            <p class="counter-subtitle">FAKULTAS/LAINNYA</p>
-                        </div>
-                    </div>
-                    <div class="max-w-4xl mx-auto mb-16 sm:mb-20 pt-8 sm:pt-0 reveal-on-scroll">
-                        <p class="text-sm sm:text-base text-gray-700 text-justify leading-relaxed sm:leading-normal">
-                            PMII adalah organisasi mahasiswa Islam yang didirikan pada 17 April 1960 di Surabaya, Jawa Timur, oleh 13 mahasiswa dan pemuda Nahdlatul Ulama (NU) dengan restu KH Idham Chalid. Berlandaskan Islam Ahlussunnah Wal Jamaah, PMII bertujuan membentuk pribadi muslim Indonesia yang bertakwa, berilmu, berbudi luhur, dan bertanggung jawab. Organisasi ini aktif dalam kegiatan sosial, pendidikan, dan politik, serta fokus mengembangkan kepemimpinan mahasiswa. PMII tersebar di berbagai daerah, termasuk Bali dan Nusa Tenggara, dikoordinasikan oleh PKC PMII Bali Nusa Tenggara. PMII terus berkontribusi dalam memperjuangkan cita-cita kemerdekaan Indonesia.
-                        </p>
-                    </div>
-                    <div id="homeNewsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-16 sm:mb-20 pt-8 sm:pt-12">
-                    </div>
-                    <div id="homeTestimonialGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 pt-8 sm:pt-12">
-                    </div>
-                </div>
-            </section>
         </div>
+    </section>
 
-        <div id="page-about" class="page-content-wrapper">
-            <section class="page-content-section">
-                <div class="container mx-auto px-6">
-                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzU4ZWY5ejhjaDM3M3VkYzJodXp3ODhvMHFob3g5bDQ3dnhmaXYxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fHSxiRjom2A9dYZ7hq/giphy.gif" alt="Kegiatan PMII Bali Nusra" class="about-page-image reveal-on-scroll" onerror="this.onerror=null;this.src='https://placehold.co/700x400/E2E8F0/4A5568?text=Gambar+Tidak+Tersedia';">
-                    <div class="max-w-4xl mx-auto my-10 reveal-on-scroll">
-                        <p class="text-sm sm:text-base text-gray-700 leading-relaxed sm:leading-normal text-justify">
-                            Pergerakan Mahasiswa Islam Indonesia (PMII) merupakan organisasi kemahasiswaan yang berlandaskan nilai-nilai Islam Ahlussunnah wal Jama’ah dan berorientasi pada perjuangan intelektual, sosial, dan kebangsaan. Berdiri sejak 1960, PMII hadir sebagai wadah pengkaderan mahasiswa Muslim Indonesia untuk membentuk pribadi yang beriman, bertakwa, kritis, progresif, serta mampu menjawab tantangan zaman. PMII memposisikan diri sebagai mitra strategis dalam pembangunan bangsa, dengan mengedepankan prinsip independensi, transformasi sosial, dan gerakan keilmuan. Melalui berbagai forum, pelatihan, serta advokasi, PMII berperan aktif dalam penguatan demokrasi, hak asasi manusia, dan keadilan sosial.
-                        </p>
-                    </div>
-                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjJldGM3bjg3dDh5aHE5MjN4OHI1MXRydW56OGcxYjA1MGhsYTRwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UFdFuhMrBljJSBHb4K/giphy.gif" alt="Aktivitas PMII" class="about-page-gif reveal-on-scroll" onerror="this.onerror=null;this.src='https://placehold.co/700x400/E2E8F0/4A5568?text=GIF+Tidak+Tersedia';">
-                    <div class="max-w-4xl mx-auto my-10 reveal-on-scroll">
-                        <p class="text-sm sm:text-base text-gray-700 leading-relaxed sm:leading-normal text-justify">
-                            PMII Bali Nusra (Bali, Nusa Tenggara Barat, dan Nusa Tenggara Timur) merupakan representasi regional dari PMII yang aktif mendorong penguatan kapasitas kader di kawasan Indonesia Timur. Wilayah ini menjadi ruang strategis bagi PMII dalam mengembangkan nilai-nilai keislaman dan keindonesiaan berbasis multikulturalisme dan toleransi. PMII Bali Nusra hadir sebagai pelopor gerakan intelektual mahasiswa yang konsisten menyuarakan keadilan sosial, pemberdayaan masyarakat adat, serta pelestarian nilai-nilai lokal. Melalui kaderisasi berjenjang dan kolaborasi antar cabang, PMII Bali Nusra terus membangun jaringan intelektual dan aktivis yang berdaya saing di tingkat regional dan nasional.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div id="page-team" class="page-content-wrapper">
-            <section class="page-content-section">
-                <div class="container mx-auto px-6">
-                    <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-8">
-                        </div>
-                </div>
-            </section>
-        </div>
-
-        <div id="page-release" class="page-content-wrapper">
-            <section class="page-content-section">
-                <div class="container mx-auto px-6">
-                    <div id="release-list-view">
-                        <div id="releaseGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 pt-8">
-                            </div>
-                        <div class="text-center mt-8">
-                            <button id="loadMoreReleasesButton" class="text-white text-sm sm:text-base font-semibold py-2 px-6 rounded-lg transition-colors duration-200 transform hover:scale-105 active:scale-95" style="background-color: #0973D6; hover:background-color: #0861b3;">
-                                Baca Lainnya
-                            </button>
-                        </div>
-                    </div>
-                    <div id="release-detail-view" class="hidden max-w-4xl mx-auto"> 
-                        <button id="back-to-release-list" class="mb-8 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-semibold py-2 px-6 rounded-lg transition-all duration-200 inline-flex items-center transform hover:scale-105 active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
-                            Kembali
-                        </button>
-                        <img id="detail-release-image" src="" alt="Gambar Detail Informasi" class="release-detail-image" onerror="this.onerror=null;this.src='https://placehold.co/768x432/E2E8F0/4A5568?text=Gambar+Detail+Tidak+Tersedia';">
-                        <h2 id="detail-release-title" class="text-2xl sm:text-3xl md:text-4xl font-bold mt-6 mb-3 text-gray-800"></h2>
-                        <p id="detail-release-date" class="text-sm sm:text-base text-gray-500 mb-6"></p>
-                        <div id="detail-release-content" class="text-sm sm:text-base text-gray-700 leading-relaxed text-justify"></div>
-                        <hr class="my-10 border-gray-300">
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-800">Informasi Lainnya</h3>
-                        <ul id="latest-releases-list" class="list-none space-y-3"></ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div id="page-database" class="page-content-wrapper">
-            <section class="page-content-section">
-                <div class="container mx-auto px-6 max-w-2xl"> 
-                    <form id="formKartuAnggota" action="#" method="POST" class="space-y-6 bg-white p-6 sm:p-8 rounded-xl shadow-xl border border-gray-200 reveal-on-scroll mt-8">
-                        <div>
-                            <label for="nama_lengkap" class="form-label text-xs sm:text-sm font-medium">NAMA LENGKAP</label>
-                            <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-input form-input-uppercase text-sm sm:text-base" required>
-                        </div>
-                        <div>
-                            <label for="email_anggota" class="form-label text-xs sm:text-sm font-medium">EMAIL</label>
-                            <input type="email" name="email_anggota" id="email_anggota" class="form-input text-sm sm:text-base" required>
-                        </div>
-                        <div>
-                            <label for="asal_rayon" class="form-label text-xs sm:text-sm font-medium">RAYON ATAU FAKULTAS</label>
-                            <select name="asal_rayon" id="asal_rayon" class="form-select text-sm sm:text-base" required>
-                                <option value="">Pilih Fakultas/Rayon...</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="asal_komisariat" class="form-label text-xs sm:text-sm font-medium">KOMISARIAT ATAU UNIVERSITAS</label>
-                            <select name="asal_komisariat" id="asal_komisariat" class="form-select text-sm sm:text-base" required>
-                                <option value="">Pilih Universitas/Komisariat...</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="asal_cabang" class="form-label text-xs sm:text-sm font-medium">CABANG (KAB ATAU KOTA)</label>
-                            <select name="asal_cabang" id="asal_cabang" class="form-select text-sm sm:text-base" required>
-                                <option value="">Pilih Cabang (Kab/Kota)...</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="sertifikat_mapaba" class="form-label text-xs sm:text-sm font-medium">SERTIFIKAT MAPABA (JPG, PNG, PDF, DOC)</label>
-                            <input type="file" name="sertifikat_mapaba" id="sertifikat_mapaba" class="form-file-input text-xs sm:text-sm" accept=".jpg, .jpeg, .png, .svg, .doc, .docx, .pdf" required>
-                        </div>
-                        <div class="pt-3"> 
-                            <button type="submit" id="submitKtaButton" class="form-button submit-button-card flex items-center justify-center text-sm sm:text-base font-semibold">
-                                <span class="button-text">BUAT KTA PMII</span>
-                                <span class="button-spinner"></span>
-                            </button>
-                            <button type="button" id="unduhProdukPmiiButton" class="form-button download-button-card text-sm sm:text-base font-semibold">
-                                PRODUK PMII
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <div class="app-promo-footer-section">
+    <footer class="footer-gradient text-white py-12">
         <div class="container mx-auto px-6">
-            <div class="app-promo-footer-container">
-                <div class="app-footer-content-wrapper w-full">
-                    <div class="app-promo-text-content mb-6">
-                        <h2 class="app-promo-headline text-base sm:text-xl md:text-2xl font-bold">
-                            Download Aplikasi <span style="color: #FFCB05;">PERMAISINDO</span>
-                        </h2>
-                        <h3 class="app-promo-subheadline text-xs sm:text-sm md:text-base font-bold">
-                            Platform Aktivis Pergerakan, Sekarang!
-                        </h3>
-                    </div>
-                    <div class="app-promo-buttons">
-                        <a href="#" class="app-store-badge">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png" alt="Download di App Store" onerror="this.onerror=null;this.src='https://placehold.co/160x48/000000/FFFFFF?text=App+Store';">
-                        </a>
-                        <a href="#" class="app-store-badge">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/800px-Google_Play_Store_badge_EN.svg.png" alt="Dapatkan di Google Play" onerror="this.onerror=null;this.src='https://placehold.co/160x48/000000/FFFFFF?text=Google+Play';">
-                        </a>
-                    </div>
-                    <footer class="main-footer-text-container mt-8"> 
-                        <p class="mb-2 text-[0.6rem] leading-tight sm:text-xs">&copy;2025 PMII Bali dan Nusa Tenggara. Hak Cipta Dilindungi.</p>
-                    </footer>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Alamat</h4>
+                    <p class="text-sm">Jl. Catur Warga, Kecamatan Pejanggik, Kota Mataram, Provinsi Nusa Tenggara Barat.</p>
+                    <p class="text-sm">Email	: pkcbalinusra@gmail.com</p>
+                    <p class="text-sm">Telepon	: +62 877-5432-2362</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Regulasi</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Survey</a></li>
+                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Disclaimer</a></li>
+                        <li><a href="#" onclick="openModal('privacyModal')" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Privacy Policy</a></li>
+                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Copyright</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Media Sosial</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
+                                <i class="fab fa-facebook-f text-xl mr-3"></i>
+                                <span class="text-sm">PKC PMII Bali Nusra</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
+                                <i class="fab fa-instagram text-xl mr-3"></i>
+                                <span class="text-sm">@pkc.pmiibalinusra</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
+                                <i class="fab fa-youtube text-xl mr-3"></i>
+                                <span class="text-sm">PKC PMII Bali-Nusra</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <div class="border-t border-white border-opacity-50 pt-8 text-center text-sm"> 
+                <p>&copy; <span id="currentYear"></span> PMII Bali Nusra. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="demoModal" class="fixed inset-0 z-50 flex items-center justify-center modal-backdrop hidden">
+        <div class="bg-white p-8 md:p-10 rounded-lg shadow-2xl w-11/12 md:w-1/2 lg:w-1/3 max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold text-black">Formulir Pendaftaran Kader</h3>
+                <button onclick="closeModal('demoModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <form id="demoForm">
+                <div class="mb-4">
+                    <label for="demoName" class="block text-sm font-medium text-black mb-1">Nama Lengkap</label>
+                    <input type="text" id="demoName" name="demoName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="demoEmail" class="block text-sm font-medium text-black mb-1">Email Aktif</label>
+                    <input type="email" id="demoEmail" name="demoEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="demoCompany" class="block text-sm font-medium text-black mb-1">Asal Kampus/Universitas</label>
+                    <input type="text" id="demoCompany" name="demoCompany" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
+                </div>
+                <div class="mb-6">
+                    <label for="demoMessage" class="block text-sm font-medium text-black mb-1">Motivasi Bergabung (Singkat)</label>
+                    <textarea id="demoMessage" name="demoMessage" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black"></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">Kirim Pendaftaran</button>
+            </form>
+            <div id="demoMessageStatus" class="mt-4 text-center"></div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center modal-backdrop hidden">
+        <div class="bg-white p-8 md:p-10 rounded-lg shadow-2xl w-11/12 md:w-1/2 lg:w-1/3 max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold text-black">Hubungi Sekretariat</h3>
+                <button onclick="closeModal('contactModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <form id="contactForm">
+                <div class="mb-4">
+                    <label for="contactName" class="block text-sm font-medium text-black mb-1">Nama Anda</label>
+                    <input type="text" id="contactName" name="contactName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="contactEmail" class="block text-sm font-medium text-black mb-1">Email Anda</label>
+                    <input type="email" id="contactEmail" name="contactEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
+                </div>
+                <div class="mb-6">
+                    <label for="contactMessage" class="block text-sm font-medium text-black mb-1">Pesan Anda</label>
+                    <textarea id="contactMessage" name="contactMessage" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black"></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">Kirim Pesan</button>
+            </form>
+            <div id="contactMessageStatus" class="mt-4 text-center"></div>
         </div>
     </div>
 
     <script>
-        // Variabel Global untuk elemen DOM
-        const pageHeader = document.getElementById('pageHeader'); 
-        const hamburgerButton = document.getElementById('hamburgerButton');
-        const menuPanel = document.getElementById('sideMenu'); 
-        const closeSideMenuButton = document.getElementById('closeSideMenuButton'); 
-        const menuLinks = document.querySelectorAll('#sideMenu .menu-link'); 
-        const topLeftLogo = document.getElementById('topLeftLogo'); 
-        const scrollThreshold = 50; 
+        // JavaScript untuk fungsionalitas modal, menu mobile, dan menu aktif
 
-        const gifColorOverlay = document.querySelector('.gif-color-overlay');
-        const bodyElement = document.body;
-        const originalBodyBgImage = "url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3FjMmd4YTI0eWlubTduaThqbzBobmtiYTJzeGFkYjlxaWVoc25ybCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eS6c9bqOnxIPBpKFwS/giphy.gif')";
-
-        const pageHome = document.getElementById('page-home');
-        const pageAbout = document.getElementById('page-about');
-        const pageTeam = document.getElementById('page-team');
-        const pageRelease = document.getElementById('page-release');
-        const pageDatabase = document.getElementById('page-database');
-        const selengkapnyaButton = document.getElementById('selengkapnyaButton');
-        const pelajariLebihLanjutContent = document.getElementById('pelajari-lebih-lanjut-content');
-
-        const allPageWrappers = document.querySelectorAll('.page-content-wrapper');
-
-        const releaseListView = document.getElementById('release-list-view');
-        const releaseDetailView = document.getElementById('release-detail-view');
-        const backToReleaseListButton = document.getElementById('back-to-release-list');
-        const detailReleaseImage = document.getElementById('detail-release-image');
-        const detailReleaseTitle = document.getElementById('detail-release-title');
-        const detailReleaseDate = document.getElementById('detail-release-date');
-        const detailReleaseContent = document.getElementById('detail-release-content');
-        const latestReleasesList = document.getElementById('latest-releases-list');
-        const releaseGrid = document.getElementById('releaseGrid');
-        const homeNewsGrid = document.getElementById('homeNewsGrid'); 
-        const homeTestimonialGrid = document.getElementById('homeTestimonialGrid'); 
-        const loadMoreReleasesButton = document.getElementById('loadMoreReleasesButton'); 
-
-        let currentlyDisplayedReleases = 0;
-        const releasesPerPage = 6; 
-
-        const sampleReleaseData = [
-            {
-                id: 1,
-                title: "Muzakkir Berkomitmen Merevolusi Pendidikan di Bali Nusra Melalui Program Beasiswa dan Pelatihan Vokasi", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir akan meluncurkan program beasiswa serta pelatihan vokasi guna membekali generasi muda.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra yang baru terpilih, menyatakan komitmennya untuk meningkatkan akses dan kualitas pendidikan di wilayah Bali Nusra. Dalam rencananya, ia akan meluncurkan program beasiswa serta pelatihan vokasi guna membekali generasi muda dengan keterampilan yang relevan di era modern. Muzakkir menjelaskan bahwa ia akan bekerja sama dengan institusi pendidikan lokal untuk mengembangkan kurikulum yang selaras dengan kebutuhan industri. Program beasiswa akan diprioritaskan bagi pelajar berprestasi dari keluarga kurang mampu, sementara pelatihan vokasi akan fokus pada bidang teknologi informasi, pertanian, dan pariwisata. “Pendidikan adalah kunci masa depan, dan kami ingin memastikan setiap anak muda memiliki kesempatan untuk berkembang,” ujarnya.",
-                imageUrl: "https://blogger.googleusercontent.com/img/a/AVvXsEh1QTUM0jBBT6uldKzGqhY5jWc4owWiT2z2ycO4co0Lpja4NrzwmAMAgse0ydr3WgH2R7wNa-11jQdicoGnaJ97K_mGZUcpVpUugCJk9mPLIyXWhf50ErMTB4YV0JuZYRMSvRHofFPAz5eR7PNxd-FAJwHLJXC_JBG706SpkJbh1CtCTFZLuHWSrCQS=w640-h352",
-                articleUrl: "#" 
-            },
-            {
-                id: 2,
-                title: "Muzakkir Dorong Penguatan Nilai Islam dalam Pembinaan Karakter Generasi Muda Bali Nusra", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir bertekad membentuk generasi muda berakhlak mulia melalui penguatan nilai-nilai Islam.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, bertekad membentuk generasi muda yang berakhlak mulia melalui penguatan nilai-nilai Islam. Ia akan mengadakan kajian Islam rutin dan program dakwah komunitas untuk menanamkan etika dalam kehidupan sehari-hari. Kajian Islam akan digelar di masjid dan sekolah dengan melibatkan ulama serta tokoh agama sebagai pembicara. Sementara itu, program dakwah komunitas akan mengajak pemuda berpartisipasi dalam kegiatan sosial berbasis nilai Islam, seperti bakti sosial dan pengajian kelompok. “Kami ingin generasi muda tidak hanya cerdas, tetapi juga memiliki moral yang kuat,” kata Muzakkir.",
-                imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCpnVqk49BiPF7oGNRGZFL2VGBMHy916Ya4PdVSDyF4k2kN9DIaAaGYfF0fW_BEC5Q0dgt24C6pHkmMUSUUEpokOlAZ8j-vVq9QzdfQOK9gkb8Sf7_o9hskO4IAabhLC1BEikkr-hD40I2GD9PHAplU80LhqETGyjHgXey_4sIjbameJYGp1gwuYyW3ck/w1200-h630-p-k-no-nu/IMG-20241001-WA0024.jpg",
-                articleUrl: "#"
-            },
-            {
-                id: 3,
-                title: "Muzakkir Prioritaskan Kesejahteraan dan Keadilan Sosial bagi Masyarakat Bali Nusra", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir menegaskan komitmennya untuk mewujudkan keadilan sosial melalui inisiatif bantuan.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, menegaskan komitmennya untuk mewujudkan keadilan sosial melalui inisiatif bantuan bagi masyarakat kurang mampu. Ia juga akan mengorganisir program sukarela untuk menangani permasalahan sosial yang mendesak di wilayah tersebut. Inisiatif ini mencakup program bantuan pangan dan kesehatan untuk keluarga miskin. Selain itu, program sukarela akan melibatkan anggota PMII dan masyarakat umum dalam aksi seperti pembersihan lingkungan dan bantuan korban bencana. “Kesejahteraan masyarakat adalah tanggung jawab bersama,” tegas Muzakkir.",
-                imageUrl: "https://lombokfokus.com/wp-content/uploads/2024/10/IMG-20241001-WA0060.jpg",
-                articleUrl: "#"
-            },
-            {
-                id: 4,
-                title: "Inisiatif Hijau PMII Bali Nusra: Rencana Muzakkir untuk Masa Depan Lingkungan yang Berkelanjutan", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir berjanji menjadikan Bali Nusra lebih hijau melalui promosi praktik ramah lingkungan.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, berjanji menjadikan Bali Nusra lebih hijau melalui promosi praktik ramah lingkungan dan kebijakan pelestarian sumber daya alam. Ia ingin menciptakan lingkungan yang lestari untuk generasi mendatang. Muzakkir akan berkolaborasi dengan pemerintah daerah dan organisasi lingkungan untuk mengembangkan kebijakan hijau. Praktik yang dipromosikan meliputi pengelolaan sampah, penggunaan energi terbarukan, dan penanaman pohon. “Kita harus menjaga bumi ini demi anak cucu kita,” ungkapnya.",
-                imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRJKTksV8aJO7WLBBeBwysZf2WNpdIDgR5TsHby3y8d13RLRpkCwhFVlPQZofhNhGIS56f2BRYTQbUD_RZ_q5tpuqTx8C8hXyOQH5Dt_uGLy61DBZkRcL83huz76mmTWJyNaM-U8xlWg_xm2s5d-BzTjzm0ZA3Isq_4TVMPw-NNs_4uPFIhnTxS96mGS4/s1599/IMG-20240603-WA0021.jpg",
-                articleUrl: "#"
-            },
-            {
-                id: 5,
-                title: "Membangun Kesatuan Bangsa: Muzakkir Dukung Dialog Antaragama dan Pertukaran Budaya", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir akan mengadakan forum antaragama dan program pertukaran budaya untuk harmoni sosial.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, akan mengadakan forum antaragama dan program pertukaran budaya untuk menciptakan harmoni sosial. Ia berharap dapat mempererat hubungan antar komunitas beragama demi perdamaian yang berkelanjutan. Forum antaragama akan melibatkan tokoh lintas agama untuk berdialog, sementara program pertukaran budaya akan mengajak pemuda dari berbagai latar belakang berpartisipasi dalam kegiatan yang memupuk toleransi. “Perbedaan adalah kekayaan yang harus kita jaga,” kata Muzakkir.",
-                imageUrl: "https://lombokfokus.com/wp-content/uploads/2025/05/IMG-20250502-WA0024.jpg",
-                articleUrl: "#"
-            },
-            {
-                id: 6,
-                title: "Memberdayakan Generasi Muda Bali Nusra: Fokus Muzakkir pada Kepemimpinan dan Inovasi", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir berkomitmen mendukung pemuda menjadi pemimpin dan wirausahawan melalui pelatihan.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, berkomitmen mendukung pemuda menjadi pemimpin dan wirausahawan melalui pelatihan kepemimpinan dan workshop inovasi. Langkah ini bertujuan mendorong kemajuan ekonomi dan sosial di wilayah tersebut. Pelatihan kepemimpinan akan mencakup komunikasi, manajemen konflik, dan pengambilan keputusan, sedangkan workshop inovasi akan fokus pada pengembangan ide bisnis dan teknologi. “Pemuda adalah agen perubahan, dan kami akan berikan mereka alat untuk sukses,” ujar Muzakkir.",
-                imageUrl: "https://lombokfokus.com/wp-content/uploads/2025/05/IMG-20250530-WA0055.jpg",
-                articleUrl: "#"
-            },
-            {
-                id: 7,
-                title: "Melestarikan Warisan Budaya Bali Nusra: Visi Budaya dari Ketua PKC PMII Muzakkir", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir berencana menggelar festival budaya dan mendukung pengrajin tradisional.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, berencana menggelar festival budaya dan mendukung pengrajin tradisional untuk menjaga identitas lokal. Ia ingin warisan budaya Bali Nusra tetap hidup di tengah arus modernisasi. Festival budaya tahunan akan menampilkan seni, musik, dan tarian tradisional, sementara dukungan bagi pengrajin mencakup pelatihan keterampilan dan akses pasar. “Budaya adalah jati diri kita yang harus dilestarikan,” tegas Muzakkir.",
-                imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEheFXurWEeHA4quG7JngJCqt_OhEC_GhW7FhceSbF9C73-KqU7qfI8PH3rm9cGrTrS8NDu9WKISkPFYSsV3-MdZ1Am3j-fDEqdiwnxVlwWqhzGF-5IRMwi-H5DNHXE4I0GFTFWh98wtBInkwCAn6wCOC2v6A3Bk9AWInwpF_V7oOE5_XumI6iKFvppA/s1396/IMG-20220825-WA0067.jpg",
-                articleUrl: "#"
-            },
-            {
-                id: 8,
-                title: "Menjembatani Kesenjangan Digital di Bali Nusra: Inisiatif Teknologi PMII oleh Muzakkir", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir akan meningkatkan literasi digital di kalangan pelajar dengan akses teknologi dan lokakarya.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, akan meningkatkan literasi digital di kalangan pelajar dengan menyediakan akses teknologi dan lokakarya terkait. Ia ingin generasi muda siap bersaing di era digital. Akses teknologi akan diwujudkan melalui penyediaan komputer dan internet di sekolah, sedangkan lokakarya akan membahas keamanan online dan pengembangan web. “Digitalisasi adalah keniscayaan, dan kita harus siap,” ungkap Muzakkir.",
-                imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHjyJ3TxK8V36fIyMUHOw_lb9g1mIxYJ4RrirSUOHS2k5OKuZTM02yyhIHC-72raYt0ujSN55du0_7gT7cp4X0tQe_-jx-AX0w1hmx782t8sLxBT_eN6ymV2f-ZYiQnDrL2Y7-wYu96onCwLLP-K_qT6mmOni0hM2cdW7mjjm-n5mhNkuYf9MF_f7om13k/s16000-rw/IMG-20241001-WA0149.jpg",
-                articleUrl: "#"
-            },
-            {
-                id: 9,
-                title: "Masyarakat Sehat dan Kuat: Agenda Kesehatan PMII Bali Nusra di Bawah Kepemimpinan Muzakkir", 
-                date: "31 Mei 2025",
-                shortDesc: "Ahmad Muzakkir menjadikan kesehatan prioritas dengan kampanye kesehatan dan peningkatan akses layanan medis.",
-                fullDesc: "Ahmad Muzakkir, Ketua PKC PMII Bali Nusra, menjadikan kesehatan sebagai prioritas dengan mengadakan kampanye kesehatan dan meningkatkan akses layanan medis. Ia ingin meningkatkan kualitas hidup masyarakat secara menyeluruh. Kampanye kesehatan akan meliputi pemeriksaan gratis dan edukasi gaya hidup sehat, sementara akses layanan medis akan diperluas melalui kerjasama dengan rumah sakit lokal. “Masyarakat yang sehat adalah masyarakat yang kuat,” kata Muzakkir.",
-                imageUrl: "https://kopitv.id/wp-content/uploads/2024/12/IMG-20241214-WA0045.jpg",
-                articleUrl: "#"
+        // Modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
             }
-        ];
-        
-        const sampleTestimonialData = [
-            { id: 1, name: "KH Nasaruddin Umar", title: "Menteri Agama", text: "PMII telah membentuk karakter kepemimpinan yang inklusif dan moderat. Nilai-nilai ini sangat penting dalam menjaga harmoni kehidupan beragama di Indonesia.", photoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Menteri_Agama_Nasaruddin_Umar.jpg/250px-Menteri_Agama_Nasaruddin_Umar.jpg" },
-            { id: 2, name: "Muhaimin Iskandar", title: "Menteri Koordinator Pemberdayaan Masyarakat", text: "PMII adalah kawah candradimuka yang menempa kader-kader muda menjadi pemimpin yang tangguh dan berintegritas.", photoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Muhaimin_Iskandar%2C_Wakil_Ketua_DPR.jpg/250px-Muhaimin_Iskandar%2C_Wakil_Ketua_DPR.jpg" },
-            { id: 3, name: "Nusron Wahid", title: "Menteri Agraria dan Tata Ruang/Kepala BPN", text: "Pengalaman saya di PMII mengajarkan pentingnya keadilan sosial dan keberpihakan kepada rakyat kecil, yang saya terapkan dalam kebijakan agraria.", photoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nusron_Wahid%2C_Menteri_Agraria_dan_Tata_Ruang_%282024%29_%28cropped%29.png/250px-Nusron_Wahid%2C_Menteri_Agraria_dan_Tata_Ruang_%282024%29_%28cropped%29.png" },
-            { id: 4, name: "Arifatul Choiri Fauzi", title: "Menteri Pemberdayaan Perempuan dan Anak", text: "PMII memberikan ruang bagi perempuan untuk berperan aktif dalam kepemimpinan dan pengambilan keputusan.", photoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Arifah_Choiri_Fauzi_saat_Serah_Terima_Jabatan_Menteri_Pemberdayaan_Perempuan_dan_Perlindungan_Anak_%282024%29.png/250px-Arifah_Choiri_Fauzi_saat_Serah_Terima_Jabatan_Menteri_Pemberdayaan_Perempuan_dan_Perlindungan_Anak_%282024%29.png" },
-            { id: 5, name: "Abdul Kadir Karding", title: "Menteri Perlindungan Pekerja Migran Indonesia", text: "Nilai-nilai perjuangan dan solidaritas yang saya pelajari di PMII menjadi dasar dalam memperjuangkan hak-hak pekerja migran.", photoUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Abdul_Kadir_Karding%2C_Menteri_Perlindungan_Pekerja_Migran_%282024%29.jpg" },
-            { id: 6, name: "Aminuddin Ma’ruf", title: "Wakil Menteri BUMN", text: "PMII membentuk saya menjadi pribadi yang adaptif dan inovatif, yang sangat berguna dalam menghadapi tantangan di sektor BUMN.", photoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Aminuddin_Ma%27ruf%2C_Wakil_Menteri_BUMN_%282024%29.jpg/250px-Aminuddin_Ma%27ruf%2C_Wakil_Menteri_BUMN_%282024%29.jpg" }
-        ];
-
-        function showNotification(message, type = 'info', duration = 3000) {
-            const notificationArea = document.getElementById('notification-area');
-            if (!notificationArea) return;
-
-            const toast = document.createElement('div');
-            toast.className = `notification-toast ${type}`;
-            toast.textContent = message;
-            notificationArea.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 10); 
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-                toast.addEventListener('transitionend', () => {
-                    if (toast.parentElement) {
-                         toast.remove();
-                    }
-                });
-            }, duration);
         }
 
-        function showPage(pageToShowWrapper) {
-            let activePageFound = false;
-            allPageWrappers.forEach(wrapper => {
-                if (wrapper.classList.contains('active-page')) {
-                    activePageFound = true;
-                    wrapper.classList.remove('active-page'); 
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal-backdrop');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
                 }
             });
+        }
+        
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const closeMobileMenuButton = document.getElementById('closeMobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link'); 
+        const desktopNavLinks = document.querySelectorAll('header nav a.nav-link'); 
 
-            const delay = activePageFound ? 10 : 0; 
-
-            setTimeout(() => {
-                if (pageToShowWrapper) { 
-                    pageToShowWrapper.classList.add('active-page');
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                    observeElementsForReveal(); 
-                }
-
-                const isHomePage = pageToShowWrapper === pageHome;
-
-                bodyElement.style.backgroundImage = isHomePage ? originalBodyBgImage : 'none';
-                bodyElement.style.backgroundColor = isHomePage ? '' : 'white'; 
-                if (gifColorOverlay) {
-                    if (isHomePage) gifColorOverlay.classList.add('active');
-                    else gifColorOverlay.classList.remove('active');
-                }
-                
-                if (isHomePage) {
-                    pageHeader.classList.remove('header-solid-bg');
-                    if (window.scrollY > scrollThreshold) {
-                        pageHeader.classList.add('scrolled');
-                    } else {
-                        pageHeader.classList.remove('scrolled');
+        function openMobileMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.remove('transform', 'translateX(100%)'); 
+                mobileMenu.classList.add('transform', 'translateX(0)');
+            }
+        }
+        
+        function closeMobileMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.remove('transform', 'translateX(0)');
+                mobileMenu.classList.add('transform', 'translateX(100%)');
+                setTimeout(() => {
+                     if (mobileMenu.classList.contains('translateX(100%)')) { 
+                        mobileMenu.classList.add('hidden');
                     }
-                } else {
-                    pageHeader.classList.add('header-solid-bg');
-                    pageHeader.classList.remove('scrolled'); 
-                }
-
-                if (pageToShowWrapper === pageRelease) {
-                    if(releaseListView) releaseListView.classList.remove('hidden');
-                    if(releaseDetailView) releaseDetailView.classList.add('hidden');
-                    if(releaseGrid) releaseGrid.innerHTML = ''; 
-                    currentlyDisplayedReleases = 0; 
-                    renderReleaseBatch(); 
-                }
-            }, delay);
+                }, 300);
+            }
         }
 
-        window.addEventListener('scroll', () => {
-            if (pageHeader && !pageHeader.classList.contains('header-solid-bg')) { 
-                if (window.scrollY > scrollThreshold) {
-                    pageHeader.classList.add('scrolled');
-                } else {
-                    pageHeader.classList.remove('scrolled');
-                }
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', openMobileMenu);
+        }
+        if (closeMobileMenuButton) {
+            closeMobileMenuButton.addEventListener('click', closeMobileMenu);
+        }
+        
+        function handleNavLinkClick(clickedLink, allLinks, activeClass) {
+            allLinks.forEach(link => {
+                link.classList.remove(activeClass);
+            });
+            clickedLink.classList.add(activeClass);
+            
+            if (clickedLink.classList.contains('mobile-menu-link')) {
+                closeMobileMenu();
             }
+        }
+
+        desktopNavLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                handleNavLinkClick(this, desktopNavLinks, 'active');
+            });
+        });
+        
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                handleNavLinkClick(this, mobileMenuLinks, 'active');
+            });
         });
 
-        function openSideMenu() {
-            if(menuPanel) menuPanel.classList.add('open');
+        const currentYearElem = document.getElementById('currentYear');
+        if (currentYearElem) {
+            currentYearElem.textContent = new Date().getFullYear();
         }
-        function closeSideMenu() {
-            if(menuPanel) menuPanel.classList.remove('open');
+        
+        const privacyDateElem = document.getElementById('privacyDate');
+        if (privacyDateElem) {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            privacyDateElem.textContent = today.toLocaleDateString('id-ID', options);
         }
 
-        if(hamburgerButton) hamburgerButton.addEventListener('click', openSideMenu);
-        if(closeSideMenuButton) closeSideMenuButton.addEventListener('click', closeSideMenu);
+        const sections = document.querySelectorAll('section[id]');
+        const allNavLinks = document.querySelectorAll('header nav a.nav-link, #mobileMenu nav a.mobile-menu-link');
+        const footerNavLinks = document.querySelectorAll('footer ul a.nav-link-footer'); // Disesuaikan selectornya
 
-        function setActiveLink(activeLink) {
-            menuLinks.forEach(link => {
+
+        function activateMenuAtCurrentScroll() {
+            let scrollY = window.pageYOffset;
+            let currentSectionId = "";
+
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 150; 
+                if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    currentSectionId = current.getAttribute('id');
+                }
+            });
+            
+            if (!currentSectionId && scrollY < (sections[0] ? sections[0].offsetTop - 150 : 0)) {
+                 currentSectionId = "hero";
+            }
+
+            allNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+            footerNavLinks.forEach(link => { 
                 link.classList.remove('active'); 
-            });
-            if (activeLink) {
-                activeLink.classList.add('active'); 
-            }
-        }
-
-        menuLinks.forEach(link => {
-            link.addEventListener('click', function(e) { 
-                e.preventDefault(); 
-                setActiveLink(this); 
-                closeSideMenu(); 
-                
-                const targetHref = this.getAttribute('href');
-                let pageToDisplay;
-                switch (targetHref) {
-                    case '#home':   pageToDisplay = pageHome; break;
-                    case '#about':  pageToDisplay = pageAbout; break;
-                    case '#team':   pageToDisplay = pageTeam; break;
-                    case '#release': pageToDisplay = pageRelease; break;
-                    case '#database':pageToDisplay = pageDatabase; break;
-                    default:        pageToDisplay = pageHome; 
+                if (link.getAttribute('href').substring(1) === currentSectionId) {
+                    link.classList.add('active'); 
                 }
-                showPage(pageToDisplay);
             });
-        });
+        }
         
-        if(selengkapnyaButton) {
-            selengkapnyaButton.addEventListener('click', function(e) {
+        window.addEventListener('scroll', activateMenuAtCurrentScroll);
+        window.addEventListener('load', activateMenuAtCurrentScroll); 
+
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('onclick') && this.getAttribute('onclick').includes('openModal')) {
+                    return;
+                }
+                
                 e.preventDefault();
-                showPage(pageHome); 
-                setActiveLink(document.querySelector('#sideMenu .menu-link[href="#home"]')); 
-                if(pelajariLebihLanjutContent) {
-                    setTimeout(() => {
-                        pelajariLebihLanjutContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 300); 
-                }
-            });
-        }
-        
-        showPage(pageHome); 
-        const homeLinkInitial = document.querySelector('#sideMenu .menu-link[href="#home"]'); 
-        if (homeLinkInitial) {
-            setActiveLink(homeLinkInitial);
-        }
-
-        function animateCounter(elementId, targetValue, duration = 2000) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
-            let startValue = 0;
-            const frameDuration = 1000 / 60; 
-            const totalFrames = Math.round(duration / frameDuration);
-            const increment = targetValue / totalFrames;
-            let currentFrame = 0;
-
-            function updateCounter() {
-                currentFrame++;
-                startValue += increment;
-                if (currentFrame < totalFrames) {
-                    element.textContent = Math.floor(startValue);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = Math.floor(targetValue); 
-                }
-            }
-            requestAnimationFrame(updateCounter);
-        }
-
-        const fakultasData = [
-            "Adab dan Humaniora", "Dakwah dan Komunikasi", "Dirasat Islamiyah", "Ekonomi dan Bisnis", 
-            "Ekonomi dan Bisnis Islam", "Filsafat", "Hukum", "Ilmu Kesehatan", "Ilmu Komputer", 
-            "Ilmu Pendidikan", "Ilmu Sosial dan Ilmu Politik", "Kedokteran", "Kedokteran Gigi", 
-            "Kedokteran Hewan", "Kehutanan", "Keperawatan", "Kesehatan Masyarakat", "Matematika dan Ilmu Pengetahuan Alam (MIPA)",
-            "Pendidikan", "Perikanan dan Ilmu Kelautan", "Pertanian", "Peternakan", "Psikologi", 
-            "Sains dan Teknologi", "Sastra dan Budaya", "Syariah dan Hukum", "Tarbiyah dan Keguruan", 
-            "Teknik", "Teknologi Industri", "Teknologi Pertanian", "Teologi", "Ushuluddin dan Pemikiran Islam"
-        ].sort();
-
-        const universitasBaliNusra = [
-            "Institut Agama Islam Hamzanwadi NW Lombok Timur", "Institut Seni Indonesia Denpasar", "Politeknik Negeri Bali", 
-            "Politeknik Pariwisata Lombok", "Politeknik Pertanian Negeri Kupang", "Universitas Dhyana Pura", 
-            "Universitas Flores", "Universitas Hindu Indonesia", "Universitas Islam Negeri Mataram", 
-            "Universitas Katolik Widya Mandira Kupang", "Universitas Kristen Artha Wacana", "Universitas Mahasaraswati Denpasar", 
-            "Universitas Mataram", "Universitas Muhammadiyah Kupang", "Universitas Muhammadiyah Mataram", 
-            "Universitas Nahdlatul Ulama Nusa Tenggara Barat", "Universitas Nusa Cendana", "Universitas Pendidikan Ganesha", 
-            "Universitas Teknologi Sumbawa", "Universitas Timor", "Universitas Udayana", "Universitas Warmadewa"
-        ].sort();
-
-        const cabangBaliNusra = [
-            "Kab. Alor", "Kab. Badung", "Kab. Bangli", "Kab. Belu", "Kab. Bima", "Kota Bima", "Kab. Buleleng", 
-            "Kota Denpasar", "Kab. Dompu", "Kab. Ende", "Kab. Flores Timur", "Kab. Gianyar", "Kab. Jembrana", 
-            "Kab. Karangasem", "Kab. Klungkung", "Kota Kupang", "Kab. Kupang", "Kab. Lembata", "Kab. Lombok Barat", 
-            "Kab. Lombok Tengah", "Kab. Lombok Timur", "Kab. Lombok Utara", "Kab. Malaka", "Kab. Manggarai", 
-            "Kab. Manggarai Barat", "Kab. Manggarai Timur", "Kota Mataram", "Kab. Nagekeo", "Kab. Ngada", 
-            "Kab. Rote Ndao", "Kab. Sabu Raijua", "Kab. Sikka", "Kab. Sumbawa", "Kab. Sumbawa Barat", 
-            "Kab. Sumba Barat", "Kab. Sumba Barat Daya", "Kab. Sumba Tengah", "Kab. Sumba Timur", "Kab. Tabanan", 
-            "Kab. Timor Tengah Selatan", "Kab. Timor Tengah Utara"
-        ].sort();
-
-        function populateSelect(selectId, dataArray) {
-            const selectElement = document.getElementById(selectId);
-            if (selectElement) {
-                dataArray.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item;
-                    option.textContent = item;
-                    selectElement.appendChild(option);
-                });
-            }
-        }
-        
-        function createTeamMemberCard(nama, jabatan, fotoUrl, delay = 0) { 
-            return `
-                <div class="team-member-card card reveal-on-scroll" style="transition-delay: ${delay}s;">
-                    <img src="${fotoUrl}" alt="Foto ${nama}" onerror="this.onerror=null;this.src='https://placehold.co/150x150/FFCB05/1F2937?text=Foto';">
-                    <h3 class="member-name text-base sm:text-lg font-semibold">${nama}</h3>
-                    <p class="member-title text-xs sm:text-sm">${jabatan}</p>
-                </div>
-            `;
-        }
-
-        function createReleaseCard(item, delay = 0) { 
-            return `
-                <div class="release-card-custom card flex flex-col reveal-on-scroll" style="transition-delay: ${delay}s;">
-                    <img src="${item.imageUrl}" alt="Gambar ${item.title}" class="w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x350/FFCB05/1F2937?text=Gagal+Muat';">
-                    <div class="release-content"> 
-                        <h3 class="text-base sm:text-lg font-semibold mt-2 mb-1">${item.title}</h3>
-                        <p class="release-date text-xs sm:text-sm mb-2">${item.date}</p>
-                        <p class="text-sm mb-2">${item.shortDesc.substring(0,60)}${item.shortDesc.length > 60 ? '...' : ''}</p>
-                        <a href="#" class="release-read-more text-sm font-medium self-start text-[#0973d6]" data-id="${item.id}">Baca Selengkapnya &rarr;</a>
-                    </div>
-                </div>
-            `;
-        }
-
-        function createHomeNewsCard(item, delay = 0) {
-             return `
-                <div class="news-card-custom-bg card reveal-on-scroll" style="transition-delay: ${delay}s;"> 
-                    <img src="${item.imageUrl}" alt="Gambar Berita ${item.title}" onerror="this.onerror=null;this.src='https://placehold.co/600x338/E2E8F0/4A5568?text=Gagal+Muat';">
-                    <div class="news-content">
-                        <div> 
-                            <h3 class="text-sm sm:text-base font-semibold mt-2 mb-1">${item.title}</h3>
-                            <p class="text-xs sm:text-sm mb-2">${item.shortDesc.substring(0,50)}${item.shortDesc.length > 50 ? '...' : ''}</p>
-                        </div>
-                        <a href="#" class="release-read-more-home text-xs sm:text-sm font-medium self-start text-[#FFCB05]" data-id="${item.id}">Baca Selengkapnya &rarr;</a>
-                    </div>
-                </div>
-            `;
-        }
-
-        function createHomeTestimonialCard(item, delay = 0) {
-            return `
-                <div class="testimonial-card-custom-bg card reveal-on-scroll" style="transition-delay: ${delay}s;"> 
-                    <div> 
-                        <img src="${item.photoUrl}" alt="Foto Testimoni ${item.name}" class="w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2 sm:mb-3 border-2 shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/80x80/FFCB05/1F2937?text=Foto';">
-                        <p class="testimonial-text text-xs sm:text-sm italic text-center">"${item.text}"</p>
-                    </div>
-                    <div> 
-                        <p class="testimonial-name text-sm font-semibold mt-2">- ${item.name}</p>
-                        <p class="testimonial-title text-xs">${item.title}</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function showReleaseDetail(itemId) {
-            const item = sampleReleaseData.find(r => r.id === parseInt(itemId));
-            if (item && detailReleaseImage && detailReleaseTitle && detailReleaseDate && detailReleaseContent && latestReleasesList && releaseListView && releaseDetailView) {
-                detailReleaseImage.src = item.imageUrl;
-                detailReleaseImage.alt = `Gambar ${item.title}`;
-                detailReleaseTitle.textContent = item.title; 
-                detailReleaseDate.textContent = item.date;
+                const targetId = this.getAttribute('href');
                 
-                if (item.articleUrl && item.articleUrl !== "#") {
-                    detailReleaseContent.innerHTML = `<p class="mb-4">${item.fullDesc}</p>
-                                                     <p class="mt-4">Untuk detail lengkap, silakan kunjungi sumber berita asli:</p>
-                                                     <a href="${item.articleUrl}" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-semibold py-2 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 active:scale-95 mt-2">
-                                                        Baca Sumber Asli &rarr;
-                                                     </a>`;
-                } else {
-                    detailReleaseContent.innerHTML = `<p class="mb-4">${item.fullDesc}</p>`; 
-                }
-
-
-                latestReleasesList.innerHTML = ''; 
-                sampleReleaseData.filter(r => r.id !== item.id).slice(0, 5).forEach((otherItem, index, arr) => { 
-                    const li = document.createElement('li');
-                    if (index < arr.length -1 ) { 
-                        li.classList.add('border-b', 'border-gray-200', 'pb-2', 'mb-2');
-                    } else {
-                        li.classList.add('pb-2', 'mb-2'); 
-                    }
-
-                    const a = document.createElement('a');
-                    a.href = "#";
-                    a.textContent = otherItem.title; 
-                    a.dataset.id = otherItem.id;
-                    a.classList.add('release-read-more', 'text-sm', 'sm:text-base', 'font-medium'); 
-                    li.appendChild(a);
-                    latestReleasesList.appendChild(li);
-                });
-                
-                latestReleasesList.querySelectorAll('.release-read-more').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const newId = this.dataset.id;
-                        showReleaseDetail(newId); 
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    });
-                });
-
-                releaseListView.classList.add('hidden');
-                releaseDetailView.classList.remove('hidden');
-                observeElementsForReveal(releaseDetailView);
-            }
-        }
-
-        if (backToReleaseListButton && releaseListView && releaseDetailView) {
-            backToReleaseListButton.addEventListener('click', () => {
-                releaseDetailView.classList.add('hidden');
-                releaseListView.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                observeElementsForReveal(releaseListView); 
-            });
-        }
-
-        let observer;
-        function observeElementsForReveal(container = document) {
-            const revealElements = container.querySelectorAll('.reveal-on-scroll');
-            if (!revealElements.length) return;
-
-            if (observer) { 
-                observer.disconnect();
-            }
-
-            observer = new IntersectionObserver((entries, observerInstance) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observerInstance.unobserve(entry.target); 
-                    }
-                });
-            }, { threshold: 0.1 }); 
-
-            revealElements.forEach(el => {
-                observer.observe(el);
-            });
-        }
-        
-        function renderReleaseBatch() {
-            if (!releaseGrid) return;
-            
-            const startIndex = currentlyDisplayedReleases;
-            const endIndex = Math.min(startIndex + releasesPerPage, sampleReleaseData.length);
-            
-            let newCardsHTML = '';
-            for (let i = startIndex; i < endIndex; i++) {
-                newCardsHTML += createReleaseCard(sampleReleaseData[i], i * 0.05);
-            }
-            releaseGrid.innerHTML += newCardsHTML; 
-            currentlyDisplayedReleases = endIndex;
-
-            const newLinks = releaseGrid.querySelectorAll('.release-read-more:not(.listener-added)');
-            newLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const itemId = this.dataset.id;
-                    showReleaseDetail(itemId);
-                });
-                link.classList.add('listener-added');
-            });
-
-            if (loadMoreReleasesButton) {
-                if (currentlyDisplayedReleases >= sampleReleaseData.length) {
-                    loadMoreReleasesButton.style.display = 'none';
-                } else {
-                    loadMoreReleasesButton.style.display = 'inline-block';
-                }
-            }
-            observeElementsForReveal(releaseGrid); 
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            animateCounter('counter1', 15);
-            animateCounter('counter2', 45);
-            animateCounter('counter3', 125);
-
-            populateSelect('asal_rayon', fakultasData);
-            populateSelect('asal_komisariat', universitasBaliNusra);
-            populateSelect('asal_cabang', cabangBaliNusra);
-
-            const namaLengkapInput = document.getElementById('nama_lengkap');
-            if (namaLengkapInput) {
-                namaLengkapInput.addEventListener('input', function() {
-                    this.value = this.value.toUpperCase();
-                });
-            }
-
-            const formKartuAnggota = document.getElementById('formKartuAnggota');
-            const submitKtaButton = document.getElementById('submitKtaButton');
-
-            if(formKartuAnggota && submitKtaButton) {
-                formKartuAnggota.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const nama = formKartuAnggota.nama_lengkap.value.trim();
-                    const email = formKartuAnggota.email_anggota.value.trim(); 
-                    const rayon = formKartuAnggota.asal_rayon.value;
-                    const komisariat = formKartuAnggota.asal_komisariat.value;
-                    const cabang = formKartuAnggota.asal_cabang.value;
-                    const sertifikat = formKartuAnggota.sertifikat_mapaba.files.length;
-
-                    if (!nama || !email || !rayon || !komisariat || !cabang || !sertifikat) { 
-                        showNotification('Harap lengkapi semua kolom formulir!', 'error');
-                        return;
-                    }
-                    
-                    submitKtaButton.classList.add('loading');
-                    submitKtaButton.disabled = true;
-
-                    setTimeout(() => {
-                        showNotification('Data formulir (simulasi) berhasil terkirim!', 'success');
-                        const formData = new FormData(this);
-                        console.log("Data Formulir:");
-                        for (let [key, value] of formData.entries()) {
-                            console.log(key, value instanceof File ? value.name : value);
+                if (targetId && targetId !== '#') { 
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        if (this.classList.contains('nav-link')) {
+                            handleNavLinkClick(this, desktopNavLinks, 'active');
+                        } else if (this.classList.contains('mobile-menu-link')) {
+                            handleNavLinkClick(this, mobileMenuLinks, 'active');
                         }
-                        formKartuAnggota.reset(); 
-                        
-                        submitKtaButton.classList.remove('loading');
-                        submitKtaButton.disabled = false;
-                    }, 2000); 
-                });
-            }
 
-            const unduhProdukPmiiButton = document.getElementById('unduhProdukPmiiButton'); 
-            if (unduhProdukPmiiButton) {
-                unduhProdukPmiiButton.addEventListener('click', () => {
-                    showNotification('Fitur unduh produk PMII akan segera tersedia.', 'info');
-                });
-            }
-
-            const teamGrid = document.getElementById('teamGrid');
-            if (teamGrid) {
-                const teamData = [ 
-                    { name: "Mohammad Shofiyulloh Cokro", jabatan: "Ketua Umum PB PMII", fotoUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHjyJ3TxK8V36fIyMUHOw_lb9g1mIxYJ4RrirSUOHS2k5OKuZTM02yyhIHC-72raYt0ujSN55du0_7gT7cp4X0tQe_-jx-AX0w1hmx782t8sLxBT_eN6ymV2f-ZYiQnDrL2Y7-wYu96onCwLLP-K_qT6mmOni0hM2cdW7mjjm-n5mhNkuYf9MF_f7om13k/s3760/IMG-20241001-WA0149.jpg" },
-                    { name: "M. Irkham Tamrin", jabatan: "Sekretaris Jenderal PB PMII", fotoUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHjyJ3TxK8V36fIyMUHOw_lb9g1mIxYJ4RrirSUOHS2k5OKuZTM02yyhIHC-72raYt0ujSN55du0_7gT7cp4X0tQe_-jx-AX0w1hmx782t8sLxBT_eN6ymV2f-ZYiQnDrL2Y7-wYu96onCwLLP-K_qT6mmOni0hM2cdW7mjjm-n5mhNkuYf9MF_f7om13k/s3760/IMG-20241001-WA0149.jpg" },
-                    { name: "Sainuddin", jabatan: "Bendahara Umum PB PMII", fotoUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHjyJ3TxK8V36fIyMUHOw_lb9g1mIxYJ4RrirSUOHS2k5OKuZTM02yyhIHC-72raYt0ujSN55du0_7gT7cp4X0tQe_-jx-AX0w1hmx782t8sLxBT_eN6ymV2f-ZYiQnDrL2Y7-wYu96onCwLLP-K_qT6mmOni0hM2cdW7mjjm-n5mhNkuYf9MF_f7om13k/s3760/IMG-20241001-WA0149.jpg" },
-                    { name: "Acep Jamaludin", jabatan: "Ketua PB PMII", fotoUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHjyJ3TxK8V36fIyMUHOw_lb9g1mIxYJ4RrirSUOHS2k5OKuZTM02yyhIHC-72raYt0ujSN55du0_7gT7cp4X0tQe_-jx-AX0w1hmx782t8sLxBT_eN6ymV2f-ZYiQnDrL2Y7-wYu96onCwLLP-K_qT6mmOni0hM2cdW7mjjm-n5mhNkuYf9MF_f7om13k/s3760/IMG-20241001-WA0149.jpg" },
-                    { name: "Apriliana Eka Dani", jabatan: "Ketua PB PMII", fotoUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHjyJ3TxK8V36fIyMUHOw_lb9g1mIxYJ4RrirSUOHS2k5OKuZTM02yyhIHC-72raYt0ujSN55du0_7gT7cp4X0tQe_-jx-AX0w1hmx782t8sLxBT_eN6ymV2f-ZYiQnDrL2Y7-wYu96onCwLLP-K_qT6mmOni0hM2cdW7mjjm-n5mhNkuYf9MF_f7om13k/s3760/IMG-20241001-WA0149.jpg" },
-                    { name: "Muhammad Ainul Yaqin", jabatan: "Ketua PB PMII", fotoUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHjyJ3TxK8V36fIyMUHOw_lb9g1mIxYJ4RrirSUOHS2k5OKuZTM02yyhIHC-72raYt0ujSN55du0_7gT7cp4X0tQe_-jx-AX0w1hmx782t8sLxBT_eN6ymV2f-ZYiQnDrL2Y7-wYu96onCwLLP-K_qT6mmOni0hM2cdW7mjjm-n5mhNkuYf9MF_f7om13k/s3760/IMG-20241001-WA0149.jpg" }
-                ];
-                let teamCardsHTML = '';
-                teamData.forEach((member, index) => { 
-                    teamCardsHTML += createTeamMemberCard(member.name, member.jabatan, member.fotoUrl, index * 0.1);
-                });
-                teamGrid.innerHTML = teamCardsHTML;
-            }
-
-            if (homeNewsGrid) {
-                let homeNewsHTML = '';
-                sampleReleaseData.slice(0,4).forEach((item, index) => { 
-                    homeNewsHTML += createHomeNewsCard(item, index * 0.1);
-                });
-                homeNewsGrid.innerHTML = homeNewsHTML;
-                homeNewsGrid.querySelectorAll('.release-read-more-home').forEach(link => {
-                    link.addEventListener('click', function(e){
-                        e.preventDefault();
-                        const itemId = this.dataset.id;
-                        showPage(pageRelease); 
-                        setActiveLink(document.querySelector('#sideMenu .menu-link[href="#release"]'));
-                        setTimeout(() => showReleaseDetail(itemId), 50); 
-                    });
-                });
-            }
-
-            if (homeTestimonialGrid) {
-                let homeTestimonialHTML = '';
-                sampleTestimonialData.slice(0,6).forEach((testi, index) => { 
-                    homeTestimonialHTML += createHomeTestimonialCard(testi, index * 0.1);
-                });
-                homeTestimonialGrid.innerHTML = homeTestimonialHTML;
-            }
-
-            if (releaseGrid && loadMoreReleasesButton) { 
-                renderReleaseBatch(); 
-                
-                loadMoreReleasesButton.addEventListener('click', () => {
-                    renderReleaseBatch(); 
-                });
-            } else if (releaseGrid) { 
-                 renderReleaseBatch(); 
-            }
-            
-            observeElementsForReveal();
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                } else if (targetId === '#') { 
+                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                     allNavLinks.forEach(link => link.classList.remove('active'));
+                     const homeDesktopLink = document.querySelector('header nav a.nav-link[href="#hero"]');
+                     if (homeDesktopLink) homeDesktopLink.classList.add('active');
+                     const homeMobileLink = document.querySelector('#mobileMenu nav a.mobile-menu-link[href="#hero"]');
+                     if (homeMobileLink) homeMobileLink.classList.add('active');
+                }
+            });
         });
+
+
+        const demoForm = document.getElementById('demoForm');
+        const contactForm = document.getElementById('contactForm');
+        const demoMessageStatus = document.getElementById('demoMessageStatus');
+        const contactMessageStatus = document.getElementById('contactMessageStatus');
+
+        if (demoForm) {
+            demoForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (demoMessageStatus) {
+                    demoMessageStatus.innerHTML = '<p class="text-green-600 font-semibold">Terima kasih! Pendaftaran Anda telah terkirim. Kami akan segera menghubungi Anda.</p>';
+                }
+                demoForm.reset();
+                setTimeout(() => {
+                    closeModal('demoModal');
+                    if (demoMessageStatus) demoMessageStatus.innerHTML = '';
+                }, 3000);
+            });
+        }
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (contactMessageStatus) {
+                    contactMessageStatus.innerHTML = '<p class="text-green-600 font-semibold">Terima kasih! Pesan Anda telah terkirim. Kami akan segera merespons.</p>';
+                }
+                contactForm.reset();
+                setTimeout(() => {
+                    closeModal('contactModal');
+                    if (contactMessageStatus) contactMessageStatus.innerHTML = '';
+                }, 3000);
+            });
+        }
+
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                if (window.scrollY > 50) { 
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            }
+        });
+
+        // Fungsi untuk animasi angka
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerText = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Intersection Observer untuk animasi angka pada card
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.number');
+                    if (numberElement && !numberElement.classList.contains('animated')) {
+                        const targetValue = parseInt(numberElement.getAttribute('data-target'));
+                        animateValue(numberElement, 0, targetValue, 1500); 
+                        numberElement.classList.add('animated'); 
+                    }
+                }
+            });
+        };
+
+        const cardObserver = new IntersectionObserver(observerCallback, observerOptions);
+        const aboutCards = document.querySelectorAll('#about .about-card');
+        aboutCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+
+        // Carousel untuk Team Section
+        const teamCarouselTrackEl = document.querySelector('#team .carousel-track');
+        if (teamCarouselTrackEl) {
+            const teamItems = Array.from(teamCarouselTrackEl.children).filter(child => child.classList.contains('carousel-item'));
+            const totalOriginalTeamItems = teamItems.length;
+            let teamCurrentSlide = 0;
+            let teamItemsToShow = 3; 
+            let teamInterval;
+
+            const setupTeamCarousel = () => {
+                if (window.innerWidth < 768) { // Mobile
+                    teamItemsToShow = 1;
+                } else { // Tablet and Desktop
+                    teamItemsToShow = 3;
+                }
+
+                teamCarouselTrackEl.querySelectorAll('.cloned').forEach(clone => clone.remove());
+
+                teamItems.forEach(item => {
+                    item.style.flex = `0 0 ${100 / teamItemsToShow}%`;
+                    item.style.maxWidth = `${100 / teamItemsToShow}%`;
+                });
+                
+                if (totalOriginalTeamItems > teamItemsToShow) {
+                    for (let i = 0; i < teamItemsToShow; i++) {
+                        if (teamItems[i]) { // Pastikan item ada sebelum di-clone
+                            const clone = teamItems[i].cloneNode(true);
+                            clone.classList.add('cloned');
+                            teamCarouselTrackEl.appendChild(clone);
+                        }
+                    }
+                }
+                teamCurrentSlide = 0;
+                teamCarouselTrackEl.style.transition = 'none';
+                teamCarouselTrackEl.style.transform = 'translateX(0%)';
+                void teamCarouselTrackEl.offsetWidth; 
+                teamCarouselTrackEl.style.transition = 'transform 0.5s ease-in-out';
+            };
+
+
+            const scrollTeamCarousel = () => {
+                teamCurrentSlide++;
+                teamCarouselTrackEl.style.transform = `translateX(-${teamCurrentSlide * (100 / teamItemsToShow)}%)`;
+
+                if (teamCurrentSlide >= totalOriginalTeamItems) {
+                    setTimeout(() => {
+                        teamCarouselTrackEl.style.transition = 'none';
+                        teamCurrentSlide = 0;
+                        teamCarouselTrackEl.style.transform = 'translateX(0%)';
+                        void teamCarouselTrackEl.offsetWidth; 
+                        teamCarouselTrackEl.style.transition = 'transform 0.5s ease-in-out';
+                    }, 500); 
+                }
+            };
+
+            const startTeamCarouselInterval = () => {
+                if (teamInterval) clearInterval(teamInterval);
+                if (totalOriginalTeamItems > teamItemsToShow) {
+                    teamInterval = setInterval(scrollTeamCarousel, 3000);
+                } else {
+                     // Jika item kurang dari atau sama dengan yang ditampilkan, tidak perlu auto-scroll
+                    teamCarouselTrackEl.style.transform = 'translateX(0%)'; // Pastikan di posisi awal
+                }
+            };
+            
+            const teamSectionEl = document.getElementById('team');
+            if (teamSectionEl) {
+                const teamObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setupTeamCarousel();
+                            startTeamCarouselInterval();
+                        } else {
+                            clearInterval(teamInterval);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                teamObserver.observe(teamSectionEl);
+            }
+
+            window.addEventListener('resize', () => {
+                clearInterval(teamInterval);
+                setupTeamCarousel(); 
+                startTeamCarouselInterval();
+            });
+        }
+        
+        // Animasi Scroll untuk elemen lain
+        const scrollAnimatedElements = document.querySelectorAll('.animate-on-scroll');
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    // scrollObserver.unobserve(entry.target); // Hapus jika ingin animasi berulang
+                } else {
+                    // entry.target.classList.remove('animated'); // Tambahkan jika ingin animasi berulang saat scroll kembali
+                }
+            });
+        }, { threshold: 0.1 });
+
+        scrollAnimatedElements.forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+
     </script>
 </body>
 </html>
