@@ -1,1 +1,835 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMII Bali Nusra</title>
+    <link rel="icon" type="image/png" href="https://pmii.id/assets/frontend/images/apple-touch-icon2.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden; 
+            background-color: #ffffff; 
+        }
+        #hero {
+            position: relative; 
+            background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2pkanNrOWZmMmI4NXhmdmliZ2FoZTBvNXY0dGg3MjF6ZmV1Ym5meCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eS6c9bqOnxIPBpKFwS/giphy.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* overflow: hidden; -- Dihapus karena ombak dihilangkan, mungkin tidak perlu lagi */
+        }
+        .hero-gradient-overlay { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
+            opacity: 0.9; 
+            z-index: 1; 
+        }
+        #hero .container-hero-content {
+            position: relative;
+            z-index: 3; /* Tetap di atas overlay jika ada elemen lain */
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            height: 100%; 
+        }
+        /* CSS untuk Wave Dihapus */
 
+        .footer-gradient {
+            background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
+            position: relative;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .modal-backdrop {
+            background-color: rgba(0,0,0,0.5);
+        }
+        .btn-primary { 
+            @apply bg-[#2918A9] hover:bg-[#1F127A] text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
+        }
+        
+        header {
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .header-scrolled {
+            background-color: #2918A9; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .nav-link.active {
+            color: #FFCB05;
+            font-weight: 700;
+        }
+        .mobile-menu-item {
+            color: #2918A9; 
+        }
+        .mobile-menu-item.active {
+             color: #FFCB05; 
+             font-weight: 700; 
+        }
+        .about-card {
+            background-color: #FFCB05;
+            min-height: 180px; 
+        }
+        .about-card .number {
+            font-size: 3rem; 
+        }
+        @media (min-width: 768px) { 
+            .about-card .number {
+                font-size: 3.75rem; 
+            }
+            .about-card h3 {
+                 font-size: 1.125rem; 
+            }
+             .about-card p {
+                 font-size: 0.875rem; 
+            }
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            flex-shrink: 0; 
+        }
+        .phone-mockup-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+        .phone-mockup {
+            width: 280px; 
+            height: 560px; 
+            background-color: #1a202c; 
+            border-radius: 30px; 
+            padding: 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            margin-top: 2rem; 
+            margin-bottom: 1rem; 
+        }
+        .phone-screen {
+            background-color: #000; 
+            width: 100%;
+            height: 100%;
+            border-radius: 15px; 
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+        .app-download-buttons {
+            display: flex;
+            justify-content: center; 
+            gap: 1rem; 
+            width: 280px; 
+            margin-top: 1rem;
+        }
+        .app-download-buttons a img {
+            height: 45px; 
+            width: auto;
+            border-radius: 8px;
+            transition: transform 0.2s ease-in-out;
+        }
+        .app-download-buttons a:hover img {
+            transform: scale(1.05);
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .footer-title-underline::after {
+            content: '';
+            display: block;
+            width: 30%; 
+            max-width: 50px; 
+            height: 2px;
+            background-color: #FFCB05;
+            margin-top: 0.35rem; 
+        }
+        .footer-regulation-item:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+            padding-bottom: 0.5rem; 
+            margin-bottom: 0.5rem; 
+        }
+    </style>
+</head>
+<body class="bg-white text-black">
+
+    <header class="fixed top-0 left-0 w-full z-50 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#hero" class="flex items-center">
+                <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII Bali Nusra" class="h-10 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x40/2918A9/FFFFFF?text=Logo+PMII';">
+            </a>
+            
+            <nav class="hidden md:flex space-x-4 items-center">
+                <a href="#hero" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1 active">HOME</a>
+                <a href="#about" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">ABOUT</a>
+                <a href="#team" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">TEAM</a>
+                <a href="#release" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">RELEASE</a>
+                <a href="#database" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">DATABASE</a>
+            </nav>
+
+            <div class="md:hidden">
+                <button id="mobileMenuButton" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobileMenu" class="fixed inset-0 bg-white z-[60] hidden transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center mb-8">
+                <a href="#hero" class="flex items-center" onclick="closeMobileMenu()">
+                    <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII Bali Nusra" class="h-10 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x40/2918A9/FFFFFF?text=Logo+PMII';">
+                </a>
+                <button id="closeMobileMenuButton" class="text-[#2918A9] hover:text-[#FFCB05] focus:outline-none">
+                    <i class="fas fa-times text-3xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <nav class="flex-grow overflow-y-auto px-6 text-center space-y-6">
+            <a href="#hero" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3 active">HOME</a>
+            <a href="#about" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">ABOUT</a>
+            <a href="#team" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">TEAM</a>
+            <a href="#release" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">RELEASE</a>
+            <a href="#database" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">DATABASE</a>
+        </nav>
+
+        <div class="mt-auto"> 
+            <img src="https://i.imgur.com/RsBhqF3.png" alt="Dekorasi Menu PMII" class="w-full h-auto block" onerror="this.onerror=null;this.src='https://placehold.co/300x100/cccccc/000000?text=Error+Memuat+Gambar';">
+        </div>
+    </div>
+
+
+    <section id="hero" class="text-white py-20 md:py-32 min-h-[60vh] md:min-h-[80vh] flex flex-col justify-center items-center">
+        <div class="hero-gradient-overlay"></div> 
+        <div class="container-hero-content mx-auto px-6 text-center animate-on-scroll"> 
+            <img src="https://i.imgur.com/XF5dHMa.png" alt="PMII Bali Nusra Hero Image" class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x200/FFFFFF/000000?text=PMII+Bali+Nusra';">
+        </div>
+        </section>
+
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16 animate-on-scroll">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll">
+                    <span class="number font-bold text-black mb-2" data-target="25">0</span>
+                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Cabang</h3>
+                    <p class="text-black text-sm">Kabupaten/Kota</p>
+                </div>
+                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.2s;">
+                    <span class="number font-bold text-black mb-2" data-target="75">0</span>
+                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Komisariat</h3>
+                    <p class="text-black text-sm">Universitas/Institusi</p>
+                </div>
+                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.4s;">
+                    <span class="number font-bold text-black mb-2" data-target="150">0</span>
+                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Rayon</h3>
+                    <p class="text-black text-sm">Fakultas/Departemen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="py-16 md:py-24 bg-gray-50"> 
+        <div class="container mx-auto px-6">
+            <div class="text-left mb-12 md:mb-16 animate-on-scroll">
+                 <p class="text-lg md:text-xl font-bold">
+                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Dokumentasi Kegiatan</span>
+                </p>
+            </div>
+            <div class="carousel-wrapper w-full relative animate-on-scroll">
+                <div class="carousel-container overflow-hidden rounded-lg"> 
+                    <div class="carousel-track flex">
+                        <div class="carousel-item p-2">
+                            <img src="https://radarlombok.co.id/wp-content/uploads/2025/02/DISKUSI.jpg" alt="Dokumentasi Kegiatan 1" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Diskusi Publik</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://akcdn.detik.net.id/community/media/visual/2024/07/10/konferensi-pers-pkc-pmii-bali-nusra-terkait-penangkapan-ketua-pmi-lombok-timur-zul-harman-karena-terlibat-peredaran-sabu-rabu-_169.jpeg" alt="Dokumentasi Kegiatan 2" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Konferensi Pers</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/01/30/IMG-20250130-WA0009-2234609062.jpg" alt="Dokumentasi Kegiatan 3" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Kegiatan Internal</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://xposetv.live/wp-content/uploads/2024/12/Polish_20241219_184033432-e1734605026994.jpg" alt="Dokumentasi Kegiatan 4" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Pertemuan Kader</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://asset-2.tstatic.net/lombok/foto/bank/images/Ketua-BPK-Rafial-Nazir-kiri-saat-Konferensi-pers-penetapan-Calon-Ketua-PKC.jpg" alt="Dokumentasi Kegiatan 5" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Penetapan Calon</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://i0.wp.com/radarmandalika.id/wp-content/uploads/2025/02/IMG-20250215-WA0000-1.jpg" alt="Dokumentasi Kegiatan 6" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Acara Organisasi</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/05/01/IMG-20250501-WA0021-1709682188.jpg" alt="Dokumentasi Kegiatan 7" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Rapat Pleno</p>
+                        </div>
+                         <div class="carousel-item p-2">
+                            <img src="https://placehold.co/600x400/2918A9/FFFFFF?text=Kegiatan+8" alt="Dokumentasi Kegiatan 8" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" >
+                            <p class="text-center text-sm mt-2 text-black">Musyawarah Wilayah</p>
+                        </div>
+                        <div class="carousel-item p-2">
+                             <img src="https://placehold.co/600x400/FFCB05/000000?text=Kegiatan+9" alt="Dokumentasi Kegiatan 9" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" >
+                            <p class="text-center text-sm mt-2 text-black">Forum Diskusi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="release" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-left mb-12 md:mb-16 animate-on-scroll">
+                 <p class="text-lg md:text-xl font-bold">
+                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Rilis Kegiatan</span> </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll"> 
+                    <img src="https://radarlombok.co.id/wp-content/uploads/2025/02/DISKUSI.jpg" alt="PKC PMII Bali Nusra Wujudkan Kader Profesional melalui Digitalisasi Organisasi" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Wujudkan Kader Profesional melalui Digitalisasi Organisasi</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.1s;">
+                    <img src="https://akcdn.detik.net.id/community/media/visual/2024/07/10/konferensi-pers-pkc-pmii-bali-nusra-terkait-penangkapan-ketua-pmi-lombok-timur-zul-harman-karena-terlibat-peredaran-sabu-rabu-_169.jpeg" alt="PKC PMII Bali Nusra Wujudkan Kepemimpinan Inklusif untuk Harmoni Nusantara" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 10 Juli 2024</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Wujudkan Kepemimpinan Inklusif untuk Harmoni Nusantara</h3>
+                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.2s;">
+                     <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/01/30/IMG-20250130-WA0009-2234609062.jpg" alt="PKC PMII Bali Nusra Targetkan Ekspansi Cabang di Seluruh Bali-Nusra" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 30 Januari 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Targetkan Ekspansi Cabang di Seluruh Bali-Nusra</h3>
+                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.3s;">
+                    <img src="https://xposetv.live/wp-content/uploads/2024/12/Polish_20241219_184033432-e1734605026994.jpg" alt="Visi PMII Bali Nusra: Cetak Kader Berintegritas di Era Disrupsi" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 19 Desember 2024</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Visi PMII Bali Nusra: Cetak Kader Berintegritas di Era Disrupsi</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.4s;">
+                    <img src="https://asset-2.tstatic.net/lombok/foto/bank/images/Ketua-BPK-Rafial-Nazir-kiri-saat-Konferensi-pers-penetapan-Calon-Ketua-PKC.jpg" alt="PKC PMII Bali Nusra Dorong Inovasi Kaderisasi Berbasis Teknologi" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 15 Mei 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Dorong Inovasi Kaderisasi Berbasis Teknologi</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.5s;">
+                    <img src="https://i0.wp.com/radarmandalika.id/wp-content/uploads/2025/02/IMG-20250215-WA0000-1.jpg" alt="Menuju Nusantara Maju, PMII Bali Nusra Perkuat Kolaborasi Stakeholder" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 15 Februari 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Menuju Nusantara Maju, PMII Bali Nusra Perkuat Kolaborasi Stakeholder</h3>
+                    <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="database" class="py-16 md:py-24 bg-gray-50"> 
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16 animate-on-scroll">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <div class="flex animate-on-scroll rounded-xl shadow-xl overflow-hidden"> 
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3R1ZGVudHMlMjBjb2xsYWJvcmF0aW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="Database PMII Bali Nusra - Ilustrasi Kolaborasi" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2918A9/FFFFFF?text=Database+PMII';">
+                </div>
+                <div class="space-y-6 flex flex-col justify-center animate-on-scroll" style="transition-delay: 0.2s;"> 
+                    <div>
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-6 card-hover"> 
+                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-id-card-alt mr-2"></i> Kartu Tanda Anggota</h3>
+                            <p class="text-black">Pusat data anggota, pengurus, dan alumni PMII terintegrasi.</p>
+                        </div>
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-6 card-hover">
+                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-folder-open mr-2"></i> Dokumentasi Pengurus</h3>
+                            <p class="text-black">Arsip digital dokumentasi dan pelaporan kegiatan PMII di semua tingkatan.</p>
+                        </div>
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md card-hover">
+                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-lightbulb mr-2"></i> Produk PMII & Kajian</h3>
+                            <p class="text-black">Pusat studi ilmiah, kajian strategis, dan regulasi terkait isu daerah hingga internasional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak" class="py-16 md:py-24 bg-white text-black">
+        <div class="container mx-auto px-6 text-center">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="text-black">UNDUH APLIKASI</span> <span class="text-[#2918a9]">PERMAISINDO</span>
+                </h2>
+                <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                    Platform Aktivis Pergerakan, Pusat Kajian Keilmuan Organisasi, Akademisi, dan Opini Publik! Jangan Sampai Ketinggalan.
+                </p>
+            </div>
+            <div class="phone-mockup-container animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <img src="https://placehold.co/250x530/0973d6/FFFFFF?text=Tampilan+Aplikasi+Permasindo" alt="Tampilan Aplikasi Permasindo" onerror="this.onerror=null;this.src='https://placehold.co/250x530/cccccc/000000?text=App+Screen';">
+                    </div>
+                </div>
+                <div class="app-download-buttons">
+                    <a href="#" aria-label="Unduh di Google Play">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1920px-Google_Play_Store_badge_EN.svg.png" alt="Tombol Google Play" onerror="this.onerror=null;this.src='https://placehold.co/135x40/000000/FFFFFF?text=Google+Play';">
+                    </a>
+                    <a href="#" aria-label="Unduh di App Store">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Download_on_the_App_Store_RGB_blk.svg/1920px-Download_on_the_App_Store_RGB_blk.svg.png" alt="Tombol App Store" onerror="this.onerror=null;this.src='https://placehold.co/120x40/000000/FFFFFF?text=App+Store';">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-gradient text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Alamat Sekretariat</h4>
+                    <p class="text-sm">Jl. Catur Warga, Kecamatan Pejanggik, Kota Mataram, Provinsi Nusa Tenggara Barat.</p>
+                    <p class="text-sm">Email : pkcbalinusra@gmail.com</p>
+                    <p class="text-sm">Telepon : +62 877-5432-2362</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Regulasi & Info</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Survey & Feedback</a></li>
+                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Disclaimer</a></li>
+                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Copyright & Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Media Sosial</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
+                                <i class="fab fa-facebook-f text-xl mr-3"></i>
+                                <span class="text-sm">PKC PMII Bali Nusra</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
+                                <i class="fab fa-instagram text-xl mr-3"></i>
+                                <span class="text-sm">@pkc.pmiibalinusra</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
+                                <i class="fab fa-youtube text-xl mr-3"></i>
+                                <span class="text-sm">PKC PMII Bali-Nusra</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white border-opacity-50 pt-8 text-center text-sm"> 
+                <p>&copy; <span id="currentYear"></span> PKC PMII Bali dan Nusa Tenggara. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contactModal" class="fixed inset-0 z-[70] flex items-center justify-center modal-backdrop hidden">
+        <div class="bg-white p-8 md:p-10 rounded-lg shadow-2xl w-11/12 md:w-1/2 lg:w-1/3 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold text-black">Hubungi Sekretariat</h3>
+                <button onclick="closeModal('contactModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <form id="contactForm">
+                <div class="mb-4">
+                    <label for="contactName" class="block text-sm font-medium text-black mb-1">Nama Anda</label>
+                    <input type="text" id="contactName" name="contactName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
+                </div>
+                <div class="mb-4">
+                    <label for="contactEmail" class="block text-sm font-medium text-black mb-1">Email Anda</label>
+                    <input type="email" id="contactEmail" name="contactEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
+                </div>
+                <div class="mb-6">
+                    <label for="contactMessage" class="block text-sm font-medium text-black mb-1">Pesan Anda</label>
+                    <textarea id="contactMessage" name="contactMessage" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black"></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">Kirim Pesan</button>
+            </form>
+            <div id="contactMessageStatus" class="mt-4 text-center"></div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for various functionalities
+
+        // Modal Functionality
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden'); 
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden'); 
+            }
+        }
+
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal-backdrop');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    if (modal.id === 'contactModal') { 
+                         closeModal(modal.id);
+                    }
+                }
+            });
+        });
+        
+        // Mobile Menu Elements
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const closeMobileMenuButton = document.getElementById('closeMobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuItems = document.querySelectorAll('#mobileMenu .mobile-menu-item'); 
+        const desktopNavLinks = document.querySelectorAll('header nav a.nav-link'); 
+
+        function openMobileMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.remove('hidden');
+                requestAnimationFrame(() => { 
+                    mobileMenu.classList.remove('translate-x-full');
+                });
+                document.body.classList.add('overflow-hidden');
+            }
+        }
+        
+        function closeMobileMenu() {
+            if (mobileMenu) {
+                mobileMenu.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300); 
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', openMobileMenu);
+        }
+        if (closeMobileMenuButton) {
+            closeMobileMenuButton.addEventListener('click', closeMobileMenu);
+        }
+        
+        function handleNavLinkClick(clickedLink, allLinks, activeClass) {
+            allLinks.forEach(link => {
+                link.classList.remove(activeClass);
+            });
+            clickedLink.classList.add(activeClass);
+            
+            if (clickedLink.classList.contains('mobile-menu-item') && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                const href = clickedLink.getAttribute('href');
+                if (href && href.startsWith('#') && href.length > 1) {
+                     closeMobileMenu();
+                }
+            }
+        }
+
+        desktopNavLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
+                    handleNavLinkClick(this, desktopNavLinks, 'active');
+                }
+            });
+        });
+        
+        mobileMenuItems.forEach(link => { 
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
+                    handleNavLinkClick(this, mobileMenuItems, 'active');
+                }
+            });
+        });
+
+        const currentYearElem = document.getElementById('currentYear');
+        if (currentYearElem) {
+            currentYearElem.textContent = new Date().getFullYear();
+        }
+        
+        const sections = document.querySelectorAll('section[id]');
+        const allNavLinksForScroll = document.querySelectorAll('header nav a.nav-link, #mobileMenu nav a.mobile-menu-item');
+
+        function activateMenuAtCurrentScroll() {
+            let scrollY = window.pageYOffset;
+            let currentSectionId = "";
+
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 100; 
+                if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    currentSectionId = current.getAttribute('id');
+                }
+            });
+            
+            if (!currentSectionId && scrollY < (sections[0] ? sections[0].offsetTop - 100 : 0)) {
+                 currentSectionId = "hero";
+            }
+
+            allNavLinksForScroll.forEach(link => {
+                link.classList.remove('active');
+                const linkHref = link.getAttribute('href');
+                if (linkHref && linkHref.substring(1) === currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', activateMenuAtCurrentScroll);
+        window.addEventListener('load', activateMenuAtCurrentScroll); 
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('onclick') && (this.getAttribute('onclick').includes('openModal') || this.getAttribute('onclick').includes('closeMobileMenu'))) {
+                    return; 
+                }
+                
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId !== '#' && targetId.length > 1) { 
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault(); 
+
+                        if (this.classList.contains('nav-link')) {
+                            handleNavLinkClick(this, desktopNavLinks, 'active');
+                        } else if (this.classList.contains('mobile-menu-item')) {
+                            handleNavLinkClick(this, mobileMenuItems, 'active');
+                        }
+                        
+                        const headerOffset = document.querySelector('header')?.offsetHeight || 70; 
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                } else if (targetId === '#') { 
+                    e.preventDefault();
+                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                     allNavLinksForScroll.forEach(link => link.classList.remove('active'));
+                     const homeLinkDesktop = document.querySelector('header nav a.nav-link[href="#hero"]');
+                     if(homeLinkDesktop) homeLinkDesktop.classList.add('active');
+                     const homeLinkMobile = document.querySelector('#mobileMenu nav a.mobile-menu-item[href="#hero"]');
+                     if(homeLinkMobile) homeLinkMobile.classList.add('active');
+                }
+            });
+        });
+
+        const contactForm = document.getElementById('contactForm');
+        const contactMessageStatus = document.getElementById('contactMessageStatus');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (contactMessageStatus) {
+                    contactMessageStatus.innerHTML = '<p class="text-green-600 font-semibold">Terima kasih! Pesan Anda telah terkirim. Kami akan segera merespons.</p>';
+                }
+                contactForm.reset();
+                setTimeout(() => {
+                    closeModal('contactModal');
+                    if (contactMessageStatus) contactMessageStatus.innerHTML = '';
+                }, 3000);
+            });
+        }
+
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                if (window.scrollY > 50) { 
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            }
+        });
+
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerText = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const numberObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+
+        const numberObserverCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.number');
+                    if (numberElement && !numberElement.classList.contains('animated-number')) { 
+                        const targetValue = parseInt(numberElement.getAttribute('data-target'));
+                        animateValue(numberElement, 0, targetValue, 1500); 
+                        numberElement.classList.add('animated-number'); 
+                        observer.unobserve(entry.target); 
+                    }
+                }
+            });
+        };
+
+        const cardObserverForNumbers = new IntersectionObserver(numberObserverCallback, numberObserverOptions);
+        const aboutCardsForNumbers = document.querySelectorAll('#about .about-card');
+        aboutCardsForNumbers.forEach(card => {
+            cardObserverForNumbers.observe(card);
+        });
+
+        // --- JavaScript untuk Wave Dihapus ---
+
+
+        // Carousel for Team Section
+        const teamCarouselTrackEl = document.querySelector('#team .carousel-track');
+        if (teamCarouselTrackEl) {
+            const originalTeamItems = Array.from(teamCarouselTrackEl.children).filter(child => child.classList.contains('carousel-item'));
+            const totalOriginalTeamItems = originalTeamItems.length;
+            let teamCurrentSlide = 0;
+            let teamItemsToShow = 3; 
+            let teamInterval;
+
+            const setupTeamCarousel = () => {
+                if (window.innerWidth < 768) { 
+                    teamItemsToShow = 1;
+                } else if (window.innerWidth < 1024) { 
+                    teamItemsToShow = 2;
+                } else { 
+                    teamItemsToShow = 3;
+                }
+
+                teamCarouselTrackEl.innerHTML = '';
+                originalTeamItems.forEach(item => teamCarouselTrackEl.appendChild(item.cloneNode(true))); 
+
+                const currentItemsInTrack = Array.from(teamCarouselTrackEl.children);
+
+                currentItemsInTrack.forEach(item => {
+                    item.style.flex = `0 0 ${100 / teamItemsToShow}%`;
+                    item.style.maxWidth = `${100 / teamItemsToShow}%`;
+                });
+                
+                if (totalOriginalTeamItems > teamItemsToShow) {
+                    for (let i = 0; i < teamItemsToShow; i++) {
+                        if (originalTeamItems[i]) { 
+                            const clone = originalTeamItems[i].cloneNode(true);
+                            clone.classList.add('cloned'); 
+                            teamCarouselTrackEl.appendChild(clone);
+                        }
+                    }
+                }
+                
+                teamCurrentSlide = 0;
+                teamCarouselTrackEl.style.transition = 'none'; 
+                teamCarouselTrackEl.style.transform = 'translateX(0%)';
+                void teamCarouselTrackEl.offsetWidth; 
+                teamCarouselTrackEl.style.transition = 'transform 0.5s ease-in-out'; 
+            };
+
+            const scrollTeamCarousel = () => {
+                if (totalOriginalTeamItems <= teamItemsToShow) return; 
+
+                teamCurrentSlide++;
+                teamCarouselTrackEl.style.transform = `translateX(-${teamCurrentSlide * (100 / teamItemsToShow)}%)`;
+
+                if (teamCurrentSlide >= totalOriginalTeamItems) {
+                    setTimeout(() => {
+                        teamCarouselTrackEl.style.transition = 'none'; 
+                        teamCurrentSlide = 0; 
+                        teamCarouselTrackEl.style.transform = 'translateX(0%)';
+                        void teamCarouselTrackEl.offsetWidth; 
+                        teamCarouselTrackEl.style.transition = 'transform 0.5s ease-in-out'; 
+                    }, 500); 
+                }
+            };
+
+            const startTeamCarouselInterval = () => {
+                if (teamInterval) clearInterval(teamInterval);
+                if (totalOriginalTeamItems > teamItemsToShow) { 
+                    teamInterval = setInterval(scrollTeamCarousel, 3000);
+                }
+            };
+            
+            const teamSectionEl = document.getElementById('team');
+            if (teamSectionEl) {
+                const teamCarouselObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setupTeamCarousel(); 
+                            startTeamCarouselInterval();
+                        } else {
+                            clearInterval(teamInterval);
+                        }
+                    });
+                }, { threshold: 0.1 }); 
+                teamCarouselObserver.observe(teamSectionEl);
+            }
+
+            window.addEventListener('resize', () => {
+                if (teamCarouselTrackEl) { 
+                    clearInterval(teamInterval); 
+                    setupTeamCarousel(); 
+                    startTeamCarouselInterval();
+                }
+            });
+        }
+        
+        const scrollAnimatedElements = document.querySelectorAll('.animate-on-scroll');
+        const generalScrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                } 
+            });
+        }, { threshold: 0.1 }); 
+
+        scrollAnimatedElements.forEach(el => {
+            generalScrollObserver.observe(el);
+        });
+
+    </script>
+</body>
+</html>
