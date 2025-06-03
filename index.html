@@ -12,6 +12,7 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            overflow-x: hidden; /* Mencegah scroll horizontal */
         }
         /* Gaya untuk Hero Section dengan GIF dan Overlay Gradien */
         #hero {
@@ -28,16 +29,16 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
-            opacity: 0.9; /* Opasitas 90% untuk gradien */
+            opacity: 0.9; 
             z-index: 1; 
         }
         #hero .container { 
             position: relative;
             z-index: 2;
-            display: flex; /* Untuk memusatkan gambar baru */
+            display: flex; 
             justify-content: center;
             align-items: center;
-            height: 100%; /* Memastikan container mengisi tinggi hero section */
+            height: 100%; 
         }
         /* Footer dengan gradien */
         .footer-gradient {
@@ -57,8 +58,8 @@
         }
         .mobile-menu {
             transition: transform 0.3s ease-in-out;
-            width: 100vw; /* Full screen width */
-            height: 100vh; /* Full screen height */
+            width: 100vw; 
+            height: 100vh; 
             background-color: white; 
             display: flex; 
             flex-direction: column; 
@@ -107,35 +108,49 @@
             background-color: #2918A9; 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
+        /* Gaya untuk link menu header desktop */
+        .nav-link {
+            @apply text-white hover:text-[#FFCB05] transition duration-300 relative; 
+        }
         .nav-link.active {
-            text-decoration: underline;
-            text-underline-offset: 4px; 
+            font-weight: 700; /* bold */
             color: #FFCB05; 
+        }
+        .nav-link.active::after {
+            content: '';
+            display: block;
+            width: 1.5em; 
+            height: 2px; 
+            background-color: #FFCB05; 
+            position: absolute;
+            bottom: -4px; 
+            left: 0; 
         }
         
         /* Gaya untuk link menu mobile */
         .mobile-menu-item {
-            @apply text-center font-bold py-4 block relative text-black; /* py-4 untuk spasi vertikal lebih */
-            border-bottom: 1px solid #2918a9; /* Garis pemisah */
+            @apply text-center py-4 block relative text-black; 
+            border-bottom: 1px solid #2918a9; 
         }
-        .mobile-menu-item:last-of-type { /* Item terakhir di nav tidak ada border bawah */
+        .mobile-menu-item:last-of-type { 
              border-bottom: none;
+        }
+        .mobile-menu-item.active {
+             font-weight: 700; /* bold */
+             color: #0973d6; 
         }
         .mobile-menu-item.active::after, .mobile-menu-item:hover::after {
             content: '';
             display: block;
-            width: 2.5em; 
+            width: 1.5em; 
             height: 3px; 
             background-color: #FFCB05; 
             margin: 6px auto 0; 
         }
-         .mobile-menu-item.active {
-             color: #0973d6; 
-        }
         .mobile-menu-logo-container {
             margin-top: auto; 
             padding-top: 1rem; 
-            padding-bottom: 2vh; /* Sedikit lebih naik dari sebelumnya */
+            padding-bottom: 5vh; 
             display: flex;
             justify-content: center;
         }
@@ -165,31 +180,31 @@
             transition: transform 0.5s ease-in-out;
         }
         .carousel-item {
-            flex-shrink: 0; /* Mencegah item menyusut */
+            flex-shrink: 0; 
         }
 
         /* Phone Mockup Styling */
         .phone-mockup-container {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Pusatkan mockup dan tombol di bawahnya */
+            align-items: center; 
         }
         .phone-mockup {
-            width: 280px; /* Lebar mockup HP */
-            height: 560px; /* Tinggi mockup HP */
-            background-color: #1a202c; /* Warna casing HP (abu-abu gelap) */
-            border-radius: 30px; /* Sudut melengkung casing */
-            padding: 15px; /* Padding internal untuk layar */
+            width: 280px; 
+            height: 560px; 
+            background-color: #1a202c; 
+            border-radius: 30px; 
+            padding: 15px; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-            margin-top: 2rem; /* Margin atas untuk mockup */
-            margin-bottom: 1rem; /* Margin bawah sebelum tombol */
+            margin-top: 2rem; 
+            margin-bottom: 1rem; 
         }
         .phone-screen {
-            background-color: #000; /* Warna layar (hitam) */
+            background-color: #000; 
             width: 100%;
             height: 100%;
-            border-radius: 15px; /* Sudut melengkung layar */
-            overflow: hidden; /* Untuk memastikan gambar tidak keluar dari layar */
+            border-radius: 15px; 
+            overflow: hidden; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -197,17 +212,17 @@
         .phone-screen img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Gambar mengisi layar tanpa distorsi */
+            object-fit: cover; 
         }
         .app-download-buttons {
             display: flex;
-            justify-content: center; /* Pusatkan tombol jika ada ruang lebih */
-            gap: 1rem; /* Spasi antar tombol */
-            width: 280px; /* Samakan lebar dengan mockup hp */
+            justify-content: center; 
+            gap: 1rem; 
+            width: 280px; 
             margin-top: 1rem;
         }
         .app-download-buttons a img {
-            height: 50px; /* Tinggi tombol gambar disesuaikan */
+            height: 45px; 
             width: auto;
             border-radius: 8px;
             transition: transform 0.2s ease-in-out;
@@ -230,17 +245,17 @@
         .footer-title-underline::after {
             content: '';
             display: block;
-            width: 30%; /* Lebar garis bawah, sesuaikan jika perlu */
-            max-width: 50px; /* Batas maksimal lebar garis */
+            width: 30%; 
+            max-width: 50px; 
             height: 2px;
             background-color: #FFCB05;
-            margin-top: 0.35rem; /* Spasi dari teks */
+            margin-top: 0.35rem; 
         }
         /* Garis pemisah untuk item regulasi di footer */
         .footer-regulation-item:not(:last-child) {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Garis tipis putih transparan */
-            padding-bottom: 0.5rem; /* Spasi bawah untuk item */
-            margin-bottom: 0.5rem; /* Spasi antar item */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+            padding-bottom: 0.5rem; 
+            margin-bottom: 0.5rem; 
         }
     </style>
 </head>
@@ -252,11 +267,11 @@
                 <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII Bali Nusra" class="h-10 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x40/2918A9/FFFFFF?text=Logo+PMII';">
             </a>
             <nav class="hidden md:flex space-x-6 items-center">
-                <a href="#hero" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">HOME</a>
-                <a href="#about" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">ABOUT</a>
-                <a href="#team" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">TEAM</a>
-                <a href="#release" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">RELEASE</a>
-                <a href="#database" class="nav-link text-white hover:text-[#FFCB05] font-bold transition duration-300">DATABASE</a>
+                <a href="#hero" class="nav-link text-white hover:text-[#FFCB05] transition duration-300">HOME</a>
+                <a href="#about" class="nav-link text-white hover:text-[#FFCB05] transition duration-300">ABOUT</a>
+                <a href="#team" class="nav-link text-white hover:text-[#FFCB05] transition duration-300">TEAM</a>
+                <a href="#release" class="nav-link text-white hover:text-[#FFCB05] transition duration-300">RELEASE</a>
+                <a href="#database" class="nav-link text-white hover:text-[#FFCB05] transition duration-300">DATABASE</a>
             </nav>
             <div class="md:hidden">
                 <button id="mobileMenuButton" class="text-white hover:text-[#FFCB05] focus:outline-none">
@@ -286,7 +301,7 @@
     <section id="hero" class="text-white py-20 md:py-32 min-h-[50vh] flex flex-col justify-center items-center">
         <div class="hero-gradient-overlay"></div> 
         <div class="container mx-auto px-6 text-center animate-on-scroll flex justify-center items-center h-full"> 
-            <img src="https://i.imgur.com/XF5dHMa.png" alt="PMII Bali Nusra Hero Image" class="max-w-md md:max-w-lg lg:max-w-xl h-auto" onerror="this.onerror=null;this.src='https://placehold.co/600x300/FFFFFF/000000?text=PMII+Bali+Nusra';">
+            <img src="https://i.imgur.com/XF5dHMa.png" alt="PMII Bali Nusra Hero Image" class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x200/FFFFFF/000000?text=PMII+Bali+Nusra';">
         </div>
     </section>
 
@@ -317,7 +332,7 @@
     <section id="team" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-left mb-12 md:mb-16 animate-on-scroll">
-                <p class="text-2xl md:text-3xl font-bold">
+                 <p class="text-lg md:text-xl font-bold">
                     <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Dokumentasi Kegiatan</span>
                 </p>
             </div>
@@ -325,40 +340,40 @@
                 <div class="carousel-container overflow-hidden">
                     <div class="carousel-track flex">
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/FFC107/000000?text=Kegiatan+1" alt="Dokumentasi Kegiatan 1" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
+                            <img src="https://radarlombok.co.id/wp-content/uploads/2025/02/DISKUSI.jpg" alt="Dokumentasi Kegiatan 1" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
                             <p class="text-center text-sm mt-2 text-black">Diskusi Publik</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/3F51B5/FFFFFF?text=Kegiatan+2" alt="Dokumentasi Kegiatan 2" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Pelatihan Kader</p>
+                            <img src="https://akcdn.detik.net.id/community/media/visual/2024/07/10/konferensi-pers-pkc-pmii-bali-nusra-terkait-penangkapan-ketua-pmi-lombok-timur-zul-harman-karena-terlibat-peredaran-sabu-rabu-_169.jpeg" alt="Dokumentasi Kegiatan 2" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Konferensi Pers</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Kegiatan+3" alt="Dokumentasi Kegiatan 3" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Bakti Sosial</p>
+                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/01/30/IMG-20250130-WA0009-2234609062.jpg" alt="Dokumentasi Kegiatan 3" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Kegiatan Internal</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/F44336/FFFFFF?text=Kegiatan+4" alt="Dokumentasi Kegiatan 4" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Seminar Nasional</p>
+                            <img src="https://xposetv.live/wp-content/uploads/2024/12/Polish_20241219_184033432-e1734605026994.jpg" alt="Dokumentasi Kegiatan 4" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Pertemuan Kader</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/9C27B0/FFFFFF?text=Kegiatan+5" alt="Dokumentasi Kegiatan 5" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Kunjungan Studi</p>
+                            <img src="https://asset-2.tstatic.net/lombok/foto/bank/images/Ketua-BPK-Rafial-Nazir-kiri-saat-Konferensi-pers-penetapan-Calon-Ketua-PKC.jpg" alt="Dokumentasi Kegiatan 5" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Penetapan Calon</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/00BCD4/000000?text=Kegiatan+6" alt="Dokumentasi Kegiatan 6" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Pentas Seni</p>
+                            <img src="https://i0.wp.com/radarmandalika.id/wp-content/uploads/2025/02/IMG-20250215-WA0000-1.jpg" alt="Dokumentasi Kegiatan 6" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Acara Organisasi</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/8BC34A/000000?text=Kegiatan+7" alt="Dokumentasi Kegiatan 7" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Olahraga Bersama</p>
+                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/05/01/IMG-20250501-WA0021-1709682188.jpg" alt="Dokumentasi Kegiatan 7" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Rapat Pleno</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/FF9800/000000?text=Kegiatan+8" alt="Dokumentasi Kegiatan 8" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Workshop Kepenulisan</p>
+                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/05/01/IMG-20250501-WA0021-1709682188.jpg" alt="Dokumentasi Kegiatan 8" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Musyawarah Wilayah</p>
                         </div>
                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/795548/FFFFFF?text=Kegiatan+9" alt="Dokumentasi Kegiatan 9" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md">
-                            <p class="text-center text-sm mt-2 text-black">Rapat Anggota</p>
+                            <img src="https://radarlombok.co.id/wp-content/uploads/2025/02/DISKUSI.jpg" alt="Dokumentasi Kegiatan 9" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                            <p class="text-center text-sm mt-2 text-black">Forum Diskusi</p>
                         </div>
                     </div>
                 </div>
@@ -369,63 +384,63 @@
     <section id="release" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-left mb-12 md:mb-16 animate-on-scroll">
-                 <p class="text-2xl md:text-3xl font-bold">
+                 <p class="text-lg md:text-xl font-bold">
                     <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Informasi Kegiatan</span>
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll">
-                    <img src="https://placehold.co/600x400/FFCB05/000000?text=Info+1" alt="Gambar Informasi 1" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 02 Juni 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Judul Informasi Kegiatan Terbaru 1</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll"> 
+                    <img src="https://radarlombok.co.id/wp-content/uploads/2025/02/DISKUSI.jpg" alt="PKC PMII Bali Nusra Wujudkan Kader Profesional melalui Digitalisasi Organisasi" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Wujudkan Kader Profesional melalui Digitalisasi Organisasi</h3>
                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                 <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.1s;">
-                    <img src="https://placehold.co/600x400/0973d6/FFFFFF?text=Info+2" alt="Gambar Informasi 2" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 01 Juni 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Opini Kader: Pentingnya Organisasi Mahasiswa</h3>
+                 <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.1s;">
+                    <img src="https://akcdn.detik.net.id/community/media/visual/2024/07/10/konferensi-pers-pkc-pmii-bali-nusra-terkait-penangkapan-ketua-pmi-lombok-timur-zul-harman-karena-terlibat-peredaran-sabu-rabu-_169.jpeg" alt="PKC PMII Bali Nusra Wujudkan Kepemimpinan Inklusif untuk Harmoni Nusantara" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Wujudkan Kepemimpinan Inklusif untuk Harmoni Nusantara</h3>
                      <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                 <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.2s;">
-                     <img src="https://placehold.co/600x400/2918A9/FFFFFF?text=Info+3" alt="Gambar Informasi 3" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 30 Mei 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Laporan Kegiatan MAPABA Rayon X</h3>
+                 <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.2s;">
+                     <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/01/30/IMG-20250130-WA0009-2234609062.jpg" alt="PKC PMII Bali Nusra Targetkan Ekspansi Cabang di Seluruh Bali-Nusra" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Targetkan Ekspansi Cabang di Seluruh Bali-Nusra</h3>
                      <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.3s;">
-                    <img src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Info+4" alt="Gambar Informasi 4" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 28 Mei 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Jadwal Pelatihan Jurnalistik PMII</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.3s;">
+                    <img src="https://xposetv.live/wp-content/uploads/2024/12/Polish_20241219_184033432-e1734605026994.jpg" alt="Visi PMII Bali Nusra: Cetak Kader Berintegritas di Era Disrupsi" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Visi PMII Bali Nusra: Cetak Kader Berintegritas di Era Disrupsi</h3>
                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.4s;">
-                    <img src="https://placehold.co/600x400/F44336/FFFFFF?text=Info+5" alt="Gambar Informasi 5" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 27 Mei 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Undangan Diskusi Panel Kebangsaan</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.4s;">
+                    <img src="https://asset-2.tstatic.net/lombok/foto/bank/images/Ketua-BPK-Rafial-Nazir-kiri-saat-Konferensi-pers-penetapan-Calon-Ketua-PKC.jpg" alt="PKC PMII Bali Nusra Dorong Inovasi Kaderisasi Berbasis Teknologi" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Dorong Inovasi Kaderisasi Berbasis Teknologi</h3>
                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.5s;">
-                    <img src="https://placehold.co/600x400/9C27B0/FFFFFF?text=Info+6" alt="Gambar Informasi 6" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 25 Mei 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Refleksi Hari Kebangkitan Nasional</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.5s;">
+                    <img src="https://i0.wp.com/radarmandalika.id/wp-content/uploads/2025/02/IMG-20250215-WA0000-1.jpg" alt="Menuju Nusantara Maju, PMII Bali Nusra Perkuat Kolaborasi Stakeholder" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Menuju Nusantara Maju, PMII Bali Nusra Perkuat Kolaborasi Stakeholder</h3>
                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.6s;">
-                    <img src="https://placehold.co/600x400/00BCD4/000000?text=Info+7" alt="Gambar Informasi 7" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 22 Mei 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Galang Dana untuk Korban Bencana Alam</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.6s;">
+                    <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/05/01/IMG-20250501-WA0021-1709682188.jpg" alt="PKC PMII Bali Nusra Komitmen Lawan Radikalisme dan Jaga Keutuhan NKRI" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Komitmen Lawan Radikalisme dan Jaga Keutuhan NKRI</h3>
                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.7s;">
-                    <img src="https://placehold.co/600x400/8BC34A/000000?text=Info+8" alt="Gambar Informasi 8" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 20 Mei 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Kajian Mingguan: Islam dan Tantangan Global</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.7s;">
+                    <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/05/01/IMG-20250501-WA0021-1709682188.jpg" alt="PMII Bali Nusra Siap Hadapi Era Digital dengan Kader Visioner" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PMII Bali Nusra Siap Hadapi Era Digital dengan Kader Visioner</h3>
                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.8s;">
-                    <img src="https://placehold.co/600x400/FF9800/000000?text=Info+9" alt="Gambar Informasi 9" class="rounded-lg shadow-md w-full h-48 object-cover mb-4">
-                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 18 Mei 2025</div>
-                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Pengumuman Hasil Lomba Esai PMII</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll" style="transition-delay: 0.8s;">
+                    <img src="https://radarlombok.co.id/wp-content/uploads/2025/02/DISKUSI.jpg" alt="Transformasi Organisasi: PKC PMII Bali Nusra Fokus pada SDM Unggul" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
+                    <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
+                    <h3 class="text-lg font-semibold text-black mb-2 flex-grow">Transformasi Organisasi: PKC PMII Bali Nusra Fokus pada SDM Unggul</h3>
                     <a href="#" class="text-[#2918A9] hover:text-[#0973d6] font-semibold mt-auto self-start">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></a>
                 </div>
             </div>
@@ -442,15 +457,15 @@
                 </div>
                 <div class="space-y-6 flex flex-col justify-between animate-on-scroll" style="transition-delay: 0.2s;"> 
                     <div>
-                        <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6"> 
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-6 card-hover"> 
                             <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-id-card-alt mr-2"></i> Kartu Tanda Anggota</h3>
                             <p class="text-black">Pusat data anggota, pengurus, dan alumni PMII.</p>
                         </div>
-                        <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-6 card-hover">
                             <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-folder-open mr-2"></i> Dokumentasi Pengurus</h3>
                             <p class="text-black">Pusat dokumentasi dan pelaporan kegiatan PMII di Cabang, Komisariat dan Rayon.</p>
                         </div>
-                        <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md card-hover">
                             <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-lightbulb mr-2"></i> Produk PMII</h3>
                             <p class="text-black">Pusat studi ilmiah dan regulasi akademis terkait isu dan kebijakan daerah, nasional, dan internasional.</p>
                         </div>
@@ -478,10 +493,10 @@
                 </div>
                 <div class="app-download-buttons">
                     <a href="#" aria-label="Unduh di Google Play">
-                        <img src="https://placehold.co/135x50/000000/FFFFFF?text=Google+Play" alt="Tombol Google Play">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1920px-Google_Play_Store_badge_EN.svg.png" alt="Tombol Google Play">
                     </a>
                     <a href="#" aria-label="Unduh di App Store">
-                        <img src="https://placehold.co/135x50/000000/FFFFFF?text=App+Store" alt="Tombol App Store">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Download_on_the_App_Store_RGB_blk.svg/1920px-Download_on_the_App_Store_RGB_blk.svg.png" alt="Tombol App Store">
                     </a>
                 </div>
             </div>
@@ -502,7 +517,6 @@
                     <ul class="space-y-2 text-sm">
                         <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Survey</a></li>
                         <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Disclaimer</a></li>
-                        <li class="footer-regulation-item"><a href="#" onclick="openModal('privacyModal')" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Privacy Policy</a></li>
                         <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Copyright</a></li>
                     </ul>
                 </div>
@@ -531,7 +545,7 @@
                 </div>
             </div>
             <div class="border-t border-white border-opacity-50 pt-8 text-center text-sm"> 
-                <p>&copy; <span id="currentYear"></span> PMII Bali Nusra. Semua Hak Dilindungi.</p>
+                <p>&copy; <span id="currentYear"></span> PKC PMII Bali dan Nusa Tenggara.</p>
             </div>
         </div>
     </footer>
