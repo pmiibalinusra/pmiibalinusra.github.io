@@ -15,13 +15,17 @@
             overflow-x: hidden; 
             background-color: #ffffff; 
         }
+        header { /* Background header diatur permanen */
+            background-color: #2918A9 !important; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s ease-in-out; /* Transisi hanya untuk shadow jika diperlukan */
+        }
         #hero {
             position: relative; 
             background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2pkanNrOWZmMmI4NXhmdmliZ2FoZTBvNXY0dGg3MjF6ZmV1Ym5meCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eS6c9bqOnxIPBpKFwS/giphy.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* overflow: hidden; -- Dihapus karena ombak dihilangkan, mungkin tidak perlu lagi */
         }
         .hero-gradient-overlay { 
             position: absolute;
@@ -35,13 +39,12 @@
         }
         #hero .container-hero-content {
             position: relative;
-            z-index: 3; /* Tetap di atas overlay jika ada elemen lain */
+            z-index: 3; 
             display: flex; 
             justify-content: center;
             align-items: center;
             height: 100%; 
         }
-        /* CSS untuk Wave Dihapus */
 
         .footer-gradient {
             background: linear-gradient(135deg, #2918A9 0%, #0973d6 100%);
@@ -55,26 +58,14 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .modal-backdrop {
-            background-color: rgba(0,0,0,0.5);
-        }
-        .btn-primary { 
-            @apply bg-[#2918A9] hover:bg-[#1F127A] text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
-        }
         
-        header {
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .header-scrolled {
-            background-color: #2918A9; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
         .nav-link.active {
             color: #FFCB05;
             font-weight: 700;
         }
         .mobile-menu-item {
             color: #2918A9; 
+            border-color: #2918A9; 
         }
         .mobile-menu-item.active {
              color: #FFCB05; 
@@ -105,52 +96,7 @@
         .carousel-item {
             flex-shrink: 0; 
         }
-        .phone-mockup-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-        }
-        .phone-mockup {
-            width: 280px; 
-            height: 560px; 
-            background-color: #1a202c; 
-            border-radius: 30px; 
-            padding: 15px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-            margin-top: 2rem; 
-            margin-bottom: 1rem; 
-        }
-        .phone-screen {
-            background-color: #000; 
-            width: 100%;
-            height: 100%;
-            border-radius: 15px; 
-            overflow: hidden; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .phone-screen img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-        }
-        .app-download-buttons {
-            display: flex;
-            justify-content: center; 
-            gap: 1rem; 
-            width: 280px; 
-            margin-top: 1rem;
-        }
-        .app-download-buttons a img {
-            height: 45px; 
-            width: auto;
-            border-radius: 8px;
-            transition: transform 0.2s ease-in-out;
-        }
-        .app-download-buttons a:hover img {
-            transform: scale(1.05);
-        }
+        
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -174,22 +120,35 @@
             padding-bottom: 0.5rem; 
             margin-bottom: 0.5rem; 
         }
+        /* Section default display controlled by JS */
+        section[id] { 
+            display: none;
+        }
+        /* Konten khusus untuk halaman kosong */
+        .empty-page-content {
+            min-height: calc(100vh - 128px - 200px); /* Tinggi viewport - tinggi header - tinggi footer (perkiraan) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
     </style>
 </head>
 <body class="bg-white text-black">
 
     <header class="fixed top-0 left-0 w-full z-50 py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#hero" class="flex items-center">
+            <a href="#hero" data-page="home" class="nav-trigger flex items-center">
                 <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII Bali Nusra" class="h-10 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x40/2918A9/FFFFFF?text=Logo+PMII';">
             </a>
             
             <nav class="hidden md:flex space-x-4 items-center">
-                <a href="#hero" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1 active">HOME</a>
-                <a href="#about" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">ABOUT</a>
-                <a href="#team" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">TEAM</a>
-                <a href="#release" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">RELEASE</a>
-                <a href="#database" class="nav-link text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">DATABASE</a>
+                <a href="#hero" data-page="home" class="nav-link nav-trigger text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1 active">HOME</a>
+                <a href="#about" data-page="about" class="nav-link nav-trigger text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">ABOUT</a>
+                <a href="#team" data-page="team" class="nav-link nav-trigger text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">TEAM</a>
+                <a href="#release" data-page="release" class="nav-link nav-trigger text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">RELEASE</a>
+                <a href="#database" data-page="database" class="nav-link nav-trigger text-white hover:text-[#FFCB05] transition duration-300 px-2 py-1">DATABASE</a>
             </nav>
 
             <div class="md:hidden">
@@ -202,41 +161,33 @@
 
     <div id="mobileMenu" class="fixed inset-0 bg-white z-[60] hidden transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
         <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center mb-8">
-                <a href="#hero" class="flex items-center" onclick="closeMobileMenu()">
-                    <img src="https://pmii.id/assets/frontend/images/apple-touch-icon2.png" alt="Logo PMII Bali Nusra" class="h-10 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x40/2918A9/FFFFFF?text=Logo+PMII';">
-                </a>
+            <div class="flex justify-end items-center mb-8"> 
                 <button id="closeMobileMenuButton" class="text-[#2918A9] hover:text-[#FFCB05] focus:outline-none">
                     <i class="fas fa-times text-3xl"></i>
                 </button>
             </div>
         </div>
 
-        <nav class="flex-grow overflow-y-auto px-6 text-center space-y-6">
-            <a href="#hero" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3 active">HOME</a>
-            <a href="#about" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">ABOUT</a>
-            <a href="#team" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">TEAM</a>
-            <a href="#release" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">RELEASE</a>
-            <a href="#database" class="mobile-menu-item block hover:text-[#FFCB05] text-xl py-3">DATABASE</a>
+        <nav class="flex-grow overflow-y-auto px-6 text-center">
+            <a href="#hero" data-page="home" class="mobile-menu-item nav-trigger block hover:text-[#FFCB05] text-xl py-3 border-t border-b border-opacity-50 active">HOME</a>
+            <a href="#about" data-page="about" class="mobile-menu-item nav-trigger block hover:text-[#FFCB05] text-xl py-3 border-b border-opacity-50">ABOUT</a>
+            <a href="#team" data-page="team" class="mobile-menu-item nav-trigger block hover:text-[#FFCB05] text-xl py-3 border-b border-opacity-50">TEAM</a>
+            <a href="#release" data-page="release" class="mobile-menu-item nav-trigger block hover:text-[#FFCB05] text-xl py-3 border-b border-opacity-50">RELEASE</a>
+            <a href="#database" data-page="database" class="mobile-menu-item nav-trigger block hover:text-[#FFCB05] text-xl py-3 border-b border-opacity-50">DATABASE</a>
         </nav>
-
-        <div class="mt-auto"> 
-            <img src="https://i.imgur.com/RsBhqF3.png" alt="Dekorasi Menu PMII" class="w-full h-auto block" onerror="this.onerror=null;this.src='https://placehold.co/300x100/cccccc/000000?text=Error+Memuat+Gambar';">
-        </div>
     </div>
-
 
     <section id="hero" class="text-white py-20 md:py-32 min-h-[60vh] md:min-h-[80vh] flex flex-col justify-center items-center">
         <div class="hero-gradient-overlay"></div> 
         <div class="container-hero-content mx-auto px-6 text-center animate-on-scroll"> 
             <img src="https://i.imgur.com/XF5dHMa.png" alt="PMII Bali Nusra Hero Image" class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x200/FFFFFF/000000?text=PMII+Bali+Nusra';">
         </div>
-        </section>
+    </section>
 
     <section id="about" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 md:mb-16 animate-on-scroll">
-            </div>
+                 </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll">
                     <span class="number font-bold text-black mb-2" data-target="25">0</span>
@@ -254,10 +205,10 @@
                     <p class="text-black text-sm">Fakultas/Departemen</p>
                 </div>
             </div>
-        </div>
+            </div>
     </section>
     
-    <section id="team" class="py-16 md:py-24 bg-gray-50"> 
+    <section id="team" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-left mb-12 md:mb-16 animate-on-scroll">
                  <p class="text-lg md:text-xl font-bold">
@@ -290,18 +241,6 @@
                         <div class="carousel-item p-2">
                             <img src="https://i0.wp.com/radarmandalika.id/wp-content/uploads/2025/02/IMG-20250215-WA0000-1.jpg" alt="Dokumentasi Kegiatan 6" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
                             <p class="text-center text-sm mt-2 text-black">Acara Organisasi</p>
-                        </div>
-                        <div class="carousel-item p-2">
-                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/818/2025/05/01/IMG-20250501-WA0021-1709682188.jpg" alt="Dokumentasi Kegiatan 7" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
-                            <p class="text-center text-sm mt-2 text-black">Rapat Pleno</p>
-                        </div>
-                         <div class="carousel-item p-2">
-                            <img src="https://placehold.co/600x400/2918A9/FFFFFF?text=Kegiatan+8" alt="Dokumentasi Kegiatan 8" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" >
-                            <p class="text-center text-sm mt-2 text-black">Musyawarah Wilayah</p>
-                        </div>
-                        <div class="carousel-item p-2">
-                             <img src="https://placehold.co/600x400/FFCB05/000000?text=Kegiatan+9" alt="Dokumentasi Kegiatan 9" class="w-full h-48 md:h-64 object-cover rounded-lg shadow-md" >
-                            <p class="text-center text-sm mt-2 text-black">Forum Diskusi</p>
                         </div>
                     </div>
                 </div>
@@ -356,10 +295,10 @@
         </div>
     </section>
 
-    <section id="database" class="py-16 md:py-24 bg-gray-50"> 
+    <section id="database" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 md:mb-16 animate-on-scroll">
-            </div>
+                </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                 <div class="flex animate-on-scroll rounded-xl shadow-xl overflow-hidden"> 
                     <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3R1ZGVudHMlMjBjb2xsYWJvcmF0aW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="Database PMII Bali Nusra - Ilustrasi Kolaborasi" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2918A9/FFFFFF?text=Database+PMII';">
@@ -381,35 +320,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="kontak" class="py-16 md:py-24 bg-white text-black">
-        <div class="container mx-auto px-6 text-center">
-            <div class="animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                    <span class="text-black">UNDUH APLIKASI</span> <span class="text-[#2918a9]">PERMAISINDO</span>
-                </h2>
-                <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-                    Platform Aktivis Pergerakan, Pusat Kajian Keilmuan Organisasi, Akademisi, dan Opini Publik! Jangan Sampai Ketinggalan.
-                </p>
-            </div>
-            <div class="phone-mockup-container animate-on-scroll" style="transition-delay: 0.2s;">
-                <div class="phone-mockup">
-                    <div class="phone-screen">
-                        <img src="https://placehold.co/250x530/0973d6/FFFFFF?text=Tampilan+Aplikasi+Permasindo" alt="Tampilan Aplikasi Permasindo" onerror="this.onerror=null;this.src='https://placehold.co/250x530/cccccc/000000?text=App+Screen';">
-                    </div>
-                </div>
-                <div class="app-download-buttons">
-                    <a href="#" aria-label="Unduh di Google Play">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1920px-Google_Play_Store_badge_EN.svg.png" alt="Tombol Google Play" onerror="this.onerror=null;this.src='https://placehold.co/135x40/000000/FFFFFF?text=Google+Play';">
-                    </a>
-                    <a href="#" aria-label="Unduh di App Store">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Download_on_the_App_Store_RGB_blk.svg/1920px-Download_on_the_App_Store_RGB_blk.svg.png" alt="Tombol App Store" onerror="this.onerror=null;this.src='https://placehold.co/120x40/000000/FFFFFF?text=App+Store';">
-                    </a>
-                </div>
-            </div>
-        </div>
+             </div>
     </section>
 
     <footer class="footer-gradient text-white py-12">
@@ -418,8 +329,8 @@
                 <div>
                     <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Alamat Sekretariat</h4>
                     <p class="text-sm">Jl. Catur Warga, Kecamatan Pejanggik, Kota Mataram, Provinsi Nusa Tenggara Barat.</p>
-                    <p class="text-sm">Email : pkcbalinusra@gmail.com</p>
-                    <p class="text-sm">Telepon : +62 877-5432-2362</p>
+                    <p class="text-sm">Email	: pkcbalinusra@gmail.com</p>
+                    <p class="text-sm">Telepon	: +62 877-5432-2362</p>
                 </div>
                 <div>
                     <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Regulasi & Info</h4>
@@ -435,13 +346,13 @@
                         <li class="flex items-center">
                             <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
                                 <i class="fab fa-facebook-f text-xl mr-3"></i>
-                                <span class="text-sm">PKC PMII Bali Nusra</span>
+                                <span class="text-sm">  PKC PMII Bali Nusra</span>
                             </a>
                         </li>
                         <li class="flex items-center">
                             <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
                                 <i class="fab fa-instagram text-xl mr-3"></i>
-                                <span class="text-sm">@pkc.pmiibalinusra</span>
+                                <span class="text-sm"> @pkc.pmiibalinusra</span>
                             </a>
                         </li>
                         <li class="flex items-center">
@@ -454,73 +365,88 @@
                 </div>
             </div>
             <div class="border-t border-white border-opacity-50 pt-8 text-center text-sm"> 
-                <p>&copy; <span id="currentYear"></span> PKC PMII Bali dan Nusa Tenggara. All Rights Reserved.</p>
+                <p>&copy; <span id="currentYear"></span> PKC PMII Bali dan Nusa Tenggara.</p>
             </div>
         </div>
     </footer>
 
-    <div id="contactModal" class="fixed inset-0 z-[70] flex items-center justify-center modal-backdrop hidden">
-        <div class="bg-white p-8 md:p-10 rounded-lg shadow-2xl w-11/12 md:w-1/2 lg:w-1/3 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-semibold text-black">Hubungi Sekretariat</h3>
-                <button onclick="closeModal('contactModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-            </div>
-            <form id="contactForm">
-                <div class="mb-4">
-                    <label for="contactName" class="block text-sm font-medium text-black mb-1">Nama Anda</label>
-                    <input type="text" id="contactName" name="contactName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
-                </div>
-                <div class="mb-4">
-                    <label for="contactEmail" class="block text-sm font-medium text-black mb-1">Email Anda</label>
-                    <input type="email" id="contactEmail" name="contactEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black">
-                </div>
-                <div class="mb-6">
-                    <label for="contactMessage" class="block text-sm font-medium text-black mb-1">Pesan Anda</label>
-                    <textarea id="contactMessage" name="contactMessage" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#0973d6] focus:border-[#0973d6] text-black"></textarea>
-                </div>
-                <button type="submit" class="btn-primary w-full">Kirim Pesan</button>
-            </form>
-            <div id="contactMessageStatus" class="mt-4 text-center"></div>
-        </div>
-    </div>
-
     <script>
         // JavaScript for various functionalities
-
-        // Modal Functionality
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden'); 
-            }
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden'); 
-            }
-        }
-
-        window.addEventListener('click', function(event) {
-            const modals = document.querySelectorAll('.modal-backdrop');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    if (modal.id === 'contactModal') { 
-                         closeModal(modal.id);
-                    }
-                }
-            });
-        });
         
         // Mobile Menu Elements
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const closeMobileMenuButton = document.getElementById('closeMobileMenuButton');
         const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuItems = document.querySelectorAll('#mobileMenu .mobile-menu-item'); 
-        const desktopNavLinks = document.querySelectorAll('header nav a.nav-link'); 
+      
+        // Section Elements
+        const heroSection = document.getElementById('hero');
+        const aboutSection = document.getElementById('about');
+        const teamSection = document.getElementById('team');
+        const releaseSection = document.getElementById('release');
+        const databaseSection = document.getElementById('database');
+        // const kontakSection = document.getElementById('kontak'); // Dihapus
+
+        // Array of all content sections that can be toggled
+        const allToggleableSections = [
+            heroSection, aboutSection, teamSection, releaseSection, databaseSection
+            // kontakSection Dihapus
+        ];
+        // Elemen footer akan selalu terlihat, jadi tidak perlu di-toggle di sini
+        const footerElement = document.querySelector('footer');
+
+
+        function displayPage(pageId) {
+            // 1. Hide all toggleable sections initially
+            allToggleableSections.forEach(section => {
+                if (section) {
+                    section.style.display = 'none';
+                }
+            });
+
+            // 2. Show sections based on pageId
+            if (pageId === 'home') {
+                if (heroSection) heroSection.style.display = 'flex'; 
+                if (aboutSection) aboutSection.style.display = 'block';
+                if (teamSection) teamSection.style.display = 'block';
+                if (releaseSection) releaseSection.style.display = 'block';
+                if (databaseSection) databaseSection.style.display = 'block';
+                // Kontak section sudah dihapus, jadi tidak perlu ditampilkan
+            } else {
+                // Untuk halaman about, team, release, database, tampilkan halaman kosong
+                // Kita bisa membuat div placeholder atau membiarkannya kosong sebelum footer
+                // Untuk saat ini, kita tidak menampilkan section spesifik, hanya footer yang akan terlihat
+                // Jika ingin menampilkan section spesifik (misal #about untuk halaman about), uncomment baris di bawah
+                // const targetSection = document.getElementById(pageId);
+                // if (targetSection) targetSection.style.display = 'block';
+
+                // Jika ingin ada konten placeholder untuk halaman kosong:
+                let emptyPagePlaceholder = document.getElementById('emptyPagePlaceholder');
+                if (!emptyPagePlaceholder) {
+                    emptyPagePlaceholder = document.createElement('div');
+                    emptyPagePlaceholder.id = 'emptyPagePlaceholder';
+                    emptyPagePlaceholder.classList.add('empty-page-content', 'py-16', 'md:py-24', 'bg-white'); // Tambahkan kelas styling
+                    // Insert placeholder sebelum footer
+                    if (footerElement) {
+                        footerElement.parentNode.insertBefore(emptyPagePlaceholder, footerElement);
+                    }
+                }
+                emptyPagePlaceholder.innerHTML = `<p class="text-xl text-gray-500">Konten untuk halaman ${pageId.charAt(0).toUpperCase() + pageId.slice(1)} akan segera hadir.</p>`;
+                emptyPagePlaceholder.style.display = 'flex';
+            }
+            
+            // 3. Update active navigation link
+            const allNavTriggers = document.querySelectorAll('.nav-trigger');
+            allNavTriggers.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // 4. Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
 
         function openMobileMenu() {
             if (mobileMenu) {
@@ -549,138 +475,24 @@
             closeMobileMenuButton.addEventListener('click', closeMobileMenu);
         }
         
-        function handleNavLinkClick(clickedLink, allLinks, activeClass) {
-            allLinks.forEach(link => {
-                link.classList.remove(activeClass);
-            });
-            clickedLink.classList.add(activeClass);
-            
-            if (clickedLink.classList.contains('mobile-menu-item') && mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                const href = clickedLink.getAttribute('href');
-                if (href && href.startsWith('#') && href.length > 1) {
-                     closeMobileMenu();
+        document.querySelectorAll('.nav-trigger').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                const pageId = this.dataset.page;
+                displayPage(pageId);
+                if (mobileMenu && !mobileMenu.classList.contains('hidden') && this.classList.contains('mobile-menu-item')) {
+                    closeMobileMenu();
                 }
-            }
-        }
+            });
+        });
 
-        desktopNavLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
-                    handleNavLinkClick(this, desktopNavLinks, 'active');
-                }
-            });
-        });
-        
-        mobileMenuItems.forEach(link => { 
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
-                    handleNavLinkClick(this, mobileMenuItems, 'active');
-                }
-            });
-        });
 
         const currentYearElem = document.getElementById('currentYear');
         if (currentYearElem) {
             currentYearElem.textContent = new Date().getFullYear();
         }
         
-        const sections = document.querySelectorAll('section[id]');
-        const allNavLinksForScroll = document.querySelectorAll('header nav a.nav-link, #mobileMenu nav a.mobile-menu-item');
-
-        function activateMenuAtCurrentScroll() {
-            let scrollY = window.pageYOffset;
-            let currentSectionId = "";
-
-            sections.forEach(current => {
-                const sectionHeight = current.offsetHeight;
-                const sectionTop = current.offsetTop - 100; 
-                if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    currentSectionId = current.getAttribute('id');
-                }
-            });
-            
-            if (!currentSectionId && scrollY < (sections[0] ? sections[0].offsetTop - 100 : 0)) {
-                 currentSectionId = "hero";
-            }
-
-            allNavLinksForScroll.forEach(link => {
-                link.classList.remove('active');
-                const linkHref = link.getAttribute('href');
-                if (linkHref && linkHref.substring(1) === currentSectionId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', activateMenuAtCurrentScroll);
-        window.addEventListener('load', activateMenuAtCurrentScroll); 
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('onclick') && (this.getAttribute('onclick').includes('openModal') || this.getAttribute('onclick').includes('closeMobileMenu'))) {
-                    return; 
-                }
-                
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId !== '#' && targetId.length > 1) { 
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        e.preventDefault(); 
-
-                        if (this.classList.contains('nav-link')) {
-                            handleNavLinkClick(this, desktopNavLinks, 'active');
-                        } else if (this.classList.contains('mobile-menu-item')) {
-                            handleNavLinkClick(this, mobileMenuItems, 'active');
-                        }
-                        
-                        const headerOffset = document.querySelector('header')?.offsetHeight || 70; 
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                } else if (targetId === '#') { 
-                    e.preventDefault();
-                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                     allNavLinksForScroll.forEach(link => link.classList.remove('active'));
-                     const homeLinkDesktop = document.querySelector('header nav a.nav-link[href="#hero"]');
-                     if(homeLinkDesktop) homeLinkDesktop.classList.add('active');
-                     const homeLinkMobile = document.querySelector('#mobileMenu nav a.mobile-menu-item[href="#hero"]');
-                     if(homeLinkMobile) homeLinkMobile.classList.add('active');
-                }
-            });
-        });
-
-        const contactForm = document.getElementById('contactForm');
-        const contactMessageStatus = document.getElementById('contactMessageStatus');
-
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                if (contactMessageStatus) {
-                    contactMessageStatus.innerHTML = '<p class="text-green-600 font-semibold">Terima kasih! Pesan Anda telah terkirim. Kami akan segera merespons.</p>';
-                }
-                contactForm.reset();
-                setTimeout(() => {
-                    closeModal('contactModal');
-                    if (contactMessageStatus) contactMessageStatus.innerHTML = '';
-                }, 3000);
-            });
-        }
-
-        const header = document.querySelector('header');
-        window.addEventListener('scroll', () => {
-            if (header) {
-                if (window.scrollY > 50) { 
-                    header.classList.add('header-scrolled');
-                } else {
-                    header.classList.remove('header-scrolled');
-                }
-            }
-        });
+        // Logika header scroll sudah dihapus karena background header permanen
 
         function animateValue(element, start, end, duration) {
             let startTimestamp = null;
@@ -720,9 +532,6 @@
         aboutCardsForNumbers.forEach(card => {
             cardObserverForNumbers.observe(card);
         });
-
-        // --- JavaScript untuk Wave Dihapus ---
-
 
         // Carousel for Team Section
         const teamCarouselTrackEl = document.querySelector('#team .carousel-track');
@@ -828,6 +637,11 @@
 
         scrollAnimatedElements.forEach(el => {
             generalScrollObserver.observe(el);
+        });
+
+        // Tampilkan halaman 'home' saat pertama kali dimuat
+        window.addEventListener('load', () => {
+            displayPage('home');
         });
 
     </script>
