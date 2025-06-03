@@ -15,17 +15,23 @@
             overflow-x: hidden; 
             background-color: #ffffff; 
         }
-        header { /* Background header diatur permanen */
+        header { 
+            background-color: transparent; /* Default transparan untuk Home */
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        header.header-solid, /* Kelas untuk background solid pada halaman selain Home */
+        header.header-scrolled { /* Kelas untuk background solid saat scroll di Home */
             background-color: #2918A9 !important; 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.3s ease-in-out; /* Transisi hanya untuk shadow jika diperlukan */
         }
+
         #hero {
             position: relative; 
             background-image: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2pkanNrOWZmMmI4NXhmdmliZ2FoZTBvNXY0dGg3MjF6ZmV1Ym5meCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eS6c9bqOnxIPBpKFwS/giphy.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            min-height: 50vh; /* Setengah layar untuk semua perangkat */
         }
         .hero-gradient-overlay { 
             position: absolute;
@@ -73,20 +79,41 @@
         }
         .about-card {
             background-color: #FFCB05;
-            min-height: 180px; 
+            min-height: 160px; /* Sedikit dikurangi untuk mengakomodasi teks */
+            padding: 1rem; /* Penyesuaian padding */
         }
         .about-card .number {
-            font-size: 3rem; 
+            font-size: 2.5rem; /* Sedikit dikurangi */
+            margin-bottom: 0.25rem;
         }
+        .about-card h3 { /* Judul kartu pengurus */
+            font-size: 0.875rem; /* Ukuran disesuaikan dengan subjudul */
+            line-height: 1.25rem;
+            font-weight: 700; /* Tetap tebal */
+            margin-bottom: 0.125rem; /* Jarak ke subjudul */
+        }
+        .about-card p { /* Subjudul kartu pengurus */
+            font-size: 0.75rem; /* Ukuran subjudul */
+            line-height: 1rem;
+        }
+
         @media (min-width: 768px) { 
-            .about-card .number {
-                font-size: 3.75rem; 
+            .about-card {
+                min-height: 180px;
+                padding: 1.5rem;
             }
-            .about-card h3 {
-                 font-size: 1.125rem; 
+            .about-card .number {
+                font-size: 3rem; 
+                 margin-bottom: 0.5rem;
+            }
+             .about-card h3 {
+                 font-size: 1rem; 
+                 line-height: 1.5rem;
+                 margin-bottom: 0.25rem;
             }
              .about-card p {
                  font-size: 0.875rem; 
+                 line-height: 1.25rem;
             }
         }
         .carousel-track {
@@ -120,13 +147,17 @@
             padding-bottom: 0.5rem; 
             margin-bottom: 0.5rem; 
         }
-        /* Section default display controlled by JS */
         section[id] { 
-            display: none;
+            display: none; /* Default semua section disembunyikan, diatur oleh JS */
+            padding-top: 4rem; /* Penyesuaian padding atas section */
+            padding-bottom: 4rem; /* Penyesuaian padding bawah section */
         }
-        /* Konten khusus untuk halaman kosong */
+        #hero { /* Hero tidak perlu padding atas karena header transparan */
+             padding-top: 0; 
+             padding-bottom: 0; 
+        }
         .empty-page-content {
-            min-height: calc(100vh - 128px - 200px); /* Tinggi viewport - tinggi header - tinggi footer (perkiraan) */
+            min-height: calc(100vh - 64px - 250px); /* Perkiraan tinggi viewport - header - footer */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,42 +208,36 @@
         </nav>
     </div>
 
-    <section id="hero" class="text-white py-20 md:py-32 min-h-[60vh] md:min-h-[80vh] flex flex-col justify-center items-center">
-        <div class="hero-gradient-overlay"></div> 
+    <section id="hero" class="text-white flex flex-col justify-center items-center"> <div class="hero-gradient-overlay"></div> 
         <div class="container-hero-content mx-auto px-6 text-center animate-on-scroll"> 
             <img src="https://i.imgur.com/XF5dHMa.png" alt="PMII Bali Nusra Hero Image" class="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x200/FFFFFF/000000?text=PMII+Bali+Nusra';">
         </div>
     </section>
 
-    <section id="about" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16 animate-on-scroll">
-                 </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll">
-                    <span class="number font-bold text-black mb-2" data-target="25">0</span>
-                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Cabang</h3>
-                    <p class="text-black text-sm">Kabupaten/Kota</p>
+    <section id="about" class="bg-white"> <div class="container mx-auto px-6">
+            <div class="text-center mb-8 md:mb-12 animate-on-scroll"> </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"> <div class="about-card p-4 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll">
+                    <span class="number font-bold text-black" data-target="25">0</span>
+                    <h3 class="font-semibold text-black">Pengurus Cabang</h3>
+                    <p class="text-black">Kabupaten atau Kota</p>
                 </div>
-                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.2s;">
-                    <span class="number font-bold text-black mb-2" data-target="75">0</span>
-                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Komisariat</h3>
-                    <p class="text-black text-sm">Universitas/Institusi</p>
+                <div class="about-card p-4 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.2s;">
+                    <span class="number font-bold text-black" data-target="75">0</span>
+                    <h3 class="font-semibold text-black">Pengurus Komisariat</h3>
+                    <p class="text-black">Universitas atau Institusi</p>
                 </div>
-                <div class="about-card p-6 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.4s;">
-                    <span class="number font-bold text-black mb-2" data-target="150">0</span>
-                    <h3 class="font-semibold text-black mb-1 text-base md:text-lg">Pengurus Rayon</h3>
-                    <p class="text-black text-sm">Fakultas/Departemen</p>
+                <div class="about-card p-4 rounded-lg shadow-xl flex flex-col justify-center items-center text-center card-hover animate-on-scroll" style="transition-delay: 0.4s;">
+                    <span class="number font-bold text-black" data-target="150">0</span>
+                    <h3 class="font-semibold text-black">Pengurus Rayon</h3>
+                    <p class="text-black">Fakultas atau Departemen</p>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
     
-    <section id="team" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-left mb-12 md:mb-16 animate-on-scroll">
-                 <p class="text-lg md:text-xl font-bold">
-                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Dokumentasi Kegiatan</span>
+    <section id="team" class="bg-white"> <div class="container mx-auto px-6">
+            <div class="text-left mb-8 md:mb-12 animate-on-scroll"> <p class="text-lg md:text-xl font-bold">
+                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Informasi Populer</span>
                 </p>
             </div>
             <div class="carousel-wrapper w-full relative animate-on-scroll">
@@ -248,14 +273,11 @@
         </div>
     </section>
 
-    <section id="release" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-left mb-12 md:mb-16 animate-on-scroll">
-                 <p class="text-lg md:text-xl font-bold">
-                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Rilis Kegiatan</span> </p>
+    <section id="release" class="bg-white"> <div class="container mx-auto px-6">
+            <div class="text-left mb-8 md:mb-12 animate-on-scroll"> <p class="text-lg md:text-xl font-bold">
+                    <span class="text-[#FFCB05]">|</span> <span class="text-[#2918a9]">Informasi Terbaru</span> </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll"> 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> <div class="bg-white p-6 rounded-xl shadow-lg card-hover flex flex-col animate-on-scroll"> 
                     <img src="https://radarlombok.co.id/wp-content/uploads/2025/02/DISKUSI.jpg" alt="PKC PMII Bali Nusra Wujudkan Kader Profesional melalui Digitalisasi Organisasi" class="rounded-lg shadow-md w-full h-48 object-cover mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Gambar+Error';">
                     <div class="text-[#0973d6] text-xs mb-2"><i class="fas fa-calendar-alt mr-1"></i> 2 Juni 2025</div>
                     <h3 class="text-lg font-semibold text-black mb-2 flex-grow">PKC PMII Bali Nusra Wujudkan Kader Profesional melalui Digitalisasi Organisasi</h3>
@@ -295,53 +317,48 @@
         </div>
     </section>
 
-    <section id="database" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16 animate-on-scroll">
-                </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-                <div class="flex animate-on-scroll rounded-xl shadow-xl overflow-hidden"> 
+    <section id="database" class="bg-white"> <div class="container mx-auto px-6">
+            <div class="text-center mb-8 md:mb-12 animate-on-scroll"> </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch"> <div class="flex animate-on-scroll rounded-xl shadow-xl overflow-hidden"> 
                     <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3R1ZGVudHMlMjBjb2xsYWJvcmF0aW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="Database PMII Bali Nusra - Ilustrasi Kolaborasi" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2918A9/FFFFFF?text=Database+PMII';">
                 </div>
-                <div class="space-y-6 flex flex-col justify-center animate-on-scroll" style="transition-delay: 0.2s;"> 
-                    <div>
-                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-6 card-hover"> 
+                <div class="space-y-4 flex flex-col justify-center animate-on-scroll" style="transition-delay: 0.2s;"> <div>
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-4 card-hover"> 
                             <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-id-card-alt mr-2"></i> Kartu Tanda Anggota</h3>
                             <p class="text-black">Pusat data anggota, pengurus, dan alumni PMII terintegrasi.</p>
                         </div>
-                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-6 card-hover">
+                        <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md mb-4 card-hover">
                             <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-folder-open mr-2"></i> Dokumentasi Pengurus</h3>
                             <p class="text-black">Arsip digital dokumentasi dan pelaporan kegiatan PMII di semua tingkatan.</p>
                         </div>
                         <div class="bg-[#FFCB05] p-6 rounded-lg shadow-md card-hover">
-                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-lightbulb mr-2"></i> Produk PMII & Kajian</h3>
+                            <h3 class="text-xl font-semibold text-[#2918A9] mb-2"><i class="fas fa-lightbulb mr-2"></i> Kajian Strategis</h3>
                             <p class="text-black">Pusat studi ilmiah, kajian strategis, dan regulasi terkait isu daerah hingga internasional.</p>
                         </div>
                     </div>
                 </div>
             </div>
-             </div>
+        </div>
     </section>
 
-    <footer class="footer-gradient text-white py-12">
-        <div class="container mx-auto px-6">
+    <footer class="footer-gradient text-white py-10 md:py-12"> <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Alamat Sekretariat</h4>
+                    <h4 class="text-lg font-semibold text-white mb-3 footer-title-underline">Alamat</h4>
                     <p class="text-sm">Jl. Catur Warga, Kecamatan Pejanggik, Kota Mataram, Provinsi Nusa Tenggara Barat.</p>
                     <p class="text-sm">Email	: pkcbalinusra@gmail.com</p>
                     <p class="text-sm">Telepon	: +62 877-5432-2362</p>
                 </div>
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Regulasi & Info</h4>
+                    <h4 class="text-lg font-semibold text-white mb-3 footer-title-underline">Informasi</h4>
                     <ul class="space-y-2 text-sm">
-                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Survey & Feedback</a></li>
-                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Disclaimer</a></li>
-                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Copyright & Privasi</a></li>
+                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Umpan Balik</a></li>
+                        <li class="footer-regulation-item"><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Hak Cipta</a></li>
+                        <li><a href="#" class="nav-link-footer hover:text-[#FFCB05] transition duration-300">Kebijakan Privasi</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4 footer-title-underline">Media Sosial</h4>
+                    <h4 class="text-lg font-semibold text-white mb-3 footer-title-underline">Media</h4>
                     <ul class="space-y-3">
                         <li class="flex items-center">
                             <a href="#" class="text-white hover:text-[#FFCB05] transition duration-300 flex items-center">
@@ -364,77 +381,75 @@
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white border-opacity-50 pt-8 text-center text-sm"> 
-                <p>&copy; <span id="currentYear"></span> PKC PMII Bali dan Nusa Tenggara.</p>
+            <div class="border-t border-white border-opacity-50 pt-6 text-center text-sm"> <p>&copy; <span id="currentYear"></span> PKC PMII Bali dan Nusa Tenggara.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // JavaScript for various functionalities
-        
-        // Mobile Menu Elements
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const closeMobileMenuButton = document.getElementById('closeMobileMenuButton');
         const mobileMenu = document.getElementById('mobileMenu');
+        const header = document.querySelector('header');
       
-        // Section Elements
         const heroSection = document.getElementById('hero');
         const aboutSection = document.getElementById('about');
         const teamSection = document.getElementById('team');
         const releaseSection = document.getElementById('release');
         const databaseSection = document.getElementById('database');
-        // const kontakSection = document.getElementById('kontak'); // Dihapus
+        // const kontakSection = document.getElementById('kontak'); // Sudah dihapus dari HTML
 
-        // Array of all content sections that can be toggled
-        const allToggleableSections = [
+        const allContentSections = [
             heroSection, aboutSection, teamSection, releaseSection, databaseSection
-            // kontakSection Dihapus
         ];
-        // Elemen footer akan selalu terlihat, jadi tidak perlu di-toggle di sini
         const footerElement = document.querySelector('footer');
-
+        let currentPage = 'home'; // Untuk melacak halaman aktif
 
         function displayPage(pageId) {
-            // 1. Hide all toggleable sections initially
-            allToggleableSections.forEach(section => {
-                if (section) {
-                    section.style.display = 'none';
-                }
+            currentPage = pageId; // Update halaman saat ini
+
+            // Sembunyikan semua section konten
+            allContentSections.forEach(section => {
+                if (section) section.style.display = 'none';
             });
 
-            // 2. Show sections based on pageId
+            // Hapus placeholder jika ada
+            const existingPlaceholder = document.getElementById('emptyPagePlaceholder');
+            if (existingPlaceholder) {
+                existingPlaceholder.remove();
+            }
+
             if (pageId === 'home') {
-                if (heroSection) heroSection.style.display = 'flex'; 
+                if (heroSection) heroSection.style.display = 'flex';
                 if (aboutSection) aboutSection.style.display = 'block';
                 if (teamSection) teamSection.style.display = 'block';
                 if (releaseSection) releaseSection.style.display = 'block';
                 if (databaseSection) databaseSection.style.display = 'block';
-                // Kontak section sudah dihapus, jadi tidak perlu ditampilkan
+                // Kontak/App section sudah dihapus
+                if (header) header.classList.remove('header-solid'); // Header transparan untuk home
+                updateHeaderScrollEffect(); // Terapkan efek scroll jika di home
             } else {
-                // Untuk halaman about, team, release, database, tampilkan halaman kosong
-                // Kita bisa membuat div placeholder atau membiarkannya kosong sebelum footer
-                // Untuk saat ini, kita tidak menampilkan section spesifik, hanya footer yang akan terlihat
-                // Jika ingin menampilkan section spesifik (misal #about untuk halaman about), uncomment baris di bawah
-                // const targetSection = document.getElementById(pageId);
-                // if (targetSection) targetSection.style.display = 'block';
+                // Untuk halaman lain (about, team, release, database), tampilkan halaman kosong
+                // atau konten spesifik jika ada di masa depan.
+                // Saat ini, kita buat halaman kosong dengan pesan.
+                if (heroSection) heroSection.style.display = 'none'; // Sembunyikan hero di halaman lain
 
-                // Jika ingin ada konten placeholder untuk halaman kosong:
-                let emptyPagePlaceholder = document.getElementById('emptyPagePlaceholder');
-                if (!emptyPagePlaceholder) {
-                    emptyPagePlaceholder = document.createElement('div');
-                    emptyPagePlaceholder.id = 'emptyPagePlaceholder';
-                    emptyPagePlaceholder.classList.add('empty-page-content', 'py-16', 'md:py-24', 'bg-white'); // Tambahkan kelas styling
-                    // Insert placeholder sebelum footer
-                    if (footerElement) {
-                        footerElement.parentNode.insertBefore(emptyPagePlaceholder, footerElement);
-                    }
+                // Buat dan tampilkan placeholder untuk halaman kosong
+                let emptyPagePlaceholder = document.createElement('div');
+                emptyPagePlaceholder.id = 'emptyPagePlaceholder';
+                emptyPagePlaceholder.classList.add('empty-page-content', 'py-16', 'md:py-24', 'bg-white');
+                // emptyPagePlaceholder.innerHTML = `<p class="text-xl text-gray-500">Konten untuk halaman ${pageId.charAt(0).toUpperCase() + pageId.slice(1)} akan segera hadir.</p>`;
+                // Sesuai permintaan, halaman dikosongkan, jadi tidak ada teks placeholder
+                emptyPagePlaceholder.innerHTML = ``; 
+                
+                if (footerElement) {
+                    footerElement.parentNode.insertBefore(emptyPagePlaceholder, footerElement);
                 }
-                emptyPagePlaceholder.innerHTML = `<p class="text-xl text-gray-500">Konten untuk halaman ${pageId.charAt(0).toUpperCase() + pageId.slice(1)} akan segera hadir.</p>`;
-                emptyPagePlaceholder.style.display = 'flex';
+                emptyPagePlaceholder.style.display = 'flex'; // Pastikan placeholder terlihat
+
+                if (header) header.classList.add('header-solid'); // Header solid untuk halaman lain
             }
             
-            // 3. Update active navigation link
             const allNavTriggers = document.querySelectorAll('.nav-trigger');
             allNavTriggers.forEach(link => {
                 link.classList.remove('active');
@@ -443,8 +458,23 @@
                 }
             });
 
-            // 4. Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateHeaderScrollEffect() {
+            if (currentPage === 'home') {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                    header.classList.remove('header-solid'); // Pastikan solid tidak menimpa scrolled
+                } else {
+                    header.classList.remove('header-scrolled');
+                    header.classList.remove('header-solid'); // Tetap transparan jika di atas
+                }
+            } else {
+                // Untuk halaman selain home, header selalu solid
+                header.classList.add('header-solid');
+                header.classList.remove('header-scrolled'); // Hapus scrolled jika tidak relevan
+            }
         }
 
 
@@ -486,13 +516,16 @@
             });
         });
 
-
         const currentYearElem = document.getElementById('currentYear');
         if (currentYearElem) {
             currentYearElem.textContent = new Date().getFullYear();
         }
         
-        // Logika header scroll sudah dihapus karena background header permanen
+        window.addEventListener('scroll', updateHeaderScrollEffect);
+        window.addEventListener('load', () => {
+            displayPage('home'); // Tampilkan home page secara default
+            updateHeaderScrollEffect(); // Panggil juga saat load untuk kondisi awal
+        }); 
 
         function animateValue(element, start, end, duration) {
             let startTimestamp = null;
@@ -533,7 +566,6 @@
             cardObserverForNumbers.observe(card);
         });
 
-        // Carousel for Team Section
         const teamCarouselTrackEl = document.querySelector('#team .carousel-track');
         if (teamCarouselTrackEl) {
             const originalTeamItems = Array.from(teamCarouselTrackEl.children).filter(child => child.classList.contains('carousel-item'));
@@ -637,11 +669,6 @@
 
         scrollAnimatedElements.forEach(el => {
             generalScrollObserver.observe(el);
-        });
-
-        // Tampilkan halaman 'home' saat pertama kali dimuat
-        window.addEventListener('load', () => {
-            displayPage('home');
         });
 
     </script>
