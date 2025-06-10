@@ -145,7 +145,7 @@
             display: flex; 
             gap: 1rem; 
             animation-name: scroll-horizontal;
-            animation-duration: 60s; /* Slower animation */
+            animation-duration: 30s; /* Faster animation */
             animation-timing-function: linear;
             animation-iteration-count: infinite;
             animation-play-state: paused;
@@ -291,7 +291,7 @@
              <div class="container mx-auto px-6 py-16 prose max-w-none">
                  <div class="space-y-6">
                     <div class="rounded-lg overflow-hidden w-full animate-on-scroll slide-in-left img-zoom">
-                        <div class="skeleton min-h-[200px] md:min-h-[300px]">
+                        <div class="skeleton">
                             <img src="https://i.imgur.com/7nrNH2p.png" alt="Sejarah PMII" class="w-full h-auto object-contain opacity-0 transition-opacity duration-500" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');">
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                 </div>
                  <div class="space-y-6">
                     <div class="rounded-lg overflow-hidden w-full animate-on-scroll slide-in-left img-zoom">
-                        <div class="skeleton min-h-[200px] md:min-h-[300px]">
+                        <div class="skeleton">
                             <img src="https://i.imgur.com/3XVyvAy.jpeg" alt="PKC PMII Bali Nusra" class="w-full h-auto object-contain opacity-0 transition-opacity duration-500" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');">
                         </div>
                     </div>
@@ -455,6 +455,17 @@
             const pageContainers = document.querySelectorAll('.page-container');
 
             // --- FUNCTIONS ---
+            function createSlug(title, wordCount = 9) {
+                return title
+                    .toLowerCase()
+                    .replace(/[^\w\s-]/g, '') // remove non-word chars
+                    .replace(/[\s_-]+/g, '-') // swap spaces for -
+                    .split('-')
+                    .slice(0, wordCount)
+                    .join('-')
+                    .replace(/^-+|-+$/g, ''); // remove leading/trailing dashes
+            }
+
             function initializeData() {
                 const today = new Date();
                 const contents = [
@@ -484,6 +495,7 @@
                     item.date = new Date(today);
                     item.date.setDate(today.getDate() - (index + 1));
                     item.views = Math.floor(Math.random() * 8000) + 500;
+                    item.slug = createSlug(item.title, 9);
                     if (item.id === 10) {
                         item.content = contents[0];
                     } else if (item.id >= 1 && item.id <= 9) {
@@ -509,7 +521,7 @@
                 const formattedDate = item.date.toLocaleDateString('id-ID', options);
                 const formattedViews = item.views > 1000 ? `${(item.views / 1000).toFixed(1)}k` : item.views;
                 
-                return `<a href="#" class="release-card card-zoom bg-white rounded-lg shadow-lg overflow-hidden flex flex-col group w-full border border-gray-200 hover:shadow-xl transition-shadow duration-300 animate-on-scroll ${animationClass}" data-id="${item.id}" data-delay="${index * 150}">
+                return `<a href="#" class="release-card card-zoom bg-white rounded-lg shadow-lg overflow-hidden flex flex-col group w-full border border-gray-200 hover:shadow-xl transition-shadow duration-300 animate-on-scroll ${animationClass}" data-id="${item.slug}" data-delay="${index * 150}">
                              <div class="relative overflow-hidden pointer-events-none h-40 skeleton">
                                  <img src="${item.img}" alt="${item.alt}" class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:scale-105" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');">
                              </div>
@@ -568,14 +580,14 @@
             }
 
             // --- ROUTING AND PAGE DISPLAY ---
-            function displayPage(pageId, releaseId = null) {
+            function displayPage(pageId, releaseSlug = null) {
                 const preloader = document.getElementById('preloader');
                 
                 const showNewContent = () => {
                     pageContainers.forEach(container => container.classList.add('hidden'));
 
-                    if (pageId === 'release-detail' && releaseId) {
-                        showReleaseDetail(releaseId);
+                    if (pageId === 'release-detail' && releaseSlug) {
+                        showReleaseDetail(releaseSlug);
                     } else {
                         const container = document.getElementById(`${pageId}-content`);
                         if (container) {
@@ -603,10 +615,12 @@
                 }
             }
 
-            function showReleaseDetail(id) {
-                const releaseId = parseInt(id);
-                const release = rilisData.find(item => item.id === releaseId);
-                if (!release) return;
+            function showReleaseDetail(slug) {
+                const release = rilisData.find(item => item.slug === slug);
+                if (!release) {
+                    displayPage('home'); // Redirect to home if slug not found
+                    return;
+                }
                 
                 const container = document.getElementById('release-detail-content');
                 container.classList.remove('hidden');
@@ -615,7 +629,7 @@
                 const formattedDate = release.date.toLocaleDateString('id-ID', options);
                 const formattedViews = release.views > 1000 ? `${(release.views / 1000).toFixed(1)}k` : release.views;
                 
-                const pageUrl = `https://pmiibalinusra.or.id/?release=${releaseId}`;
+                const pageUrl = `https://pmiibalinusra.or.id/release/${release.slug}`;
                 const shareText = encodeURIComponent(`${release.title}`);
 
                 document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(pageUrl)}`;
@@ -640,21 +654,21 @@
 
                 const relatedPopularContainer = document.getElementById('related-popular-list');
                 const popularReleases = rilisData
-                    .filter(item => item.id !== releaseId)
+                    .filter(item => item.slug !== slug)
                     .sort((a, b) => b.views - a.views)
                     .slice(0, 4);
                 relatedPopularContainer.innerHTML = popularReleases.map(item => `
-                    <a href="#" class="related-release-link block py-3 border-b border-gray-200 last:border-b-0" data-id="${item.id}">
+                    <a href="#" class="related-release-link block py-3 border-b border-gray-200 last:border-b-0" data-id="${item.slug}">
                         <p class="font-body text-gray-800 transition-colors">${item.title}</p>
                     </a>`).join('');
 
                 const relatedRecentContainer = document.getElementById('related-recent-list');
                 const recentReleases = rilisData
-                    .filter(item => item.id !== releaseId)
+                    .filter(item => item.slug !== slug)
                     .sort((a, b) => new Date(b.date) - new Date(a.date))
                     .slice(0, 4);
                 relatedRecentContainer.innerHTML = recentReleases.map(item => `
-                    <a href="#" class="related-release-link block py-3 border-b border-gray-200 last:border-b-0" data-id="${item.id}">
+                    <a href="#" class="related-release-link block py-3 border-b border-gray-200 last:border-b-0" data-id="${item.slug}">
                         <p class="font-body text-gray-800 transition-colors">${item.title}</p>
                     </a>`).join('');
             }
@@ -710,9 +724,9 @@
                     const releaseLink = e.target.closest('.release-card, .related-release-link');
                     if (releaseLink) {
                         e.preventDefault();
-                        const id = releaseLink.getAttribute('data-id');
-                        if (id) {
-                            displayPage('release-detail', id);
+                        const slug = releaseLink.getAttribute('data-id');
+                        if (slug) {
+                            displayPage('release-detail', slug);
                         }
                         return;
                     }
