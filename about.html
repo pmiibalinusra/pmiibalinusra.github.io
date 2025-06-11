@@ -248,10 +248,12 @@
                 });
 
                 // Informational alert for nav links
-                document.querySelectorAll('a.nav-link, a.nav-link-mobile').forEach(link => {
+                document.querySelectorAll('a.nav-link, a.nav-link-mobile, a.db-card').forEach(link => {
                     link.addEventListener('click', (e) => {
-                         e.preventDefault();
-                         alert('Halaman ini sedang dalam pengembangan. Silakan kembali ke halaman utama.');
+                        if(link.getAttribute('href') === '#') {
+                            e.preventDefault();
+                            alert('Halaman ini sedang dalam pengembangan.');
+                        }
                     });
                 });
             },
