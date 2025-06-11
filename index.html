@@ -1,0 +1,504 @@
+<!-- index.html (Halaman Home) -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - Home</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white text-gray-800">
+
+    <div id="preloader" class="fixed top-0 left-0 w-full h-full bg-white z-[101] flex justify-center items-center">
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3lxa3l5NmRmNW40dTh5cWozbGJpOWZ5YjZuZ2Q3M3VnMTRyZ3d4NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RwvQhaDgyNrEaJIOcr/giphy.gif" alt="Loading..." class="w-32 h-32">
+    </div>
+    
+    <!-- Header -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link active-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="team.html" class="nav-link">TEAM</a>
+                    <a href="release.html" class="nav-link">RELEASE</a>
+                    <a href="database.html" class="nav-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile active-mobile-link">HOME</a>
+            <a href="about.html" class="nav-link-mobile">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile">TEAM</a>
+            <a href="release.html" class="nav-link-mobile">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile">DATABASE</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="home-content">
+        <section id="home-hero" class="relative h-[33vh] lg:h-[50vh]">
+            <div id="hero-gif-bg" class="absolute inset-0 bg-cover bg-center opacity-10"></div>
+            <div class="relative h-full flex justify-center items-center px-8 md:px-[20%] animate-on-scroll slide-in-top">
+                <img src="https://i.imgur.com/SEIP3Ef.png" alt="Logo Utama" class="w-full h-auto max-h-[50%] object-contain">
+            </div>
+        </section>
+        <section id="team-home" class="py-12 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="w-full animate-on-scroll slide-in-left card-zoom" data-delay="0"><div class="aspect-w-1 aspect-h-1"><div class="w-full h-full p-6 rounded-lg shadow-lg text-center text-white flex flex-col justify-center items-center card-gradient"><p class="count-up text-5xl font-extrabold text-[#FFCB05]" data-target="15">0</p><p class="text-sm font-bold mt-2 tracking-wider">PENGURUS CABANG</p><p class="text-xs mt-1 text-gray-200">Kabupaten atau Kota</p></div></div></div>
+                    <div class="w-full animate-on-scroll slide-in-left card-zoom" data-delay="200"><div class="aspect-w-1 aspect-h-1"><div class="w-full h-full p-6 rounded-lg shadow-lg text-center text-white flex flex-col justify-center items-center card-gradient"><p class="count-up text-5xl font-extrabold text-[#FFCB05]" data-target="45">0</p><p class="text-sm font-bold mt-2 tracking-wider">PENGURUS KOMISARIAT</p><p class="text-xs mt-1 text-gray-200">Kampus atau Instansi</p></div></div></div>
+                    <div class="w-full animate-on-scroll slide-in-left card-zoom" data-delay="400"><div class="aspect-w-1 aspect-h-1"><div class="w-full h-full p-6 rounded-lg shadow-lg text-center text-white flex flex-col justify-center items-center card-gradient"><p class="count-up text-5xl font-extrabold text-[#FFCB05]" data-target="125">0</p><p class="text-sm font-bold mt-2 tracking-wider">PENGURUS RAYON</p><p class="text-xs mt-1 text-gray-200">Fakultas atau Departemen</p></div></div></div>
+                </div>
+            </div>
+        </section>
+        <section id="release-populer" class="py-12 bg-white animate-on-scroll slide-in-right">
+            <div class="container mx-auto px-6">
+                <h2 class="font-title text-left mb-6"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> RILIS POPULER</span></h2>
+                <div class="marquee-container"><div id="rilis-populer-container" class="marquee-content"></div></div>
+            </div>
+        </section>
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="font-title text-left mb-6"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> RILIS TERBARU</span></h2>
+                <div id="rilis-terbaru-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+        <section id="database-section-home" class="py-12 bg-white">
+             <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <div class="rounded-lg overflow-hidden animate-on-scroll slide-in-left img-zoom"><div class="w-full h-full skeleton"><img src="https://i.imgur.com/8mrP06E.png" alt="Gambar database" class="w-full h-full object-cover opacity-0 transition-opacity duration-500" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');"></div></div>
+                <div class="flex flex-col">
+                    <div class="flex-grow flex flex-col space-y-4">
+                        <a href="database.html" class="p-4 rounded-lg shadow-md flex items-start space-x-3 flex-1 animate-on-scroll slide-in-right db-card card-zoom" data-delay="0" style="background-color: #FFCB05;"><div class="bg-white/50 p-2 rounded-full flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#2918A9]"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div><div><h3 class="font-title text-[#2918A9]">Kartu Tanda Anggota</h3><p class="text-[#2918A9]/80 mt-1 font-body leading-relaxed">Validasi identitas Anda sebagai kader PMII. Dapatkan akses eksklusif ke berbagai program, jaringan, dan sumber daya.</p></div></a>
+                        <a href="documentation.html" class="p-4 rounded-lg shadow-md flex items-start space-x-3 flex-1 animate-on-scroll slide-in-right db-card card-zoom" data-delay="200" style="background-color: #FFCB05;"><div class="bg-white/50 p-2 rounded-full flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#2918A9]"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div><div><h3 class="font-title text-[#2918A9]">Dokumentasi Kegiatan</h3><p class="text-[#2918A9]/80 mt-1 font-body leading-relaxed">Jejak langkah pergerakan kami. Arsip digital yang transparan dan akuntabel dari kontribusi PMII.</p></div></a>
+                        <a href="strategic-study.html" class="p-4 rounded-lg shadow-md flex items-start space-x-3 flex-1 animate-on-scroll slide-in-right db-card card-zoom" data-delay="400" style="background-color: #FFCB05;"><div class="bg-white/50 p-2 rounded-full flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#2918A9]"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div><div><h3 class="font-title text-[#2918A9]">Kajian Strategis</h3><p class="text-[#2918A9]/80 mt-1 font-body leading-relaxed">Wadah intelektual kader PMII. Analisis mendalam dan pemikiran kritis untuk merumuskan solusi strategis.</p></div></a>
+                    </div>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <a href="https://play.google.com/store/games?hl=id" target="_blank" rel="noopener noreferrer" class="w-full flex justify-center items-center gap-2 bg-[#2918A9] text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity animate-on-scroll fade-in-bottom button-active" data-delay="0"><img src="https://i.imgur.com/3fDqbBY.png" alt="Play Store Icon" class="w-6 h-6"> PlayStore</a>
+                        <a href="https://www.apple.com/id/app-store/" target="_blank" rel="noopener noreferrer" class="w-full flex justify-center items-center gap-2 bg-[#0973D6] text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity animate-on-scroll fade-in-bottom button-active" data-delay="200"><img src="https://i.imgur.com/MOuAzA0.png" alt="App Store Icon" class="w-6 h-6"> AppStore</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer (Sama untuk semua halaman) -->
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer sama seperti aslinya ... -->
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+---
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - About</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link active-link">ABOUT</a>
+                    <a href="team.html" class="nav-link">TEAM</a>
+                    <a href="release.html" class="nav-link">RELEASE</a>
+                    <a href="database.html" class="nav-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile">HOME</a>
+            <a href="about.html" class="nav-link-mobile active-mobile-link">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile">TEAM</a>
+            <a href="release.html" class="nav-link-mobile">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile">DATABASE</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="about-content" class="container mx-auto px-6 py-16 prose max-w-none">
+         <div class="space-y-6">
+            <div class="rounded-lg overflow-hidden w-full animate-on-scroll slide-in-left img-zoom"><div class="skeleton"><img src="https://i.imgur.com/7nrNH2p.png" alt="Sejarah PMII" class="w-full h-auto object-contain opacity-0 transition-opacity duration-500" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');"></div></div>
+            <div class="space-y-3 text-justify"><p>Pergerakan Mahasiswa Islam Indonesia, atau PMII, adalah organisasi kemahasiswaan ekstrakampus yang berlandaskan akidah Islam Ahlussunnah Wal Jamaah. Organisasi ini lahir dari kebutuhan mendesak Nahdlatul Ulama (NU) untuk memiliki wadah kaderisasi di tingkat mahasiswa, terutama pasca-Pemilu 1955 dalam konstelasi politik yang dinamis.</p><p>Pada 17 April 1960 di Surabaya, Jawa Timur, PMII resmi didirikan. Inisiatif ini diprakarsai oleh 13 tokoh mahasiswa dan pemuda NU, termasuk A. Khalid Mawardi, M. Said Budairy, dan M. Sobich Ubaid, dengan restu penuh dari Ketua Umum PBNU saat itu, KH Idham Chalid. Meski sebelumnya ada upaya serupa seperti IMANU dan KMNU, PMII-lah yang berhasil mendapatkan dukungan solid dan menjadi wadah resmi mahasiswa NU, yang disepakati dalam KONBES I IPNU di Kaliurang pada Maret 1960.</p></div>
+        </div>
+        <div class="space-y-6 mt-8">
+            <div class="rounded-lg overflow-hidden shadow-lg w-full animate-on-scroll slide-in-right img-zoom"><div class="aspect-w-16 aspect-h-9 skeleton"><iframe class="absolute w-full h-full opacity-0 transition-opacity duration-500" src="https://www.youtube.com/embed/AQXKIGKvlgQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');"></iframe></div></div>
+            <div class="space-y-3 text-justify"><p>Musyawarah pendirian PMII di Gedung Madrasah Muallimin Wonokromo, Surabaya, menjadi momen bersejarah. Dalam musyawarah tersebut, nama "Pergerakan Mahasiswa Islam Indonesia" disepakati, AD/ART disahkan, dan Mahbub Djunaidi terpilih sebagai Ketua Umum pertama. Tanggal 17 April 1960, bertepatan dengan 21 Syawal 1379 H, ditetapkan sebagai hari lahir PMII.</p><p>Awalnya, PMII merupakan badan otonom di bawah naungan NU. Namun, seiring dinamika zaman, PMII mengambil langkah strategis. Melalui Deklarasi Murnajati pada 14 Juli 1972, yang kemudian diresmikan pada Kongres di Ciloto tahun 1973, PMII menyatakan diri sebagai organisasi independen. Langkah ini menegaskan kemandirian PMII dalam bergerak, meskipun secara nilai dan kultur tetap tak terpisahkan dari ajaran Ahlussunnah Wal Jamaah yang diusung NU.</p></div>
+        </div>
+        <div class="space-y-6 mt-8">
+            <div class="rounded-lg overflow-hidden w-full animate-on-scroll slide-in-left img-zoom"><div class="skeleton"><img src="https://i.imgur.com/3XVyvAy.jpeg" alt="PKC PMII Bali Nusra" class="w-full h-auto object-contain opacity-0 transition-opacity duration-500" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');"></div></div>
+            <div class="space-y-3 text-justify"><p>Sebagai bagian integral dari PMII, Pengurus Koordinator Cabang (PKC) PMII Bali Nusra menjadi garda terdepan dalam mengawal kaderisasi dan gerakan di wilayah Bali, Nusa Tenggara Barat (NTB), dan Nusa Tenggara Timur (NTT). PKC PMII Bali Nusra berperan sebagai jembatan strategis yang mengoordinasikan cabang-cabang, memastikan setiap program selaras dengan visi besar organisasi.</p><p>Tujuan utama PMII, yaitu "terbentuknya pribadi muslim Indonesia yang bertaqwa kepada Allah SWT, berbudi luhur, berilmu, cakap, dan bertanggung jawab dalam mengamalkan ilmunya serta komitmen memperjuangkan cita-cita kemerdekaan Indonesia," diterjemahkan oleh PKC PMII Bali Nusra melalui berbagai program. Mulai dari pelatihan kader, seminar, kajian strategis, hingga advokasi kebijakan publik, PKC PMII Bali Nusra berkomitmen untuk melahirkan kader-kader yang tidak hanya unggul secara intelektual dan spiritual, tetapi juga responsif terhadap tantangan zaman dan berkontribusi nyata bagi pembangunan daerah dan bangsa.</p></div>
+        </div>
+    </main>
+    
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer ... -->
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+---
+<!-- team.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - Team</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+             <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="team.html" class="nav-link active-link">TEAM</a>
+                    <a href="release.html" class="nav-link">RELEASE</a>
+                    <a href="database.html" class="nav-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile">HOME</a>
+            <a href="about.html" class="nav-link-mobile">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile active-mobile-link">TEAM</a>
+            <a href="release.html" class="nav-link-mobile">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile">DATABASE</a>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="team-content" class="container mx-auto px-6 py-16">
+        <h1 class="font-title text-2xl text-center mb-12"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> TIM KAMI</span></h1>
+        <div id="team-page-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Konten tim akan di-generate oleh JavaScript -->
+        </div>
+    </main>
+
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer ... -->
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+---
+<!-- release.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - Rilis</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+             <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="team.html" class="nav-link">TEAM</a>
+                    <a href="release.html" class="nav-link active-link">RELEASE</a>
+                    <a href="database.html" class="nav-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile">HOME</a>
+            <a href="about.html" class="nav-link-mobile">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile">TEAM</a>
+            <a href="release.html" class="nav-link-mobile active-mobile-link">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile">DATABASE</a>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="release-content" class="container mx-auto px-6 py-16">
+        <h1 class="font-title text-2xl text-center mb-12"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> SEMUA RILIS</span></h1>
+        <div id="release-page-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Konten rilis akan di-generate oleh JavaScript -->
+        </div>
+    </main>
+
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer ... -->
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+---
+<!-- database.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - Database KTA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+             <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="team.html" class="nav-link">TEAM</a>
+                    <a href="release.html" class="nav-link">RELEASE</a>
+                    <a href="database.html" class="nav-link active-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile">HOME</a>
+            <a href="about.html" class="nav-link-mobile">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile">TEAM</a>
+            <a href="release.html" class="nav-link-mobile">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile active-mobile-link">DATABASE</a>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="database-content" class="container mx-auto px-6 py-16">
+        <h1 class="font-title text-2xl text-center mb-12"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> FORMULIR KARTU TANDA ANGGOTA</span></h1>
+        <form id="kta-form" class="max-w-2xl mx-auto bg-white p-6 rounded-lg space-y-4 font-body animate-on-scroll slide-in-left" novalidate>
+            <div><label for="nama_lengkap_form" class="block font-subtitle text-gray-700 mb-1">Nama Lengkap</label><input type="text" id="nama_lengkap_form" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0973D6] focus:border-[#0973D6] uppercase" oninput="this.value = this.value.toUpperCase()" required></div>
+            <div><label for="alamat_email_form" class="block font-subtitle text-gray-700 mb-1">Alamat Email</label><input type="email" id="alamat_email_form" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0973D6] focus:border-[#0973D6] lowercase" oninput="this.value = this.value.toLowerCase()" required></div>
+            <div><label for="fakultas_rayon_form" class="block font-subtitle text-gray-700 mb-1">Fakultas atau Rayon</label><select id="fakultas_rayon_form" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0973D6] focus:border-[#0973D6]" required></select></div>
+            <div><label for="kampus_komisariat_form" class="block font-subtitle text-gray-700 mb-1">Kampus atau Komisariat</label><select id="kampus_komisariat_form" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0973D6] focus:border-[#0973D6]" required></select></div>
+            <div><label for="kab_kota_cabang_form" class="block font-subtitle text-gray-700 mb-1">Kab/Kota atau Cabang</label><select id="kab_kota_cabang_form" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0973D6] focus:border-[#0973D6]" required></select></div>
+            <div><label for="sertifikat_mapaba_form" class="block font-subtitle text-gray-700 mb-1">Sertifikat MAPABA</label><input type="file" id="sertifikat_mapaba_form" accept=".jpg, .jpeg, .png, .pdf" class="file-input" required><p id="file-chosen" class="text-gray-500 mt-1"></p></div>
+            <div><button type="submit" class="w-full text-center font-bold py-3 px-6 rounded-lg text-white hover:opacity-90 transition-opacity button-active button-gradient">Buat KTA PMII</button></div>
+        </form>
+    </main>
+
+    <!-- Modal (Sama untuk semua halaman yang butuh) -->
+    <div id="form-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[101] hidden items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-11/12 max-w-sm text-center">
+            <p id="modal-message" class="font-body mb-4"></p>
+            <button id="modal-close-btn" class="bg-[#0973D6] text-white font-bold py-2 px-6 rounded-lg hover:opacity-90 transition-opacity button-active">Tutup</button>
+        </div>
+    </div>
+
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer ... -->
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+---
+<!-- release-detail.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - Rilis</title> <!-- Judul akan di-update oleh JS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+             <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="team.html" class="nav-link">TEAM</a>
+                    <a href="release.html" class="nav-link active-link">RELEASE</a>
+                    <a href="database.html" class="nav-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile">HOME</a>
+            <a href="about.html" class="nav-link-mobile">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile">TEAM</a>
+            <a href="release.html" class="nav-link-mobile active-mobile-link">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile">DATABASE</a>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="release-detail-content" class="container mx-auto px-6 py-16 sm:py-24">
+        <div class="max-w-4xl mx-auto">
+            <a href="release.html" class="mb-8 inline-flex items-center gap-2 text-[#0973D6] hover:text-[#2918A9] font-semibold transition-colors font-body">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                Kembali ke Semua Rilis
+            </a>
+            <h1 id="release-detail-title" class="font-title text-[#2918A9] mb-4 leading-tight"></h1>
+            <div id="release-detail-meta" class="flex items-center space-x-4 text-gray-500 mb-6 font-subtitle"></div>
+            <div class="w-full rounded-lg shadow-lg mb-8 skeleton animate-on-scroll slide-in-left">
+                <img id="release-detail-img" src="" alt="" class="w-full h-auto rounded-lg opacity-0 transition-opacity duration-500" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');">
+            </div>
+            <div id="release-detail-body" class="prose max-w-none text-justify"></div>
+
+            <div id="share-buttons" class="mt-10 flex flex-col sm:flex-row gap-4">
+                <a id="share-whatsapp" href="#" target="_blank" class="flex-1 flex justify-center items-center gap-3 bg-[#2918A9] text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity animate-on-scroll fade-in-bottom button-active" data-delay="0">Bagikan Rilis</a>
+                <a id="submit-article-btn" href="https://wa.me/6287859245125?text=Assalamu'alaikum%20Sahabat,%20Saya%20ingin%20mengirimkan%20tulisan%20untuk%20dapat%20dipublikasikan.%20Mohon%20atensinya.%20Terima%20kasih." target="_blank" class="flex-1 flex justify-center items-center gap-3 bg-[#0973D6] text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity animate-on-scroll fade-in-bottom button-active" data-delay="200">Kirim Rilis</a>
+            </div>
+            
+            <div class="mt-12 space-y-8">
+                <div><h2 class="font-title text-left mb-4"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> RILIS POPULER LAINNYA</span></h2><div id="related-popular-list" class="space-y-3"></div></div>
+                <div><h2 class="font-title text-left mb-4"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> RILIS TERBARU LAINNYA</span></h2><div id="related-recent-list" class="space-y-3"></div></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer ... -->
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+---
+<!-- documentation.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - Dokumentasi</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header (Sama seperti halaman lain, sesuaikan active-link) -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+             <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="team.html" class="nav-link">TEAM</a>
+                    <a href="release.html" class="nav-link">RELEASE</a>
+                    <a href="database.html" class="nav-link active-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile">HOME</a>
+            <a href="about.html" class="nav-link-mobile">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile">TEAM</a>
+            <a href="release.html" class="nav-link-mobile">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile active-mobile-link">DATABASE</a>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="documentation-content" class="container mx-auto px-6 py-16">
+        <h1 class="font-title text-2xl text-center mb-12"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> DOKUMENTASI KEGIATAN</span></h1>
+        <div id="documentation-list" class="max-w-4xl mx-auto rounded-lg border border-gray-200 overflow-hidden font-body animate-on-scroll fade-in-bottom">
+            <!-- Konten daftar dokumen akan di-generate oleh JavaScript -->
+        </div>
+    </main>
+
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer ... -->
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+---
+<!-- strategic-study.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKC PMII Bali Nusra - Kajian Strategis</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header (Sama seperti halaman lain, sesuaikan active-link) -->
+    <header id="main-header" class="sticky top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3">
+             <div class="flex justify-between items-center">
+                <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="team.html" class="nav-link">TEAM</a>
+                    <a href="release.html" class="nav-link">RELEASE</a>
+                    <a href="database.html" class="nav-link active-link">DATABASE</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden flex items-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden lg:hidden text-center">
+            <a href="index.html" class="nav-link-mobile">HOME</a>
+            <a href="about.html" class="nav-link-mobile">ABOUT</a>
+            <a href="team.html" class="nav-link-mobile">TEAM</a>
+            <a href="release.html" class="nav-link-mobile">RELEASE</a>
+            <a href="database.html" class="nav-link-mobile active-mobile-link">DATABASE</a>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="strategic-study-content" class="container mx-auto px-6 py-16">
+        <h1 class="font-title text-2xl text-center mb-12"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> KAJIAN STRATEGIS</span></h1>
+        <div id="strategic-study-list" class="max-w-4xl mx-auto rounded-lg border border-gray-200 overflow-hidden font-body animate-on-scroll fade-in-bottom">
+            <!-- Konten daftar kajian akan di-generate oleh JavaScript -->
+        </div>
+    </main>
+
+    <footer class="text-white font-body footer-gradient">
+        <!-- ... Konten footer ... -->
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
