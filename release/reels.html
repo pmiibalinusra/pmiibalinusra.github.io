@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rilis Khusus - PKC PMII Bali Nusra</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/NiEsY8O.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Menggunakan font Inter sebagai default */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 12px; /* Base font size untuk mobile */
+            overflow-x: hidden;
+        }
+        @media (min-width: 768px) {
+            body { font-size: 14px; } /* Base font size untuk tablet/desktop */
+        }
+        
+        /* Ukuran Font Kustom Responsif */
+        .font-title { font-size: 18px; font-weight: 700; }
+        .font-subtitle { font-size: 12px; font-weight: 700; }
+        .font-body { font-size: 12px; }
+        @media (min-width: 768px) {
+            .font-title { font-size: 24px; }
+            .font-subtitle { font-size: 14px; }
+            .font-body { font-size: 14px; }
+        }
+
+        /* Animasi */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-in-left { transform: translateX(-50px); }
+        .fade-in-bottom { transform: translateY(20px); }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+        }
+        
+        /* Skeleton Screen Animation */
+        .skeleton {
+            background-color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        .skeleton::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Hover & Active States */
+        a.button-active { transition: background-color 0.2s, color 0.2s; }
+        a.button-active:active {
+            background-image: none !important;
+            background-color: #FFCB05 !important;
+            color: #2918A9 !important;
+        }
+        a.related-release-link:hover p { color: #2918A9; }
+        
+        /* Gaya Link Navigasi */
+        .nav-link {
+            color: #FFFFFF;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        .nav-link.active-link, .nav-link:hover {
+            color: #FFCB05 !important;
+            border-color: #FFCB05 !important;
+        }
+        .nav-link-mobile.active-mobile-link {
+            color: #FFCB05 !important;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Prose (Text Content) Styling */
+        .prose {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        @media (min-width: 768px) {
+            .prose { font-size: 14px; }
+        }
+        .prose p { margin-bottom: 1em; }
+
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-body">
+    
+    <!-- Preloader starts here -->
+    <div id="preloader" class="fixed top-0 left-0 w-full h-full bg-white z-[100] flex justify-center items-center">
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3lxa3l5NmRmNW40dTh5cWozbGJpOWZ5YjZuZ2Q3M3VnMTRyZ3d4NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RwvQhaDgyNrEaJIOcr/giphy.gif" alt="Memuat..." class="w-32 h-32">
+    </div>
+    <!-- Preloader ends here -->
+
+    <!-- Main content is hidden initially -->
+    <div id="main-content" class="hidden">
+        <header id="main-header" class="sticky top-0 w-full z-50" style="background-image: linear-gradient(to right, #2918A9, #0973D6); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);">
+            <nav class="container mx-auto px-6 py-3">
+                <div class="flex justify-between items-center">
+                    <div class="text-white font-bold text-lg">PKC PMII BALI NUSRA</div>
+                    <div id="desktop-nav" class="hidden lg:flex space-x-6 items-center">
+                        <a href="#" data-page="home" class="nav-link font-semibold">HOME</a>
+                        <a href="#" data-page="about" class="nav-link font-semibold">ABOUT</a>
+                        <a href="#" data-page="team" class="nav-link font-semibold">TEAM</a>
+                        <a href="#" data-page="release" class="nav-link font-semibold active-link">RELEASE</a>
+                        <a href="#" data-page="database" class="nav-link font-semibold">DATABASE</a>
+                    </div>
+                    <button id="mobile-menu-button" class="lg:hidden flex items-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </nav>
+            <div id="mobile-menu" class="hidden lg:hidden text-center">
+                <a href="#" data-page="home" class="nav-link-mobile block py-2 text-white font-semibold text-sm">HOME</a>
+                <a href="#" data-page="about" class="nav-link-mobile block py-2 text-white hover:text-[#FFCB05] font-semibold text-sm">ABOUT</a>
+                <a href="#" data-page="team" class="nav-link-mobile block py-2 text-white hover:text-[#FFCB05] font-semibold text-sm">TEAM</a>
+                <a href="#" data-page="release" class="nav-link-mobile block py-2 text-white hover:text-[#FFCB05] font-semibold text-sm active-mobile-link">RELEASE</a>
+                <a href="#" data-page="database" class="nav-link-mobile block py-2 text-white hover:text-[#FFCB05] font-semibold text-sm">DATABASE</a>
+            </div>
+        </header>
+
+        <main>
+            <div id="release-detail-content">
+                <div class="container mx-auto px-6 py-16 sm:py-24">
+                    <div class="max-w-4xl mx-auto">
+                        <button id="back-to-release-btn" class="mb-8 inline-flex items-center gap-2 text-[#0973D6] hover:text-[#2918A9] font-semibold transition-colors font-body">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                            Kembali ke Rilis
+                        </button>
+                        <h1 id="release-detail-title" class="font-title text-[#2918A9] mb-4 leading-tight"></h1>
+                        <div id="release-detail-meta" class="flex items-center space-x-4 text-gray-500 mb-6 font-subtitle"></div>
+                        <div class="w-full rounded-lg shadow-lg mb-8 skeleton animate-on-scroll slide-in-left">
+                            <img id="release-detail-img" src="" alt="" class="w-full h-auto rounded-lg opacity-0 transition-opacity duration-500" onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('skeleton');">
+                        </div>
+                        <div id="release-detail-body" class="prose max-w-none text-justify"></div>
+
+                        <div id="share-buttons" class="mt-10 flex flex-col sm:flex-row gap-4">
+                            <a id="share-whatsapp" href="#" target="_blank" class="flex-1 flex justify-center items-center gap-3 bg-[#2918A9] text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity animate-on-scroll fade-in-bottom button-active" data-delay="0">
+                                Bagikan Rilis
+                            </a>
+                            <a id="submit-article-btn" href="#" class="flex-1 flex justify-center items-center gap-3 bg-[#0973D6] text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity animate-on-scroll fade-in-bottom button-active" data-delay="200">
+                                Kirim Rilis
+                            </a>
+                        </div>
+                        
+                        <div class="mt-12 space-y-8">
+                            <div>
+                                <h2 class="font-title text-left mb-4"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> RILIS POPULER</span></h2>
+                                <div id="related-popular-list" class="space-y-3"></div>
+                            </div>
+                            <div>
+                                <h2 class="font-title text-left mb-4"><span class="text-[#FFCB05] font-black">|</span><span class="text-[#2918A9]"> RILIS TERBARU</span></h2>
+                                <div id="related-recent-list" class="space-y-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-white font-body" style="background-image: linear-gradient(to right, #2918A9, #0973D6);">
+             <div class="container mx-auto px-6 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="font-title text-base mb-4 text-[#FFCB05]">Alamat Kantor</h3>
+                        <ul style="color: #FFFFFF;">
+                            <li class="flex items-start space-x-4 py-3 border-b border-white/20"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg></div><span>Jl. Catur Warga No. 9A Kelurahan Pejanggik, Kecamatan Mataram, Kota Mataram, Provinsi Nusa Tenggara Barat, Indonesia (83127).</span></li>
+                            <li class="flex items-center space-x-4 py-3 border-b border-white/20"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg></div><span>pmiibalinusra@gmail.com</span></li>
+                            <li class="flex items-center space-x-4 py-3 border-b border-white/20"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg></div><span>+62 877-5432-2362</span></li>
+                            <li class="flex items-center space-x-4 pt-3"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg></div><span>Kantor PKC PMII Bali Nusra</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-title text-base mb-4 text-[#FFCB05]">Media Sosial</h3>
+                        <ul style="color: #FFFFFF;">
+                            <li class="py-3 border-b border-white/20"><a href="https://pmiibalinusra.or.id" target="_blank" rel="noopener noreferrer" class="social-link flex items-center space-x-4 hover:opacity-80 transition-opacity"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L8 12v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.92 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div><span>www.pmiibalinusra.or.id</span></a></li>
+                            <li class="py-3 border-b border-white/20"><a href="https://www.facebook.com/pkcpmiibalinusatenggara" target="_blank" rel="noopener noreferrer" class="social-link flex items-center space-x-4 hover:opacity-80 transition-opacity"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg></div><span>PKC PMII Bali Nusra</span></a></li>
+                            <li class="py-3 border-b border-white/20"><a href="https://www.instagram.com/pkc.pmiibalinusra" target="_blank" rel="noopener noreferrer" class="social-link flex items-center space-x-4 hover:opacity-80 transition-opacity"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 1.442c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.282.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.231 0-2.136.008-2.389.046-3.232.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546.453.92-.598.282-.11.705-.24 1.485-.276.843-.039 1.096-.047 3.232-.047zM8 3.882a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 6.769a2.66 2.66 0 1 1 0-5.32 2.66 2.66 0 0 1 0 5.32zM12.973 3.856a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92z"/></svg></div><span>@pkc.pmiibalinusra</span></a></li>
+                            <li class="py-3 border-b border-white/20"><a href="https://youtube.com/@pkcpmiibalinusra" target="_blank" rel="noopener noreferrer" class="social-link flex items-center space-x-4 hover:opacity-80 transition-opacity"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg></div><span>PKC PMII Bali-Nusra</span></a></li>
+                            <li class="pt-3"><a href="https://tiktok.com/@pkc.pmiibalinusra" target="_blank" rel="noopener noreferrer" class="social-link flex items-center space-x-4 hover:opacity-80 transition-opacity"><div class="bg-white/10 h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/></svg></div><span>@pkc.pmiibalinusra</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-white/20 mt-8 pt-6"><p class="text-center text-xs text-white">© 2025-2027 PKC PMII Bali Nusra.</p></div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA (Termasuk konten lengkap untuk detail) ---
+            const rilisData = [
+                {"id":10, "img":"https://i.imgur.com/0jrXtiK.jpeg", "title":"PKC PMII Bali Nusra Wujudkan Kepedulian Sosial Melalui Program Berqurban Idul Adha", "alt":"Kegiatan Berqurban PMII", "content": "<p>Mataram – Sebagai wujud komitmen dalam memperkuat nilai spiritual dan solidaritas sosial, Pengurus Koordinator Cabang Pergerakan Mahasiswa Islam Indonesia (PKC PMII) Bali Nusra kembali menggelar program berqurban untuk menyambut Hari Raya Idul Adha 1446 H.</p><p>Kegiatan yang berpusat di Sekretariat PKC PMII Bali Nusra ini berhasil menyalurkan hewan qurban kepada kader-kader PMII dan masyarakat sekitar yang membutuhkan. Prosesi penyembelihan dan distribusi dilakukan secara gotong royong, melibatkan partisipasi aktif para kader sebagai bentuk implementasi nilai-nilai kebersamaan.</p><p>Ketua PKC PMII Bali Nusra, Ahmad Muzakkir, menyatakan bahwa kegiatan ini adalah manifestasi dari ajaran Islam sebagai rahmatan lil 'alamin. “Berqurban bukan sekadar ritual, melainkan simbol pengorbanan, keikhlasan, dan kepedulian. Melalui program ini, PMII menegaskan kehadirannya yang tidak hanya di ruang-ruang diskusi, tetapi juga di tengah denyut nadi persoalan masyarakat,” ujarnya.</p><p>Kegiatan ini sekaligus menjadi momentum untuk memperkuat internalisasi nilai-nilai Ahlussunnah wal Jamaah (Aswaja) di kalangan kader. Dengan semangat ukhuwah islamiyah, PMII Bali Nusra berkomitmen untuk terus menggulirkan program-program yang memberikan dampak positif dan nyata bagi kemaslahatan umat dan bangsa.</p>"},
+                {"id":1, "img":"https://i.imgur.com/pQpvjsW.jpeg", "title":"PMII Kaji Stagnasi Ekonomi NTB: Mendesak Adanya Kebijakan Ekonomi Pro-Rakyat", "alt":"Ekonomi NTB", "content": "<p>Mataram – PKC PMII Bali Nusra menyoroti kondisi perekonomian Nusa Tenggara Barat (NTB) yang menunjukkan tanda-tanda stagnasi. Berdasarkan data Badan Pusat Statistik (BPS) NTB 2023, pertumbuhan ekonomi provinsi ini hanya mencapai 4,5%, angka yang masih di bawah target Rencana Pembangunan Jangka Menengah Daerah (RPJMD). Ketergantungan pada sektor pariwisata terbukti belum mampu menjadi motor penggerak ekonomi yang inklusif bagi seluruh lapisan masyarakat.</p><p>Data lebih lanjut menunjukkan Indeks Pembangunan Manusia (IPM) yang stagnan dan tingkat pengangguran terbuka yang masih di atas rata-rata nasional. PMII Bali Nusra menilai, tanpa strategi yang inklusif, narasi 'lomba investasi' tidak akan berdampak signifikan bagi kesejahteraan masyarakat luas, terutama bagi para petani dan nelayan yang menjadi tulang punggung ekonomi lokal.</p><p>Sebagai solusi, PMII mendorong adanya refocusing kebijakan ekonomi yang berbasis pada pemberdayaan masyarakat lokal. Mengacu pada konsep ekonomi kerakyatan, pemerintah daerah didesak untuk meningkatkan alokasi anggaran APBD untuk sektor koperasi dan UMKM. Tanpa langkah konkret ini, pertumbuhan ekonomi NTB hanya akan menjadi statistik yang tidak dirasakan manfaatnya oleh rakyat kecil.</p>"},
+                {"id":2, "img":"https://i.imgur.com/cPGZUKd.jpeg", "title":"Tata Kelola Beasiswa NTB Disorot PMII: Mendesak Transparansi dan Meritokrasi", "alt":"Beasiswa NTB", "content": "<p>Mataram – Transparansi dan akuntabilitas program beasiswa Pemerintah Provinsi NTB menjadi sorotan tajam PKC PMII Bali Nusra. Meskipun alokasi anggaran yang signifikan telah digulirkan, data internal PMII menunjukkan adanya potensi ketidaktepatan sasaran, di mana porsi untuk aktivis kritis dan mahasiswa kurang mampu belum optimal.</p><p>Mengacu pada kajian Transparency International Indonesia (2022) yang menyoroti rendahnya skor integritas pengelolaan dana publik di NTB, PMII mendesak adanya evaluasi menyeluruh. Kondisi ini menimbulkan pertanyaan mendasar: apakah program beasiswa telah berjalan sesuai prinsip keadilan dan transparansi, atau berisiko menjadi alat politis?</p><p>PMII mengusulkan reformasi total tata kelola beasiswa dengan membentuk komite seleksi independen yang melibatkan akademisi dan perwakilan organisasi mahasiswa. Selain itu, publikasi data penerima secara daring dan berkala adalah langkah mutlak untuk memastikan akuntabilitas, sejalan dengan amanat Undang-Undang Keterbukaan Informasi Publik (KIP) tahun 2008. Beasiswa harus menjadi investasi masa depan, bukan komoditas politik.</p>"},
+                {"id":3, "img":"https://i.imgur.com/YUKsBna.jpeg", "title":"Akses Kesehatan NTB Belum Merata, PMII Dorong Peningkatan Anggaran dan Layanan", "alt":"Kesehatan NTB", "content": "<p>Mataram – PKC PMII Bali Nusra menyoroti masih adanya ketimpangan akses layanan kesehatan di Nusa Tenggara Barat (NTB). Data Dinas Kesehatan NTB (2023) menunjukkan rasio tenaga medis per penduduk yang masih di bawah standar WHO, serta Angka Kematian Ibu (AKI) yang tergolong tinggi. Hal ini diperparah dengan alokasi anggaran kesehatan dalam APBD yang belum memenuhi amanat UU Kesehatan sebesar 10%.</p><p>Program \"NTB Sehat\" yang telah berjalan dinilai belum menunjukkan hasil yang signifikan dan merata, terutama di wilayah-wilayah terpencil. PMII menilai, kebijakan kesehatan harus fokus pada hasil yang terukur, bukan sekadar retorika dan program seremonial.</p><p>Untuk itu, PMII mendorong pemerintah daerah untuk meningkatkan alokasi anggaran kesehatan hingga 15% dari APBD. Dana tersebut harus diprioritaskan untuk rekrutmen tenaga medis, pembangunan puskesmas di daerah terpencil, dan penguatan sistem kesehatan primer. Mengadopsi teknologi telemedicine, seperti yang direkomendasikan WHO, juga bisa menjadi solusi untuk menjangkau masyarakat di kepulauan. Tanpa langkah strategis ini, \"NTB Sehat\" hanya akan menjadi slogan.</p>"},
+                {"id":4, "img":"https://i.imgur.com/EN1NwUQ.jpeg", "title":"PMII Soroti Birokrasi Pariwisata NTB: Hambat Potensi, Perlu Reformasi Digital", "alt":"Pariwisata NTB", "content":"<p>Mataram – Sektor pariwisata sebagai andalan ekonomi NTB dinilai masih terhambat oleh persoalan birokrasi. PKC PMII Bali Nusra mencatat, meskipun kunjungan wisatawan meningkat, kontribusinya terhadap Pendapatan Asli Daerah (PAD) belum optimal. Keluhan dari para pelaku industri mengenai perizinan yang rumit dan pungutan tidak resmi menjadi bukti adanya inefisiensi sistemik.</p><p>Mengutip laporan Ombudsman RI (2022), PMII menyoroti bahwa indeks kemudahan berusaha di sektor pariwisata NTB masih perlu perbaikan signifikan. Selain itu, fokus pembangunan yang terlalu terpusat di Mandalika berisiko menciptakan ketimpangan dan mengabaikan potensi besar di wilayah lain seperti Sumbawa dan Dompu.</p><p>PMII mendesak adanya reformasi birokrasi pariwisata melalui digitalisasi layanan. Penerapan sistem perizinan terpadu (One-Stop Service) dan promosi destinasi non-Mandalika secara masif adalah kunci untuk membuka potensi ekonomi secara lebih merata. Pariwisata harus menjadi motor penggerak yang inklusif, bukan sekadar proyek mercusuar.</p>"},
+                {"id":5, "img":"https://i.imgur.com/xe4WAXk.jpeg", "title":"PMII Desak Audit Independen Dana Bansos NTB untuk Cegah Penyelewengan", "alt":"Bantuan Sosial NTB", "content":"<p>Mataram – PKC PMII Bali Nusra menyerukan pengawasan ketat terhadap penyaluran dana bantuan sosial (bansos) di NTB. Temuan Badan Pemeriksa Keuangan (BPK) tahun 2022 mengenai adanya penyimpangan distribusi dan data Kemensos (2023) yang menunjukkan ketidaktepatan sasaran penerima menjadi alarm serius bagi akuntabilitas pemerintah daerah.</p><p>PMII menegaskan bahwa dana bansos adalah hak rakyat miskin dan sangat rentan disalahgunakan untuk kepentingan politik atau pribadi. Buruknya validasi data dan lemahnya mekanisme pengawasan menjadi celah bagi potensi korupsi, seperti yang pernah diungkap oleh Indonesia Corruption Watch (ICW).</p><p>Sebagai langkah konkret, PMII mendesak dilakukannya audit independen dan menyeluruh terhadap semua program bansos oleh lembaga yang kredibel seperti BPKP, dengan melibatkan partisipasi aktif dari masyarakat sipil sebagai pengawas eksternal. Sesuai amanat UU No. 13/2011, data penerima harus divalidasi dan dipublikasikan secara transparan. Bansos harus menjadi jaring pengaman sosial yang efektif, bukan ladang korupsi.</p>"},
+                {"id":6, "img":"https://i.imgur.com/YoJXUt7.jpeg", "title":"Produktivitas Pertanian NTB Rendah, PMII Usulkan Peningkatan Investasi Infrastruktur", "alt":"Pertanian NTB", "content":"<p>Mataram – Sektor pertanian NTB, yang menjadi tumpuan hidup mayoritas penduduk, menghadapi tantangan serius terkait produktivitas dan infrastruktur. PKC PMII Bali Nusra mencatat, produktivitas padi yang masih di bawah rata-rata nasional dan ketergantungan tinggi pada irigasi tadah hujan menunjukkan perlunya intervensi kebijakan yang lebih strategis.</p><p>Minimnya alokasi anggaran untuk infrastruktur pertanian, rendahnya adopsi teknologi, dan kelangkaan pupuk bersubsidi menjadi akar masalah yang menghambat kesejahteraan petani. PMII menilai, tanpa keberpihakan kebijakan yang nyata, sektor pertanian akan terus tertinggal.</p><p>Oleh karena itu, PMII mengusulkan peningkatan investasi pada infrastruktur pertanian, terutama untuk modernisasi irigasi, serta penguatan program subsidi input pertanian yang tepat sasaran. Sesuai rekomendasi FAO, pemerintah juga perlu menggencarkan program pelatihan teknologi pertanian 4.0 untuk menarik minat generasi muda dan meningkatkan produktivitas secara berkelanjutan.</p>"},
+                {"id":7, "img":"https://i.imgur.com/WFA7Zqy.jpeg", "title":"Pembangunan Infrastruktur NTB Belum Inklusif, PMII Serukan Pemerataan Anggaran", "alt":"Infrastruktur NTB", "content":"<p>Mataram – Arah pembangunan infrastruktur di NTB dinilai belum sepenuhnya inklusif dan merata. PKC PMII Bali Nusra menyoroti konsentrasi anggaran yang tidak proporsional pada proyek-proyek di kawasan strategis pariwisata, sementara kondisi jalan di banyak pedesaan masih memprihatinkan. Data BPS (2022) yang menunjukkan 35% jalan desa dalam kondisi rusak berat menjadi bukti nyata ketimpangan ini.</p><p>PMII menilai, pembangunan infrastruktur tidak boleh hanya melayani kepentingan investor atau menjadi \"proyek prestise\" elit politik. Konektivitas antarwilayah adalah kunci untuk membuka isolasi, mengurangi biaya logistik, dan mendorong pertumbuhan ekonomi yang merata.</p><p>PMII menyerukan adanya realokasi anggaran infrastruktur yang lebih adil, dengan porsi minimal 50% untuk wilayah pedesaan, sejalan dengan semangat UU Desa. Pendekatan perencanaan partisipatif yang melibatkan warga secara langsung harus menjadi norma baru, memastikan infrastruktur dibangun berdasarkan kebutuhan riil masyarakat, bukan keinginan segelintir pihak.</p>"},
+                {"id":8, "img":"https://i.imgur.com/AXPtLYm.jpeg", "title":"PMII Evaluasi Kinerja Gubernur NTB: Realisasi Janji Pembangunan Belum Optimal", "alt":"Gubernur NTB", "content":"<p>Mataram – PKC PMII Bali Nusra melakukan evaluasi kritis terhadap kinerja Gubernur NTB dalam merealisasikan janji-janji kampanye yang tertuang dalam RPJMD 2018-2023. Data BPS menunjukkan bahwa beberapa target makro, seperti pertumbuhan ekonomi dan penurunan angka kemiskinan, belum tercapai secara optimal.</p><p>PMII menilai bahwa kepemimpinan yang efektif diukur dari implementasi kebijakan yang berdampak nyata, bukan sekadar retorika. Janji industrialisasi, reformasi birokrasi, dan pemberdayaan masyarakat perlu diwujudkan dalam program yang terukur dan akuntabel.</p><p>Sebagai bagian dari fungsi kontrol sosial, PMII mendorong adanya evaluasi kinerja yang transparan dan partisipatif oleh DPRD, dengan melibatkan akademisi dan organisasi masyarakat sipil. Sesuai amanat UU Pemerintahan Daerah, pemerintah daerah wajib menerbitkan laporan kinerja tahunan yang dapat diakses publik. Kepemimpinan harus dipertanggungjawabkan melalui data dan fakta, bukan klaim sepihak.</p>"},
+                {"id":9, "img":"https://i.imgur.com/eXlEdhJ.jpeg", "title":"PMII Desak Integrasi Data Terpadu di NTB untuk Kebijakan Berbasis Fakta", "alt":"Data NTB", "content":"<p>Mataram – Akurasi dan integrasi data pemerintah di NTB menjadi perhatian serius PKC PMII Bali Nusra. Adanya inkonsistensi data antar-instansi, seperti data kemiskinan antara BPS dan Dinas Sosial, serta temuan BPK mengenai ketidaksinkronan data program, menunjukkan adanya masalah fundamental dalam tata kelola data.</p><p>PMII menegaskan bahwa kebijakan publik yang efektif harus didasarkan pada data yang valid dan andal. Tanpa data yang akurat, perencanaan pembangunan akan salah arah, dan alokasi sumber daya menjadi tidak efisien. Buruknya manajemen data melanggar prinsip pemerintahan yang baik dan amanat UU Keterbukaan Informasi Publik.</p><p>Untuk mengatasi masalah ini, PMII mendesak pembentukan Badan Data Daerah yang independen untuk mengintegrasikan seluruh data publik, sejalan dengan program Satu Data Indonesia (Perpres No. 39/2019). Peningkatan kapasitas SDM di bidang statistik dan data science juga harus menjadi prioritas. Kebijakan NTB harus dibangun di atas fondasi fakta, bukan fiksi.</p>"}
+            ];
+
+            // --- FUNCTIONS ---
+            function initializeData() {
+                const today = new Date();
+                rilisData.forEach((item, index) => {
+                    item.date = new Date(today);
+                    item.date.setDate(today.getDate() - (index + 1));
+                    item.views = Math.floor(Math.random() * 8000) + 500;
+                    item.slug = createSlug(item.title, 9);
+                });
+            }
+            
+            function createSlug(title, wordCount = 9) {
+                return title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').split('-').slice(0, wordCount).join('-').replace(/^-+|-+$/g, '');
+            }
+
+            function showReleaseDetail(slug) {
+                const release = rilisData.find(item => item.slug === slug);
+                if (!release) return;
+                
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                const formattedDate = release.date.toLocaleDateString('id-ID', options);
+                const formattedViews = release.views > 1000 ? `${(release.views / 1000).toFixed(1)}k` : release.views;
+                
+                const pageUrl = `https://pmiibalinusra.or.id/release/${release.slug}`;
+                const shareText = encodeURIComponent(`${release.title}`);
+
+                document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(pageUrl)}`;
+                
+                const kirimRilisBtn = document.getElementById('submit-article-btn');
+                const waMessage = encodeURIComponent("Assalamu'alaikum Sahabat, Saya ingin mengirimkan tulisan untuk dapat dipublikasikan. Mohon atensinya. Terima kasih.");
+                kirimRilisBtn.href = `https://wa.me/6287859245125?text=${waMessage}`;
+                kirimRilisBtn.target = '_blank';
+
+                document.getElementById('release-detail-title').textContent = release.title;
+                document.getElementById('release-detail-img').src = release.img;
+                document.getElementById('release-detail-img').alt = release.alt;
+                
+                document.getElementById('release-detail-meta').innerHTML = `
+                    <div class="flex items-center space-x-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span>${formattedDate}</span></div>
+                    <div class="flex items-center space-x-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg><span>${formattedViews} dilihat</span></div>
+                `;
+                document.getElementById('release-detail-body').innerHTML = release.content;
+
+                const renderRelatedList = (containerId, data) => {
+                    const container = document.getElementById(containerId);
+                    container.innerHTML = data.map(item => `
+                        <a href="#" class="related-release-link block py-3 border-b border-gray-200 last:border-b-0" onclick="showReleaseDetail('${item.slug}'); return false;">
+                            <p class="font-body text-gray-800 transition-colors">${item.title}</p>
+                        </a>`).join('');
+                };
+
+                const relatedPopular = rilisData.filter(item => item.slug !== slug).sort((a, b) => b.views - a.views).slice(0, 4);
+                renderRelatedList('related-popular-list', relatedPopular);
+
+                const relatedRecent = rilisData.filter(item => item.slug !== slug).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4);
+                renderRelatedList('related-recent-list', relatedRecent);
+
+                window.scrollTo(0, 0); // Scroll to top on new article load
+            }
+            
+            // Expose function to global scope to be callable from onclick
+            window.showReleaseDetail = showReleaseDetail;
+
+
+            function setupScrollAnimations() {
+                const animatedElements = document.querySelectorAll('.animate-on-scroll');
+                
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const delay = parseInt(entry.target.dataset.delay) || 0;
+                            setTimeout(() => {
+                                entry.target.classList.add('is-visible');
+                            }, delay);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                animatedElements.forEach(el => {
+                    observer.observe(el);
+                });
+            }
+            
+            // --- PRELOADER AND INITIALIZATION ---
+            function initPage() {
+                const preloader = document.getElementById('preloader');
+                const mainContent = document.getElementById('main-content');
+                
+                setTimeout(() => {
+                    if (preloader) {
+                        preloader.style.transition = 'opacity 0.5s ease-out';
+                        preloader.style.opacity = '0';
+                    }
+                    if(mainContent) {
+                        mainContent.classList.remove('hidden');
+                    }
+                    
+                    setTimeout(() => {
+                        if (preloader) {
+                            preloader.remove();
+                        }
+                        setupScrollAnimations();
+                    }, 500);
+
+                }, 3000); // 3-second delay
+
+                initializeData();
+                // Show the first article by default as the "special release"
+                showReleaseDetail(rilisData[0].slug);
+
+                // Mobile menu toggle
+                document.getElementById('mobile-menu-button').addEventListener('click', () => {
+                    document.getElementById('mobile-menu').classList.toggle('hidden');
+                });
+
+                // Back button (assuming it should go back to a list page, which we simulate by reloading for now)
+                document.getElementById('back-to-release-btn').addEventListener('click', () => {
+                   alert("Fungsi kembali ke halaman daftar rilis akan diimplementasikan di sini.");
+                });
+            }
+
+            initPage();
+        });
+    </script>
+
+</body>
+</html>
