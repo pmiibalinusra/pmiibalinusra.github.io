@@ -20,7 +20,7 @@ const releasesData = [
     {
         id: 11,
         img: "https://i.imgur.com/IH91e6G.jpeg",
-        title: "Ultimatum Serius Cipayung Plus NTB: Bebaskan 6 Aktivis atau Hadapi Gerakan Massa Serentak!",
+        title: "Konferensi Pers Cipayung Plus NTB: Bebaskan 6 Aktivis atau Hadapi Gerakan Massa Serentak!",
         alt: "Konferensi Pers Cipayung Plus NTB di Mapolda NTB",
         content: `
             <p>Mataram - Merespon aksi demonstrasi damai Cipayung Plus Cabang Bima hingga berujung dipenjara, Cipayung Plus Provinsi NTB menggelar konferensi Pers di Mapolda NTB. Rabu, (11/06/25).</p>
