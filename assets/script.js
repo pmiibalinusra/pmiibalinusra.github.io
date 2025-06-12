@@ -1,15 +1,13 @@
 /**
  * ===================================================================
- * SCRIPT.JS - WEBSITE PKC PMII BALI NUSRA (VERSI MULTI-HALAMAN)
+ * SCRIPT.JS - WEBSITE PKC PMII BALI NUSRA (VERSI DIPERBAIKI)
  * ===================================================================
  * Deskripsi:
- * Mengontrol semua interaktivitas website.
- * - Memuat data dari `data.js`.
- * - Menjalankan preloader selama 3 detik.
- * - Merender konten dinamis sesuai halaman yang aktif.
- * - Mengelola semua event dan animasi.
+ * Versi ini lebih aman dan tahan eror. Menambahkan pemeriksaan (null-check)
+ * untuk setiap elemen sebelum digunakan, memastikan preloader selalu
+ * hilang setelah 3 detik meskipun beberapa elemen tidak ada di halaman.
  *
- * @version 3.0.0
+ * @version 3.1.0
  * @date 12 Juni 2025
  * ===================================================================
  */
@@ -18,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const App = {
         // --- 1. STATE & ELEMENTS ---
-        // Tempat menyimpan data aplikasi dan referensi elemen HTML
         state: {
             data: {
                 releases: [],
@@ -57,18 +54,28 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- 2. INITIALIZATION ---
-        // Fungsi utama yang berjalan saat halaman dimuat
         init() {
-            // Tampilkan preloader segera saat halaman dibuka
-            this.elements.preloader.style.display = 'flex';
+            if (this.elements.preloader) {
+                this.elements.preloader.style.display = 'flex';
+            }
 
-            // Atur waktu tunggu preloader sebelum menampilkan konten
+            // Atur waktu tunggu preloader. Fungsi `run` akan dijalankan setelah 3 detik.
             setTimeout(() => {
-                this.run();
+                try {
+                    this.run();
+                } catch (error) {
+                    console.error("Terjadi kesalahan saat menjalankan aplikasi:", error);
+                    // Jika ada eror, kita tetap paksa preloader untuk hilang
+                    if (this.elements.preloader) {
+                        this.elements.preloader.style.display = 'none';
+                    }
+                    // Tampilkan pesan eror di halaman
+                    document.body.innerHTML = `<div style="text-align: center; padding: 50px; font-family: sans-serif;"><h1>Oops! Terjadi Kesalahan</h1><p>Silakan cek konsol browser (F12) untuk detail teknis.</p></div>`;
+                }
             }, 3000); // <-- DURASI PRELOADER: 3000ms = 3 DETIK
         },
         
-        // Fungsi yang berjalan setelah preloader selesai
+        // Fungsi yang berjalan setelah preloader
         run() {
             this.data.load();
             this.events.bind();
@@ -79,24 +86,29 @@ document.addEventListener('DOMContentLoaded', () => {
             this.animations.setupScrollAnimations();
             this.ui.updateActiveLink();
             
-            // Sembunyikan preloader untuk menampilkan konten website
-            this.elements.preloader.style.display = 'none';
+            // Sembunyikan preloader setelah semua selesai
+            if (this.elements.preloader) {
+                this.elements.preloader.style.display = 'none';
+            }
         },
 
         // --- 3. DATA HANDLING ---
-        // Mengelola data yang diambil dari `data.js`
         data: {
             load() {
                 const today = new Date();
-                App.state.data.releases = releasesData.map((item, index) => {
-                    const date = new Date(today);
-                    date.setDate(today.getDate() - index);
-                    return { ...item, date, views: Math.floor(Math.random() * 8000) + 500, slug: App.utils.createSlug(item.title) };
-                });
-                App.state.data.team = teamData;
-                App.state.data.documents = documentsData;
-                App.state.data.studies = studiesData;
-                App.state.data.formData = formData;
+                // Pemeriksaan untuk memastikan 'releasesData' ada dari data.js
+                if (typeof releasesData !== 'undefined') {
+                    App.state.data.releases = releasesData.map((item, index) => {
+                        const date = new Date(today);
+                        date.setDate(today.getDate() - index);
+                        return { ...item, date, views: Math.floor(Math.random() * 8000) + 500, slug: App.utils.createSlug(item.title) };
+                    });
+                }
+                // Memuat data lain dengan aman
+                App.state.data.team = typeof teamData !== 'undefined' ? teamData : [];
+                App.state.data.documents = typeof documentsData !== 'undefined' ? documentsData : [];
+                App.state.data.studies = typeof studiesData !== 'undefined' ? studiesData : [];
+                App.state.data.formData = typeof formData !== 'undefined' ? formData : {};
             },
             getReleaseBySlug(slug) {
                 return App.state.data.releases.find(r => r.slug === slug);
@@ -109,21 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- 4. EVENT HANDLING ---
-        // Mengikat semua event listener (klik, submit, dll.)
         events: {
             bind() {
-                // Event untuk tombol menu mobile
                 const mobileMenuButton = document.getElementById('mobile-menu-button');
                 if (mobileMenuButton) {
                     mobileMenuButton.addEventListener('click', () => {
                         App.elements.mobileMenu?.classList.toggle('hidden');
                     });
                 }
-                // Event untuk form KTA
                 if (App.elements.ktaForm.form) {
                     App.elements.ktaForm.form.addEventListener('submit', this.handleFormSubmit);
                 }
-                // Event untuk input file di form KTA
                 if (App.elements.ktaForm.fileInput) {
                     App.elements.ktaForm.fileInput.addEventListener('change', () => {
                         if (App.elements.ktaForm.fileChosen) {
@@ -131,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                 }
-                // Event untuk menutup modal
                 if (App.elements.modal) {
                     App.elements.modal.addEventListener('click', (e) => {
                         if (e.target.id === 'form-modal' || e.target.id === 'modal-close-btn') {
@@ -163,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- 5. DYNAMIC RENDERING ---
-        // Kumpulan fungsi untuk memasukkan HTML ke dalam halaman
         renderPageContent(pageId) {
              switch (pageId) {
                 case 'home-page':
@@ -174,11 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case 'release-detail-page':
                     const slug = this.utils.getSlugFromURL();
-                    if (slug) {
-                        this.render.releaseDetail(slug);
-                    } else {
-                        this.render.errorPage('Rilis tidak ditemukan.', 'URL tidak valid atau parameter tidak ada.');
-                    }
+                    if (slug) this.render.releaseDetail(slug);
+                    else this.render.errorPage('Rilis tidak ditemukan.', 'URL tidak valid atau parameter tidak ada.');
                     break;
                 case 'team-page':
                     this.render.teamPage();
@@ -194,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
             }
         },
-
         render: {
             homePage() {
                 const popular = App.data.getSortedReleases('views', null, 6);
@@ -208,8 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             },
             releaseListPage() {
-                const allReleases = App.data.getSortedReleases('date');
                 if (App.elements.releasePageContainer) {
+                    const allReleases = App.data.getSortedReleases('date');
                     App.elements.releasePageContainer.innerHTML = allReleases.map((item, i) => this.getReleaseCardHTML(item, i, 'fade-in-bottom')).join('');
                 }
             },
@@ -229,16 +231,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             },
             documentationPage() {
-                const docLink = "https://drive.google.com/file/d/13grSe-WlOemxHtpSlcf8Pyg4Ghlx_2pV/view?usp=drivesdk";
                 if (App.elements.docListContainer) {
+                    const docLink = "https://drive.google.com/file/d/13grSe-WlOemxHtpSlcf8Pyg4Ghlx_2pV/view?usp=drivesdk";
                     App.elements.docListContainer.innerHTML = App.state.data.documents.map(item => `
                         <a href="${docLink}" target="_blank" rel="noopener noreferrer" class="document-list-item block p-4 hover:bg-gray-50 transition-colors">${item}</a>
                     `).join('');
                 }
             },
             strategicStudyPage() {
-                const docLink = "https://drive.google.com/file/d/13grSe-WlOemxHtpSlcf8Pyg4Ghlx_2pV/view?usp=drivesdk";
                 if (App.elements.studyListContainer) {
+                    const docLink = "https://drive.google.com/file/d/13grSe-WlOemxHtpSlcf8Pyg4Ghlx_2pV/view?usp=drivesdk";
                     App.elements.studyListContainer.innerHTML = App.state.data.studies.map(item => `
                         <a href="${docLink}" target="_blank" rel="noopener noreferrer" class="document-list-item block p-4 hover:bg-gray-50 transition-colors">${item}</a>
                     `).join('');
@@ -246,13 +248,15 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             ktaForm() {
                 const { formData } = App.state.data;
-                const populate = (id, data) => {
-                    const select = document.getElementById(id);
-                    if (select) select.innerHTML = '<option value="" selected disabled>Pilih...</option>' + data.map(item => `<option value="${item}">${item}</option>`).join('');
-                };
-                populate('fakultas_rayon_form', formData.fakultas);
-                populate('kampus_komisariat_form', formData.kampus);
-                populate('kab_kota_cabang_form', formData.kabKota);
+                if(formData.fakultas) { // Check if formData is loaded
+                    const populate = (id, data) => {
+                        const select = document.getElementById(id);
+                        if (select) select.innerHTML = '<option value="" selected disabled>Pilih...</option>' + data.map(item => `<option value="${item}">${item}</option>`).join('');
+                    };
+                    populate('fakultas_rayon_form', formData.fakultas);
+                    populate('kampus_komisariat_form', formData.kampus);
+                    populate('kab_kota_cabang_form', formData.kabKota);
+                }
             },
             releaseDetail(slug) {
                 const release = App.data.getReleaseBySlug(slug);
@@ -280,10 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const waMessage = encodeURIComponent("Assalamu'alaikum, Sahabat. Saya ingin mengirimkan tulisan untuk dapat dipublikasikan di website. Mohon atensinya. Terima kasih.");
                 if (submitArticleBtn) submitArticleBtn.href = `https://wa.me/6287859245125?text=${waMessage}`;
 
-                const popularReleases = App.data.getSortedReleases('views', slug, 4);
-                const recentReleases = App.data.getSortedReleases('date', slug, 4);
-                if (relatedPopular) relatedPopular.innerHTML = popularReleases.map(r => this.getRelatedLinkHTML(r)).join('');
-                if (relatedRecent) relatedRecent.innerHTML = recentReleases.map(r => this.getRelatedLinkHTML(r)).join('');
+                if(relatedPopular) relatedPopular.innerHTML = App.data.getSortedReleases('views', slug, 4).map(r => this.getRelatedLinkHTML(r)).join('');
+                if(relatedRecent) relatedRecent.innerHTML = App.data.getSortedReleases('date', slug, 4).map(r => this.getRelatedLinkHTML(r)).join('');
             },
             errorPage(title, message) {
                 const mainContent = document.querySelector('main');
@@ -291,43 +293,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     mainContent.innerHTML = `<div class="container mx-auto px-6 py-20 text-center"><h1 class="font-title text-2xl text-red-500">${title}</h1><p class="mt-2 text-gray-600">${message}</p><a href="release.html" class="mt-6 inline-block bg-[#0973D6] text-white font-bold py-2 px-6 rounded-lg hover:opacity-90">Kembali ke Daftar Rilis</a></div>`;
                 }
             },
-
-            // Templat HTML untuk komponen-komponen kecil
             getReleaseCardHTML(item, index, animationClass) {
                 return `<a href="release-detail.html?slug=${item.slug}" class="release-card card-zoom bg-white rounded-lg shadow-lg overflow-hidden flex flex-col group w-full border border-gray-200 hover:shadow-xl transition-shadow duration-300 animate-on-scroll ${animationClass}" data-delay="${index * 150}">
-                    <div class="relative overflow-hidden h-40 skeleton">
-                        <img src="${item.img}" alt="${item.alt}" class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:scale-105" onload="this.style.opacity = 1; this.parentElement.classList.remove('skeleton');">
-                    </div>
-                    <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="font-title flex-grow min-h-[54px] text-gray-800 leading-tight">${item.title}</h3>
-                        <div class="mt-3 flex items-center justify-between font-subtitle text-gray-500">
-                            ${this.getReleaseMetaHTML(item)}
-                        </div>
-                    </div>
+                    <div class="relative overflow-hidden h-40 skeleton"><img src="${item.img}" alt="${item.alt}" class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:scale-105" onload="this.style.opacity = 1; this.parentElement.classList.remove('skeleton');"></div>
+                    <div class="p-4 flex flex-col flex-grow"><h3 class="font-title flex-grow min-h-[54px] text-gray-800 leading-tight">${item.title}</h3><div class="mt-3 flex items-center justify-between font-subtitle text-gray-500">${this.getReleaseMetaHTML(item)}</div></div>
                 </a>`;
             },
             getReleaseMetaHTML(item) {
                 const options = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Makassar' };
                 const formattedDate = item.date.toLocaleDateString('id-ID', options);
                 const formattedViews = item.views > 1000 ? `${(item.views / 1000).toFixed(1)}k` : item.views;
-                return `
-                    <div class="flex items-center space-x-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span>${formattedDate}</span></div>
-                    <div class="flex items-center space-x-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg><span>${formattedViews} dilihat</span></div>
-                `;
+                return `<div class="flex items-center space-x-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span>${formattedDate}</span></div><div class="flex items-center space-x-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg><span>${formattedViews} dilihat</span></div>`;
             },
             getRelatedLinkHTML(item) {
-                return `<a href="release-detail.html?slug=${item.slug}" class="related-release-link block py-3 border-b border-gray-200 last:border-b-0">
-                    <p class="font-body text-gray-800 transition-colors">${item.title}</p>
-                </a>`;
+                return `<a href="release-detail.html?slug=${item.slug}" class="related-release-link block py-3 border-b border-gray-200 last:border-b-0"><p class="font-body text-gray-800 transition-colors">${item.title}</p></a>`;
             }
         },
 
         // --- 6. UI & ANIMATIONS ---
-        // Mengelola perubahan UI dan animasi
         ui: {
             updateActiveLink() {
-                const path = window.location.pathname.split('/').pop(); // Mendapatkan nama file, misal 'team.html'
-                let activePage = 'home'; // Default
+                const path = window.location.pathname.split('/').pop() || 'index.html';
+                let activePage = 'home';
                 if (path.includes('about')) activePage = 'about';
                 else if (path.includes('team')) activePage = 'team';
                 else if (path.includes('release')) activePage = 'release';
@@ -342,19 +329,16 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             showModal(message) {
                 if(App.elements.modalMessage) App.elements.modalMessage.textContent = message;
-                if(App.elements.modal) App.elements.modal.classList.remove('hidden');
-                if(App.elements.modal) App.elements.modal.classList.add('flex');
+                if(App.elements.modal) { App.elements.modal.classList.remove('hidden'); App.elements.modal.classList.add('flex'); }
             },
             hideModal() {
-                if(App.elements.modal) App.elements.modal.classList.add('hidden');
-                if(App.elements.modal) App.elements.modal.classList.remove('flex');
+                if(App.elements.modal) { App.elements.modal.classList.add('hidden'); App.elements.modal.classList.remove('flex'); }
             }
         },
         animations: {
             setupScrollAnimations() {
                 const animatedElements = document.querySelectorAll('.animate-on-scroll');
                 if(!animatedElements.length) return;
-
                 const observer = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -374,31 +358,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (element.dataset.animated) return;
                 element.dataset.animated = "true";
                 const target = +element.getAttribute('data-target');
-                const duration = 1500;
-                let start = null;
+                const duration = 1500; let start = null;
                 const step = (timestamp) => {
                     if (!start) start = timestamp;
                     const progress = Math.min((timestamp - start) / duration, 1);
                     element.innerText = Math.floor(progress * target).toLocaleString('id-ID');
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    } else {
-                        element.innerText = target.toLocaleString('id-ID');
-                    }
+                    if (progress < 1) window.requestAnimationFrame(step);
+                    else element.innerText = target.toLocaleString('id-ID');
                 };
                 window.requestAnimationFrame(step);
             }
         },
         
         // --- 7. UTILITIES ---
-        // Fungsi-fungsi bantuan
         utils: {
             createSlug(title, wordCount = 9) {
-                return title.toLowerCase()
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/[\s_-]+/g, '-')
-                    .split('-').slice(0, wordCount).join('-')
-                    .replace(/^-+|-+$/g, '');
+                return title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').split('-').slice(0, wordCount).join('-').replace(/^-+|-+$/g, '');
             },
             getSlugFromURL() {
                 const params = new URLSearchParams(window.location.search);
@@ -409,5 +384,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Menjalankan aplikasi
     App.init();
-
 });
