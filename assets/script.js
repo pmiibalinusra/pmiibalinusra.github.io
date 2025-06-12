@@ -4,14 +4,8 @@
  * ===================================================================
  * Deskripsi:
  * File ini mengontrol semua interaktivitas di seluruh halaman website.
- * Ini mencakup:
- * - Inisialisasi halaman setelah preloader.
- * - Merender konten dinamis (seperti daftar rilis, tim, dll.).
- * - Menangani event-event seperti klik, submit form, dan lainnya.
- * - Mengelola animasi saat scroll dan efek UI lainnya.
- * * Catatan:
- * File ini bergantung pada 'data.js' yang harus dimuat sebelumnya.
- * 'data.js' menyediakan variabel global seperti `rawReleases`, `teamData`, dll.
+ * Versi ini telah disesuaikan untuk membaca dari variabel `releasesData`
+ * yang terstruktur di 'data.js'.
  * ===================================================================
  */
 
@@ -19,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const App = {
         // --- STATE & CONFIG ---
-        // Menyimpan data yang telah diproses dan status aplikasi
         state: {
             data: {
                 releases: [],
@@ -31,13 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- DOM SELECTORS ---
-        // Referensi ke elemen-elemen HTML yang sering digunakan
         elements: {
             preloader: document.getElementById('preloader'),
             mobileMenu: document.getElementById('mobile-menu'),
             modal: document.getElementById('form-modal'),
             modalMessage: document.getElementById('modal-message'),
-            // Kontainer spesifik untuk setiap halaman (null jika tidak ada di halaman saat ini)
             popularReleaseContainer: document.getElementById('rilis-populer-container'),
             latestReleaseContainer: document.getElementById('rilis-terbaru-container'),
             releasePageContainer: document.getElementById('release-page-container'),
@@ -62,23 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- INITIALIZATION ---
-        // Fungsi utama yang berjalan saat halaman dimuat
         init() {
-            // 1. Tampilkan preloader segera
             this.elements.preloader.style.display = 'flex';
 
-            // 2. Atur timeout selama 3 detik untuk preloader
             setTimeout(() => {
-                // 3. Muat dan proses data dari 'data.js'
                 this.data.load();
-
-                // 4. Ikat semua event listener global (klik, submit)
                 this.events.bind();
-
-                // 5. Identifikasi halaman mana yang sedang aktif berdasarkan ID pada tag <body>
+                
                 const pageId = document.body.id;
-
-                // 6. Jalankan fungsi render yang sesuai untuk halaman tersebut
+                
                 switch (pageId) {
                     case 'home-page':
                         this.render.homePage();
@@ -91,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (slug) {
                             this.render.releaseDetail(slug);
                         } else {
-                            // Tampilkan pesan error jika tidak ada slug di URL
                             const mainContent = document.querySelector('main');
                             if (mainContent) {
                                 mainContent.innerHTML = '<div class="container mx-auto px-6 py-20 text-center"><p class="font-title text-red-500">Error: Rilis tidak ditemukan.</p><p class="mt-2">URL tidak valid. Silakan kembali ke halaman rilis.</p><a href="release.html" class="mt-4 inline-block bg-[#0973D6] text-white font-bold py-2 px-6 rounded-lg hover:opacity-90">Kembali ke Rilis</a></div>';
@@ -112,41 +94,35 @@ document.addEventListener('DOMContentLoaded', () => {
                         break;
                 }
 
-                // 7. Siapkan animasi scroll untuk elemen di halaman saat ini
                 this.animations.setupScrollAnimations();
-                
-                // 8. Perbarui link navigasi yang aktif
                 this.ui.updateActiveLink();
-
-                // 9. Sembunyikan preloader dan tampilkan konten
                 this.elements.preloader.style.display = 'none';
 
-            }, 3000); // Durasi preloader: 3000ms = 3 detik
+            }, 3000); 
         },
 
-
         // --- DATA HANDLING ---
-        // Mengelola data yang diambil dari 'data.js'
         data: {
             load() {
-                // Memproses data mentah dari variabel global (dari data.js)
-                // dan menyimpannya ke dalam App.state
+                // *** PERUBAHAN UTAMA ADA DI SINI ***
+                // Memproses data dari variabel global `releasesData` (dari data.js)
                 const today = new Date();
                 
-                // Variabel `rawReleases` dan `contents` berasal dari `data.js`
-                App.state.data.releases = rawReleases.map((item, index) => {
+                // Variabel `releasesData` sudah berisi semua info (id, img, title, content)
+                App.state.data.releases = releasesData.map((item, index) => {
                     const date = new Date(today);
-                    date.setDate(today.getDate() - (index + 1)); // Mensimulasikan tanggal rilis
+                    // Mensimulasikan tanggal rilis agar berurutan mundur dari hari ini
+                    date.setDate(today.getDate() - index); 
+                    
                     return {
-                        ...item,
-                        date,
-                        views: Math.floor(Math.random() * 8000) + 500, // Views acak
-                        slug: App.utils.createSlug(item.title),
-                        content: item.id === 10 ? contents[0] : (item.id >= 1 && item.id <= 9 ? contents[item.id] : "<p>Konten belum tersedia.</p>")
+                        ...item, // Menyalin semua properti dari objek rilis (id, img, title, content, alt)
+                        date, // Menambahkan tanggal yang disimulasikan
+                        views: Math.floor(Math.random() * 8000) + 500, // Menambahkan views acak
+                        slug: App.utils.createSlug(item.title) // Membuat slug URL-friendly
                     };
                 });
                 
-                // Variabel lain dari `data.js`
+                // Memuat data lain dari variabel global di data.js
                 App.state.data.team = teamData;
                 App.state.data.documents = documentsData;
                 App.state.data.studies = studiesData;
@@ -170,27 +146,24 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- EVENT HANDLING ---
-        // Mengikat semua event listener
         events: {
             bind() {
-                // Event untuk tombol menu mobile
-                document.getElementById('mobile-menu-button').addEventListener('click', () => {
-                    if (App.elements.mobileMenu) App.elements.mobileMenu.classList.toggle('hidden');
-                });
+                if (document.getElementById('mobile-menu-button')) {
+                    document.getElementById('mobile-menu-button').addEventListener('click', () => {
+                        if (App.elements.mobileMenu) App.elements.mobileMenu.classList.toggle('hidden');
+                    });
+                }
 
-                // Event untuk form KTA
                 if (App.elements.ktaForm.form) {
                     App.elements.ktaForm.form.addEventListener('submit', this.handleFormSubmit);
                 }
                 
-                // Event untuk input file di form KTA
                 if (App.elements.ktaForm.fileInput) {
                     App.elements.ktaForm.fileInput.addEventListener('change', () => {
                         App.elements.ktaForm.fileChosen.textContent = App.elements.ktaForm.fileInput.files[0] ? App.elements.ktaForm.fileInput.files[0].name : '';
                     });
                 }
 
-                // Event untuk menutup modal
                 if (App.elements.modal) {
                     App.elements.modal.addEventListener('click', (e) => {
                         if (e.target.id === 'form-modal' || e.target.id === 'modal-close-btn') {
@@ -223,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- RENDERING ---
-        // Kumpulan fungsi untuk memasukkan HTML ke dalam halaman
         render: {
             homePage() {
                 const popular = App.data.getSortedReleases('views', null, 6);
@@ -231,9 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (App.elements.popularReleaseContainer) {
                     const popularHtml = popular.map((item, i) => this.getReleaseCardHTML(item, i, '')).join('');
-                    App.elements.popularReleaseContainer.innerHTML = popularHtml + popularHtml; // Duplikasi untuk marquee
+                    App.elements.popularReleaseContainer.innerHTML = popularHtml + popularHtml;
                 }
-
                 if (App.elements.latestReleaseContainer) {
                     App.elements.latestReleaseContainer.innerHTML = latest.map((item, i) => this.getReleaseCardHTML(item, i, 'fade-in-bottom')).join('');
                 }
@@ -269,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             strategicStudyPage() {
                 const docLink = "https://drive.google.com/file/d/13grSe-WlOemxHtpSlcf8Pyg4Ghlx_2pV/view?usp=drivesdk";
-                 if (App.elements.studyListContainer) {
+                if (App.elements.studyListContainer) {
                     App.elements.studyListContainer.innerHTML = App.state.data.studies.map(item => `
                         <a href="${docLink}" target="_blank" rel="noopener noreferrer" class="document-list-item block p-4 hover:bg-gray-50 transition-colors">${item}</a>
                     `).join('');
@@ -292,10 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const { title, meta, img, body, shareWhatsapp, submitArticleBtn, relatedPopular, relatedRecent } = App.elements.releaseDetail;
 
                 if (title) title.textContent = release.title;
+                if(document.title) document.title = `${release.title} - PKC PMII Bali Nusra`; // Update judul tab browser
                 if (img) {
                     img.src = release.img;
                     img.alt = release.alt;
-                    img.style.opacity = 0; // Reset untuk animasi onload
+                    img.style.opacity = 0;
                 }
                 if (meta) meta.innerHTML = this.getReleaseMetaHTML(release);
                 if (body) body.innerHTML = release.content;
@@ -314,9 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
 
             // --- HTML TEMPLATES ---
-            // Fungsi-fungsi pembantu untuk membuat potongan HTML
             getReleaseCardHTML(item, index, animationClass) {
-                // Menggunakan URL parameter '?slug=' untuk halaman detail
                 return `<a href="release-detail.html?slug=${item.slug}" class="release-card card-zoom bg-white rounded-lg shadow-lg overflow-hidden flex flex-col group w-full border border-gray-200 hover:shadow-xl transition-shadow duration-300 animate-on-scroll ${animationClass}" data-delay="${index * 150}">
                     <div class="relative overflow-hidden h-40 skeleton">
                         <img src="${item.img}" alt="${item.alt}" class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:scale-105" onload="this.style.opacity = 1; this.parentElement.classList.remove('skeleton');">
@@ -351,11 +321,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const path = window.location.pathname;
                 const currentPageFile = path.substring(path.lastIndexOf('/') + 1);
                 
-                let activePage = 'home'; // Default
-                if (currentPageFile === 'about.html') activePage = 'about';
-                else if (currentPageFile === 'team.html') activePage = 'team';
-                else if (currentPageFile.includes('release')) activePage = 'release'; // untuk release.html & release-detail.html
-                else if (currentPageFile === 'database.html') activePage = 'database';
+                let activePage = 'home';
+                if (currentPageFile.includes('about')) activePage = 'about';
+                else if (currentPageFile.includes('team')) activePage = 'team';
+                else if (currentPageFile.includes('release')) activePage = 'release';
+                else if (currentPageFile.includes('database')) activePage = 'database';
 
                 document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
                     link.classList.remove('active-link', 'active-mobile-link');
@@ -401,11 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
             animateCounter(element) {
                 if (element.dataset.animated) return;
                 element.dataset.animated = "true";
-
                 const target = +element.getAttribute('data-target');
                 const duration = 1500;
                 let start = null;
-
                 const step = (timestamp) => {
                     if (!start) start = timestamp;
                     const progress = Math.min((timestamp - start) / duration, 1);
@@ -436,7 +404,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Jalankan aplikasi
     App.init();
 
 });
