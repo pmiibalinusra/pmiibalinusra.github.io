@@ -1,0 +1,246 @@
+/**
+ * ===================================================================
+ * STYLE.CSS UNTUK WEBSITE PKC PMII BALI NUSRA
+ * ===================================================================
+ * Deskripsi:
+ * File ini mengontrol seluruh aspek visual dan tata letak website.
+ * Ini mencakup styling untuk tipografi, warna, komponen, animasi,
+ * dan tata letak responsif.
+ * ===================================================================
+ */
+
+/* === BASE STYLES === */
+/* Aturan dasar untuk body, font, dan ukuran */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 12px; /* Ukuran font dasar untuk mobile */
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+}
+@media (min-width: 768px) {
+    body { 
+        font-size: 14px; /* Ukuran font dasar untuk tablet dan desktop */
+    }
+}
+
+/* === TYPOGRAPHY === */
+/* Kelas-kelas bantuan untuk mengatur teks */
+.font-title { 
+    font-size: 18px; 
+    font-weight: 700; 
+}
+.font-subtitle { 
+    font-size: 12px; 
+    font-weight: 700; 
+}
+.font-body { 
+    font-size: 12px; 
+}
+@media (min-width: 768px) {
+    .font-subtitle { font-size: 14px; }
+    .font-body { font-size: 14px; }
+}
+
+/* Styling untuk konten artikel (prose) */
+.prose {
+    font-size: 12px;
+    line-height: 1.6;
+}
+@media (min-width: 768px) {
+    .prose { font-size: 14px; }
+}
+.prose p { 
+    margin-bottom: 1em; 
+}
+
+/* === ANIMATIONS === */
+/* 1. Animasi saat elemen muncul di layar (scroll) */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.slide-in-right { transform: translateX(50px); }
+.slide-in-left { transform: translateX(-50px); }
+.slide-in-top { transform: translateY(-50px); }
+.fade-in-bottom { transform: translateY(20px); }
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+/* 2. Animasi placeholder (skeleton) saat konten dimuat */
+.skeleton {
+    background-color: #e2e8f0; /* Warna dasar skeleton */
+    position: relative;
+    overflow: hidden;
+}
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite; /* Animasi kilau */
+}
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* 3. Animasi marquee (teks berjalan horizontal) */
+@keyframes scroll-horizontal {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.marquee-container { 
+    overflow: hidden; 
+    position: relative; 
+}
+.marquee-content {
+    display: flex;
+    gap: 1rem;
+    animation: scroll-horizontal 30s linear infinite;
+    animation-play-state: running;
+}
+.marquee-container:hover .marquee-content { 
+    animation-play-state: paused; /* Berhenti saat kursor di atasnya */
+}
+
+/* === COMPONENTS === */
+/* Styling untuk komponen-komponen UI spesifik */
+
+/* 1. Efek feedback saat elemen diklik/ditekan */
+.card-zoom:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease-in-out;
+}
+.img-zoom:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-in-out;
+}
+
+/* 2. State :active untuk link dan tombol */
+a.release-card:active { 
+    background-color: #FFCB05; 
+}
+a.release-card:active h3, 
+a.release-card:active .font-subtitle, 
+a.release-card:active svg { 
+    color: #2918A9; 
+}
+
+a.db-card:active { 
+    background-color: #0973D6; 
+}
+a.db-card:active h3, 
+a.db-card:active p { 
+    color: #FFFFFF; 
+}
+
+.button-active { 
+    transition: background-color 0.2s, color 0.2s, opacity 0.2s; 
+}
+.button-active:active {
+    background-image: none !important;
+    background-color: #FFCB05 !important;
+    color: #2918A9 !important;
+}
+
+/* 3. State :hover untuk berbagai elemen */
+a.related-release-link:hover p, .document-list-item:hover { 
+    color: #2918A9; 
+}
+header .nav-link:hover { 
+    color: #FFCB05; 
+    border-color: #FFCB05; 
+}
+footer .social-link:hover { 
+    opacity: 0.8; 
+}
+input[type="file"]::file-selector-button:hover { 
+    background-color: #FFCB05; 
+    color: #2918A9; 
+}
+
+/* 4. Tombol input file kustom */
+input[type="file"]::file-selector-button {
+    background-color: #0973D6;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-width: 0;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-duration: 200ms;
+}
+
+/* 5. Link Navigasi */
+.nav-link {
+    color: #FFFFFF;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.25rem;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+.nav-link.active-link {
+    color: #FFCB05;
+    border-color: #FFCB05;
+}
+.nav-link-mobile.active-mobile-link {
+    color: #FFCB05;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 6. Aturan lebar untuk kartu di dalam marquee */
+.marquee-content > .release-card { 
+    flex-shrink: 0; 
+    width: calc(100% - 1rem); 
+}
+@media (min-width: 768px) { 
+    .marquee-content > .release-card { 
+        width: calc(50% - 1rem); 
+    } 
+}
+@media (min-width: 1024px) { 
+    .marquee-content > .release-card { 
+        width: calc(33.333% - 1rem); 
+    } 
+}
+
+/* 7. Daftar Dokumen */
+.document-list-item:not(:last-child) { 
+    border-bottom: 1px solid #e5e7eb; 
+}
+
+/* === UTILITIES === */
+/* Fallback untuk properti 'aspect-ratio' di browser lama */
+.aspect-w-16 { 
+    position: relative; 
+    padding-bottom: 56.25%; /* 16:9 */
+}
+.aspect-h-9 { } /* Placeholder */
+.aspect-w-16 > *, .aspect-h-9 > * { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+}
+
+.aspect-w-1 { 
+    position: relative; 
+    padding-bottom: 100%; /* 1:1 */
+}
+.aspect-h-1 { } /* Placeholder */
+.aspect-w-1 > *, .aspect-h-1 > * { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+}
